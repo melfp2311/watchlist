@@ -801,9 +801,6 @@ const SYNC_KEY = 'mel_sync_pending';
 const TOKEN_KEY = 'mel_github_token';
 const GITHUB_REPO = 'melfp2311/watchlist';
 const GITHUB_FILE = 'data.json';
-const TOKEN_KEY = 'mel_github_token';
-const GITHUB_REPO = 'melfp2311/watchlist';
-const GITHUB_FILE = 'data.json';
 function loadData(){
   try{ const s=localStorage.getItem(STORAGE_KEY); if(s) return JSON.parse(s); }catch(e){}
   return { movies:{toWatch:MOVIES_TO_WATCH,watched:MOVIES_WATCHED}, shows:{toWatch:SHOWS_TO_WATCH,watched:SHOWS_WATCHED} };
