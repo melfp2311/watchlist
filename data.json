@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-ix6rgui",
+        "title": "The squid and the whale",
+        "genre": "Drama",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-lvv948o",
         "title": "The drama",
         "genre": "Comedy",
