@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-a1dc2j7",
+        "title": "All of you",
+        "genre": "Romance",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-6t2gwfq",
         "title": "Lurker",
         "genre": "Thriller",
