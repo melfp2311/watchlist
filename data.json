@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-f352cw5",
+        "title": "Magnolia",
+        "genre": "Drama",
+        "rating": "",
+        "notes": "PTA"
+      },
+      {
         "id": "u-a1dc2j7",
         "title": "All of you",
         "genre": "Romance",
