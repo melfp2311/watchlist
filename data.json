@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-mdl19k4",
+        "title": "Coherence",
+        "genre": "Thriller",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-lzxv0jf",
         "title": "The invite",
         "genre": "Comedy",
