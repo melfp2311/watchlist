@@ -826,48 +826,7 @@ async function pushToGitHub(data,token){
     return p.ok;
   }catch(e){ return false; }
 }
-function getToken(){ try{return localStorage.getItem(TOKEN_KEY)||'';}catch(e){return '';} }
-function saveToken(t){ try{localStorage.setItem(TOKEN_KEY,t);}catch(e){} }
 
-async function loadFromGitHub(){
-  try{
-    const r=await fetch('https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+GITHUB_FILE+'?t='+Date.now());
-    if(r.ok) return await r.json();
-  }catch(e){}
-  return null;
-}
-
-async function pushToGitHub(data, token){
-  try{
-    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+GITHUB_FILE;
-    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
-    let sha;
-    if(getRes.ok){ const info=await getRes.json(); sha=info.sha; }
-    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
-    const body={message:'Update watchlist '+new Date().toISOString().slice(0,10),content};
-    if(sha) body.sha=sha;
-    const putRes=await fetch(apiUrl,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
-    return putRes.ok;
-  }catch(e){ return false; }
-}
-
-/* ──────────────────────────────────────────────────────────────
-   SMALL COMPONENTS
-────────────────────────────────────────────────────────────── */
-const GENRE_COLORS = {
-  Drama:'bg-blue-950 text-blue-300', Comedy:'bg-yellow-950 text-yellow-300',
-  Crime:'bg-orange-950 text-orange-300', Action:'bg-red-950 text-red-300',
-  Horror:'bg-purple-950 text-purple-300', Thriller:'bg-indigo-950 text-indigo-300',
-  Romance:'bg-pink-950 text-pink-300', Historical:'bg-amber-950 text-amber-300',
-  'Sci-Fi':'bg-cyan-950 text-cyan-300', Musical:'bg-emerald-950 text-emerald-300',
-  Documentary:'bg-teal-950 text-teal-300', Animation:'bg-lime-950 text-lime-300',
-};
-function GenreTag({genre}){
-  const c = GENRE_COLORS[genre]||'bg-gray-800 text-gray-400';
-  return <span className={`text-xs px-1.5 py-0.5 rounded-md font-medium flex-shrink-0 ${c}`}>{genre}</span>;
-}
-
-/* compact list row */
 function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
   const [sx,setSx]=React.useState(0); const tr=React.useRef(null);
   function ts(e){ tr.current=e.touches[0].clientX; }
