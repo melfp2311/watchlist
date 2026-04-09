@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-aeo652g",
+        "title": "High fidelity",
+        "genre": "Romance",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-4ef87n3",
         "title": "If I had legs I’d kick you",
         "genre": "Thriller",
