@@ -1257,7 +1257,7 @@ function StatsPage({data}){
 /* ──────────────────────────────────────────────────────────────
    MODALS
 ────────────────────────────────────────────────────────────── */
-function AddModal({onClose, onSave, activeTab}){
+function AddModal({onClose, onSave, onBatchSave, activeTab}){
   const [title,setTitle]=useState('');
   const [genre,setGenre]=useState('');
   const [watched,setWatched]=useState(false);
@@ -1268,6 +1268,8 @@ function AddModal({onClose, onSave, activeTab}){
   const [imgPreview,setImgPreview]=useState(null);
   const [scanning,setScanning]=useState(false);
   const [suggestions,setSuggestions]=useState([]);
+  const [batchItems,setBatchItems]=useState([]); // [{title,selected}]
+  const [scanProgress,setScanProgress]=useState('');
   const fileRef=React.useRef();
 
   const genres=(activeTab==='movies'?MOVIE_GENRES:SHOW_GENRES).slice(1);
@@ -1276,28 +1278,57 @@ function AddModal({onClose, onSave, activeTab}){
     onSave({id:genId(),title:title.trim(),genre,rating:watched?emoji.repeat(count):'',notes:notes.trim()},watched);
   };
 
+  function extractTitles(text){
+    const raw=text.split('\n')
+      .map(l=>l.replace(/[|]/g,'I').trim())
+      .filter(l=>l.length>2 && /[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]/.test(l) && !/^[\d\s\W]+$/.test(l));
+    const seen=new Set();
+    return raw.filter(l=>{const k=l.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;}).slice(0,8);
+  }
+
   async function handleScreenshot(e){
-    const file=e.target.files[0];
-    if(!file) return;
-    const url=URL.createObjectURL(file);
-    setImgPreview(url);
-    setScanning(true);
-    setSuggestions([]);
-    try{
-      const result=await Tesseract.recognize(url,['eng','spa'],{logger:()=>{}});
-      // Extract clean lines: strip lines that are mostly symbols/numbers or very short
-      const raw=result.data.text.split('\n')
-        .map(l=>l.replace(/[|]/g,'I').trim())
-        .filter(l=>l.length>2 && /[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]/.test(l) && !/^[\d\s\W]+$/.test(l));
-      // Deduplicate and keep first 8
-      const seen=new Set();
-      const deduped=raw.filter(l=>{const k=l.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;}).slice(0,8);
-      setSuggestions(deduped);
-      if(deduped.length>0) setTitle(deduped[0]);
-    }catch(err){}
-    setScanning(false);
-    // reset input so same file can be re-selected
+    const files=Array.from(e.target.files||[]);
+    if(!files.length) return;
     e.target.value='';
+
+    if(files.length===1){
+      const url=URL.createObjectURL(files[0]);
+      setImgPreview(url);
+      setScanning(true);
+      setSuggestions([]);
+      setBatchItems([]);
+      try{
+        const result=await Tesseract.recognize(url,['eng','spa'],{logger:()=>{}});
+        const deduped=extractTitles(result.data.text);
+        setSuggestions(deduped);
+        if(deduped.length>0) setTitle(deduped[0]);
+      }catch(err){}
+      setScanning(false);
+    } else {
+      setImgPreview(null);
+      setSuggestions([]);
+      setBatchItems([]);
+      setScanning(true);
+      const collected=[];
+      for(let i=0;i<files.length;i++){
+        setScanProgress(`Procesando ${i+1}/${files.length}…`);
+        const url=URL.createObjectURL(files[i]);
+        try{
+          const result=await Tesseract.recognize(url,['eng','spa'],{logger:()=>{}});
+          const titles=extractTitles(result.data.text);
+          if(titles.length>0) collected.push({title:titles[0],selected:true});
+        }catch(err){}
+      }
+      setScanning(false);
+      setScanProgress('');
+      setBatchItems(collected);
+    }
+  }
+
+  function handleBatchSave(){
+    const toAdd=batchItems.filter(b=>b.selected&&b.title.trim());
+    if(toAdd.length===0) return;
+    onBatchSave(toAdd.map(b=>({id:genId(),title:b.title.trim(),genre:'',rating:'',notes:''})));
   }
 
   return (
@@ -1307,11 +1338,11 @@ function AddModal({onClose, onSave, activeTab}){
           <h2 className="font-bold text-white">{activeTab==='movies'?'🎥 Agregar película':'📺 Agregar serie'}</h2>
           <label className="cursor-pointer flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-gray-300 transition-colors" title="Subir screenshot">
             📸 Screenshot
-            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleScreenshot}/>
+            <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleScreenshot}/>
           </label>
         </div>
 
-        {/* Image preview + scanning state */}
+        {/* Image preview + scanning state (single mode) */}
         {imgPreview&&(
           <div className="mb-3">
             <img src={imgPreview} alt="screenshot" className="w-full max-h-40 object-cover rounded-xl mb-2" style={{objectFit:'contain',background:'#111'}}/>
@@ -1335,6 +1366,36 @@ function AddModal({onClose, onSave, activeTab}){
               </div>
             )}
             {!scanning&&suggestions.length===0&&<p className="text-xs text-gray-600">No se detectó texto — escríbelo manualmente</p>}
+          </div>
+        )}
+
+        {/* Batch mode: scanning progress + results */}
+        {!imgPreview&&scanning&&(
+          <div className="flex items-center gap-2 py-3 mb-2">
+            <div className="w-3 h-3 rounded-full bg-violet-500 animate-pulse flex-shrink-0"/>
+            <p className="text-xs text-gray-400">{scanProgress||'Procesando…'}</p>
+          </div>
+        )}
+        {!imgPreview&&!scanning&&batchItems.length>0&&(
+          <div className="mb-3">
+            <p className="text-xs text-gray-500 mb-2">Títulos detectados — selecciona cuáles agregar:</p>
+            <div className="flex flex-col gap-1.5 mb-3">
+              {batchItems.map((b,i)=>(
+                <label key={i} className="flex items-center gap-2.5 cursor-pointer group">
+                  <input type="checkbox" checked={b.selected} onChange={ev=>{
+                    setBatchItems(prev=>prev.map((x,j)=>j===i?{...x,selected:ev.target.checked}:x));
+                  }} className="accent-violet-500 w-4 h-4"/>
+                  <input value={b.title} onChange={ev=>{
+                    setBatchItems(prev=>prev.map((x,j)=>j===i?{...x,title:ev.target.value}:x));
+                  }} className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:border-violet-500"/>
+                </label>
+              ))}
+            </div>
+            <button onClick={handleBatchSave}
+              disabled={!batchItems.some(b=>b.selected&&b.title.trim())}
+              className="w-full bg-violet-700 hover:bg-violet-600 disabled:opacity-40 text-white py-2 rounded-xl text-sm font-medium">
+              Agregar {batchItems.filter(b=>b.selected).length} títulos
+            </button>
           </div>
         )}
 
@@ -1500,6 +1561,11 @@ function App(){
     addToSync(item, key, watched);
     setShowAdd(false);
   }
+  function handleBatchSave(items){
+    const key=isMovies?'movies':'shows';
+    setData(p=>({...p,[key]:{...p[key],toWatch:[...items,...p[key].toWatch]}}));
+    setShowAdd(false);
+  }
   function handleRateSave(newRating,newNotes){
     const key=isMovies?'movies':'shows';
     setData(p=>({
@@ -1652,7 +1718,7 @@ function App(){
         </>}
       </div>
 
-      {showAdd&&<AddModal activeTab={tab} onClose={()=>setShowAdd(false)} onSave={handleAddSave}/>}
+      {showAdd&&<AddModal activeTab={tab} onClose={()=>setShowAdd(false)} onSave={handleAddSave} onBatchSave={handleBatchSave}/>}
       {rateItem&&<RateModal item={rateItem} onClose={()=>setRateItem(null)} onSave={handleRateSave}/>}
       {detailItem&&<DetailPanel item={detailItem} isMovie={isMovies} omdbKey={omdbKey} onClose={()=>setDetailItem(null)}/>}
       {showSettings&&<SettingsModal omdbKey={omdbKey} onChange={handleOmdbKey} syncPending={syncPending} onClearSync={clearSync} onClose={()=>{setShowSettings(false);setIsEditor(!!getToken());}} ghStatus={ghStatus}/>}
