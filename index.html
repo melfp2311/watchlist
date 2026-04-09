@@ -827,6 +827,20 @@ async function pushToGitHub(data,token){
   }catch(e){ return false; }
 }
 
+const GENRE_COLORS = {
+  Drama:'bg-blue-950 text-blue-300', Comedy:'bg-yellow-950 text-yellow-300',
+  Crime:'bg-orange-950 text-orange-300', Action:'bg-red-950 text-red-300',
+  Horror:'bg-purple-950 text-purple-300', Thriller:'bg-indigo-950 text-indigo-300',
+  Romance:'bg-pink-950 text-pink-300', Historical:'bg-amber-950 text-amber-300',
+  'Sci-Fi':'bg-cyan-950 text-cyan-300', Musical:'bg-emerald-950 text-emerald-300',
+  Documentary:'bg-teal-950 text-teal-300', Animation:'bg-lime-950 text-lime-300',
+};
+function GenreTag({genre}){
+  const c = GENRE_COLORS[genre]||'bg-gray-800 text-gray-400';
+  return <span className={`text-xs px-1.5 py-0.5 rounded-md font-medium flex-shrink-0 ${c}`}>{genre}</span>;
+}
+
+/* compact list row */
 function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
   const [sx,setSx]=React.useState(0); const tr=React.useRef(null);
   function ts(e){ tr.current=e.touches[0].clientX; }
