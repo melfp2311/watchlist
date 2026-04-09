@@ -1289,13 +1289,6 @@
     ],
     "watched": [
       {
-        "id": "w-m-241",
-        "year": 2026,
-        "title": "Sorry, Baby",
-        "rating": "❤️‍🩹❤️‍🩹❤️‍🩹",
-        "notes": ""
-      },
-      {
         "id": "w-m-1",
         "year": 2020,
         "title": "Whiplash",
@@ -2973,6 +2966,13 @@
         "year": 2026,
         "title": "Hoppers",
         "rating": "🦫🦫🦫🦫",
+        "notes": ""
+      },
+      {
+        "id": "w-m-241",
+        "year": 2026,
+        "title": "Sorry, Baby",
+        "rating": "❤️‍🩹❤️‍🩹❤️‍🩹",
         "notes": ""
       }
     ]
