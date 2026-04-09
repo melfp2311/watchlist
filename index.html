@@ -1371,6 +1371,7 @@ function App(){
   const [view,setView]=useState('toWatch');
   const [search,setSearch]=useState('');
   const [genre,setGenre]=useState('Todos');
+  const [sort,setSort]=useState('default');
   const [showAdd,setShowAdd]=useState(false);
   const [rateItem,setRateItem]=useState(null);
   const [detailItem,setDetailItem]=useState(null);
@@ -1417,23 +1418,27 @@ function App(){
     ?(view==='toWatch'?data.movies.toWatch:data.movies.watched)
     :(view==='toWatch'?data.shows.toWatch:data.shows.watched);
 
-  const filtered=useMemo(()=>
-    list.filter(item=>{
+  const filtered=useMemo(()=>{
+    let arr=list.filter(item=>{
       const ms=!search||item.title.toLowerCase().includes(search.toLowerCase());
       const mg=genre==='Todos'||item.genre===genre;
       return ms&&mg;
-    })
-  ,[list,search,genre]);
+    });
+    if(sort==='az') arr=[...arr].sort((a,b)=>a.title.localeCompare(b.title));
+    else if(sort==='za') arr=[...arr].sort((a,b)=>b.title.localeCompare(a.title));
+    else if(sort==='score') arr=[...arr].sort((a,b)=>ratingNum(b.rating)-ratingNum(a.rating));
+    return arr;
+  },[list,search,genre,sort]);
 
-  // group watched by year descending
+  // group watched by year descending (only when default sort)
   const yearGroups=useMemo(()=>{
-    if(view!=='watched') return null;
+    if(view!=='watched'||sort!=='default') return null;
     const map={};
     filtered.forEach(item=>{const y=item.year||'Sin año';(map[y]=map[y]||[]).push(item);});
     return Object.entries(map).sort((a,b)=>Number(b[0])-Number(a[0]));
-  },[filtered,view]);
+  },[filtered,view,sort]);
 
-  useEffect(()=>{setGenre('Todos');},[tab,view]);
+  useEffect(()=>{setGenre('Todos'); setSort('default');},[tab,view]);
 
   function handleAddSave(item,watched){
     const key=isMovies?'movies':'shows';
@@ -1541,6 +1546,18 @@ function App(){
             ))}
           </div>
 
+          {/* Sort chips */}
+          <div className="flex gap-1.5 overflow-x-auto scrollbar-hide pb-1 mb-1">
+            {[['default',view==='watched'?'📅 Año':'Reciente'],['az','A→Z'],['za','Z→A'],...(view==='watched'?[['score','⭐ Score']]:[])]
+              .map(([s,label])=>(
+                <button key={s} onClick={()=>setSort(s)}
+                  className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${sort===s?'chip-active text-violet-200':'bg-gray-900 text-gray-600 hover:bg-gray-800 hover:text-gray-300'}`}>
+                  {label}
+                </button>
+              ))
+            }
+          </div>
+
           {/* Result count */}
           <p className="text-xs text-gray-700 px-3 mb-1">
             {filtered.length} {filtered.length===1?'resultado':'resultados'}
@@ -1566,8 +1583,10 @@ function App(){
             </div>
           ) : (
             <div className="pb-20">
-              {view==='watched'&&(search||genre!=='Todos')&&(
-                <p className="text-xs text-gray-700 px-3 mb-1 italic">Mostrando resultados de todos los años</p>
+              {view==='watched'&&(search||genre!=='Todos'||sort!=='default')&&(
+                <p className="text-xs text-gray-700 px-3 mb-1 italic">
+                  {sort==='score'?'Ordenado por score':sort==='az'?'Ordenado A→Z':sort==='za'?'Ordenado Z→A':'Resultados de todos los años'}
+                </p>
               )}
               {filtered.map(item=>(
                 <Row key={item.id} item={item} isWatched={view==='watched'} onRate={setRateItem} onDelete={handleDelete} onDetail={setDetailItem} isEditor={isEditor}/>
