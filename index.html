@@ -832,10 +832,10 @@ function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
   function ts(e){ tr.current=e.touches[0].clientX; }
   function tm(e){ if(tr.current===null)return; setSx(Math.max(-90,Math.min(90,e.touches[0].clientX-tr.current))); }
   function te(){ if(isEditor){ if(sx>65) onRate(item); else if(sx<-65&&confirm('¿Eliminar?')) onDelete(item.id); } setSx(0); tr.current=null; }
-  const bg=sx>30?'rgba(109,40,217,'+(Math.min(sx/90,.7))+')':sx<-30?'rgba(185,28,28,'+(Math.min(-sx/90,.7))+')':\'transparent\';
+  const bg=sx>30?'rgba(109,40,217,'+(Math.min(sx/90,.7))+')':sx<-30?'rgba(185,28,28,'+(Math.min(-sx/90,.7))+')':'transparent';
   return (
     <div className="row relative overflow-hidden rounded-lg" style={{background:bg}} onTouchStart={ts} onTouchMove={tm} onTouchEnd={te}>
-      {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?\'✏️\':\'✓\'}</span>}
+      {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?'✏️':'✓'}</span>}
       {sx<-30&&isEditor&&<span className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">✕</span>}
       <div className="flex items-center gap-2 px-3 py-2" style={{transform:'translateX('+sx+'px)',transition:sx===0?'transform .2s':'none'}}>
       <button onClick={()=>onDetail(item)} className="flex-1 text-sm text-gray-200 min-w-0 truncate text-left hover:text-violet-300 transition-colors" title={item.title}>{item.title}</button>
