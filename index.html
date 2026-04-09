@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mel's Watch List 🎬</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#09090f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Watchlist">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -795,6 +801,9 @@ const SYNC_KEY = 'mel_sync_pending';
 const TOKEN_KEY = 'mel_github_token';
 const GITHUB_REPO = 'melfp2311/watchlist';
 const GITHUB_FILE = 'data.json';
+const TOKEN_KEY = 'mel_github_token';
+const GITHUB_REPO = 'melfp2311/watchlist';
+const GITHUB_FILE = 'data.json';
 function loadData(){
   try{ const s=localStorage.getItem(STORAGE_KEY); if(s) return JSON.parse(s); }catch(e){}
   return { movies:{toWatch:MOVIES_TO_WATCH,watched:MOVIES_WATCHED}, shows:{toWatch:SHOWS_TO_WATCH,watched:SHOWS_WATCHED} };
@@ -802,6 +811,24 @@ function loadData(){
 function saveData(d){ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}catch(e){} }
 function loadSync(){ try{ const s=localStorage.getItem(SYNC_KEY); return s?JSON.parse(s):[]; }catch(e){return [];} }
 function saveSync(arr){ try{localStorage.setItem(SYNC_KEY,JSON.stringify(arr));}catch(e){} }
+function getToken(){ try{return localStorage.getItem(TOKEN_KEY)||'';}catch(e){return '';} }
+function saveToken(t){ try{localStorage.setItem(TOKEN_KEY,t);}catch(e){} }
+async function loadFromGitHub(){
+  try{ const r=await fetch('https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+GITHUB_FILE+'?t='+Date.now());
+    if(r.ok) return await r.json(); }catch(e){} return null;
+}
+async function pushToGitHub(data,token){
+  try{
+    const u='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+GITHUB_FILE;
+    const g=await fetch(u,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
+    let sha; if(g.ok){ const d=await g.json(); sha=d.sha; }
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    const body={message:'Update watchlist '+new Date().toISOString().slice(0,10),content};
+    if(sha) body.sha=sha;
+    const p=await fetch(u,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    return p.ok;
+  }catch(e){ return false; }
+}
 function getToken(){ try{return localStorage.getItem(TOKEN_KEY)||'';}catch(e){return '';} }
 function saveToken(t){ try{localStorage.setItem(TOKEN_KEY,t);}catch(e){} }
 
@@ -845,8 +872,16 @@ function GenreTag({genre}){
 
 /* compact list row */
 function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
+  const [sx,setSx]=React.useState(0); const tr=React.useRef(null);
+  function ts(e){ tr.current=e.touches[0].clientX; }
+  function tm(e){ if(tr.current===null)return; setSx(Math.max(-90,Math.min(90,e.touches[0].clientX-tr.current))); }
+  function te(){ if(isEditor){ if(sx>65) onRate(item); else if(sx<-65&&confirm('¿Eliminar?')) onDelete(item.id); } setSx(0); tr.current=null; }
+  const bg=sx>30?'rgba(109,40,217,'+(Math.min(sx/90,.7))+')':sx<-30?'rgba(185,28,28,'+(Math.min(-sx/90,.7))+')':\'transparent\';
   return (
-    <div className="row flex items-center gap-2 px-3 py-2 rounded-lg group">
+    <div className="row relative overflow-hidden rounded-lg" style={{background:bg}} onTouchStart={ts} onTouchMove={tm} onTouchEnd={te}>
+      {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?\'✏️\':\'✓\'}</span>}
+      {sx<-30&&isEditor&&<span className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">✕</span>}
+      <div className="flex items-center gap-2 px-3 py-2" style={{transform:'translateX('+sx+'px)',transition:sx===0?'transform .2s':'none'}}>
       <button onClick={()=>onDetail(item)} className="flex-1 text-sm text-gray-200 min-w-0 truncate text-left hover:text-violet-300 transition-colors" title={item.title}>{item.title}</button>
       {item.genre && <GenreTag genre={item.genre}/>}
       {isWatched
@@ -1021,6 +1056,16 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
           {!getToken()&&<p className="text-xs text-yellow-600 mt-2">Sin token: los cambios solo se guardan en este dispositivo.</p>}
         </div>
 
+        <div className="border-t border-gray-800 pt-4 mb-4">
+          <p className="text-xs font-semibold text-gray-400 mb-1">GitHub Token</p>
+          <div className="flex gap-2">
+            <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm"/>
+            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 text-violet-200'}`}>{tokenSaved?'✓':'Guardar'}</button>
+          </div>
+          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-1">⏳ Guardando...</p>}
+          {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-1">✓ Guardado</p>}
+          {ghStatus==='error'&&<p className="text-xs text-red-500 mt-1">✗ Error</p>}
+        </div>
         {/* Notion sync */}
         <div className="border-t border-gray-800 pt-4">
           <div className="flex items-center justify-between mb-1">
@@ -1116,14 +1161,19 @@ function StatsPage({data}){
   const ratedS=sw.filter(i=>i.rating);
   const avgScoreS=ratedS.length?Math.round(ratedS.reduce((s,i)=>s+ratingNum(i.rating),0)/ratedS.length*10)/10:0;
 
-  // score distribution (movies)
   const scoreDist=[1,2,3,4,5].map(n=>({n,count:mw.filter(i=>ratingNum(i.rating)===n).length}));
   const maxDist=Math.max(...scoreDist.map(d=>d.count),1);
+  const scoreDistS=[1,2,3,4,5].map(n=>({n,count:sw.filter(i=>ratingNum(i.rating)===n).length}));
+  const maxDistS=Math.max(...scoreDistS.map(d=>d.count),1);
 
   // genre breakdown (movies to-watch)
   const genreCount={};data.movies.toWatch.forEach(i=>{if(i.genre)(genreCount[i.genre]=(genreCount[i.genre]||0)+1);});
   const genreList=Object.entries(genreCount).sort((a,b)=>b[1]-a[1]);
   const maxG=genreList.length?genreList[0][1]:1;
+  const tgm={}; [...mw,...sw].filter(i=>ratingNum(i.rating)>=4).forEach(i=>{if(i.genre)tgm[i.genre]=(tgm[i.genre]||0)+1;});
+  const tg=Object.entries(tgm).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([g])=>g);
+  const rmovies=data.movies.toWatch.filter(i=>tg.includes(i.genre)).slice(0,5);
+  const rshows=data.shows.toWatch.filter(i=>tg.includes(i.genre)).slice(0,5);
 
   return (
     <div className="pb-20 space-y-6 pt-4">
@@ -1151,12 +1201,13 @@ function StatsPage({data}){
         ))}
       </div>
 
-      {/* score distribution */}
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">⭐️ Distribución de scores (películas)</p>
-        {scoreDist.reverse().map(({n,count})=>(
-          <MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDist} color={n===5?'bg-violet-600':n===4?'bg-violet-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>
-        ))}
+        <p className="text-xs font-semibold text-gray-400 mb-3">⭐️ Scores — películas</p>
+        {scoreDist.reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDist} color={n===5?'bg-violet-600':n===4?'bg-violet-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
+      </div>
+      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+        <p className="text-xs font-semibold text-gray-400 mb-3">⭐️ Scores — series</p>
+        {[...scoreDistS].reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDistS} color={n===5?'bg-teal-600':n===4?'bg-teal-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
       </div>
 
       {/* top movies */}
@@ -1198,6 +1249,7 @@ function StatsPage({data}){
           <MiniBar key={g} label={g} count={c} max={maxG} color="bg-indigo-700"/>
         ))}
       </div>
+      {(rmovies.length>0||rshows.length>0)&&(<div className="bg-gray-900 border border-gray-800 rounded-2xl p-4"><p className="text-xs font-semibold text-gray-400 mb-1">✨ Para ver pronto</p><p className="text-xs text-gray-600 mb-2">Géneros favoritos: {tg.join(', ')}</p>{rmovies.length>0&&(<div className="mb-2"><p className="text-xs text-gray-500 mb-1">🎥 Películas</p><div className="space-y-1">{rmovies.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}{rshows.length>0&&(<div><p className="text-xs text-gray-500 mb-1">📺 Series</p><div className="space-y-1">{rshows.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}</div>)}
     </div>
   );
 }
@@ -1371,6 +1423,7 @@ function App(){
   const [view,setView]=useState('toWatch');
   const [search,setSearch]=useState('');
   const [genre,setGenre]=useState('Todos');
+  const [sort,setSort]=useState('default');
   const [sort,setSort]=useState('default');
   const [showAdd,setShowAdd]=useState(false);
   const [rateItem,setRateItem]=useState(null);
@@ -1558,6 +1611,9 @@ function App(){
             }
           </div>
 
+          <div className="flex gap-1.5 overflow-x-auto scrollbar-hide pb-1 mb-1">
+            {[['default',view==='watched'?'📅 Año':'Reciente'],['az','A→Z'],['za','Z→A'],...(view==='watched'?[['score','⭐ Score']]:[])].map(([s,l])=>(<button key={s} onClick={()=>setSort(s)} className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${sort===s?'chip-active text-violet-200':'bg-gray-900 text-gray-600 hover:bg-gray-800'}`}>{l}</button>))}
+          </div>
           {/* Result count */}
           <p className="text-xs text-gray-700 px-3 mb-1">
             {filtered.length} {filtered.length===1?'resultado':'resultados'}
