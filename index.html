@@ -792,6 +792,9 @@ const SHOW_GENRES  = ['Todos','Drama','Comedy','Crime','Action','Horror','Docume
 function genId(){ return 'u-'+Math.random().toString(36).slice(2,9); }
 const STORAGE_KEY = 'mel_watchlist_v2';
 const SYNC_KEY = 'mel_sync_pending';
+const TOKEN_KEY = 'mel_github_token';
+const GITHUB_REPO = 'melfp2311/watchlist';
+const GITHUB_FILE = 'data.json';
 function loadData(){
   try{ const s=localStorage.getItem(STORAGE_KEY); if(s) return JSON.parse(s); }catch(e){}
   return { movies:{toWatch:MOVIES_TO_WATCH,watched:MOVIES_WATCHED}, shows:{toWatch:SHOWS_TO_WATCH,watched:SHOWS_WATCHED} };
@@ -799,6 +802,30 @@ function loadData(){
 function saveData(d){ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}catch(e){} }
 function loadSync(){ try{ const s=localStorage.getItem(SYNC_KEY); return s?JSON.parse(s):[]; }catch(e){return [];} }
 function saveSync(arr){ try{localStorage.setItem(SYNC_KEY,JSON.stringify(arr));}catch(e){} }
+function getToken(){ try{return localStorage.getItem(TOKEN_KEY)||'';}catch(e){return '';} }
+function saveToken(t){ try{localStorage.setItem(TOKEN_KEY,t);}catch(e){} }
+
+async function loadFromGitHub(){
+  try{
+    const r=await fetch('https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+GITHUB_FILE+'?t='+Date.now());
+    if(r.ok) return await r.json();
+  }catch(e){}
+  return null;
+}
+
+async function pushToGitHub(data, token){
+  try{
+    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+GITHUB_FILE;
+    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
+    let sha;
+    if(getRes.ok){ const info=await getRes.json(); sha=info.sha; }
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    const body={message:'Update watchlist '+new Date().toISOString().slice(0,10),content};
+    if(sha) body.sha=sha;
+    const putRes=await fetch(apiUrl,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    return putRes.ok;
+  }catch(e){ return false; }
+}
 
 /* ──────────────────────────────────────────────────────────────
    SMALL COMPONENTS
@@ -935,9 +962,12 @@ function DetailPanel({item, isMovie, omdbKey, onClose}){
 /* ──────────────────────────────────────────────────────────────
    SETTINGS MODAL
 ────────────────────────────────────────────────────────────── */
-function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose}){
+function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, ghStatus}){
   const [val,setVal]=useState(omdbKey);
   const [copied,setCopied]=useState(false);
+  const [tokenVal,setTokenVal]=useState(getToken);
+  const [tokenSaved,setTokenSaved]=useState(false);
+  function handleSaveToken(){ saveToken(tokenVal); setTokenSaved(true); setTimeout(()=>setTokenSaved(false),2000); }
 
   function formatForNotion(){
     const movies=syncPending.filter(i=>i.mediaType==='movies');
@@ -976,6 +1006,20 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose}){
         <p className="text-xs text-gray-600 mb-2">Para ver ratings e info. Gratis en omdbapi.com</p>
         <input value={val} onChange={e=>setVal(e.target.value)} placeholder="Tu OMDB API key..."
           className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 mb-4"/>
+
+        {/* GitHub sync */}
+        <div className="border-t border-gray-800 pt-4 mb-4">
+          <p className="text-xs font-semibold text-gray-400 mb-1">GitHub Token</p>
+          <p className="text-xs text-gray-600 mb-2">Para guardar cambios desde cualquier dispositivo. Genera uno en github.com/settings/tokens con permiso <span className="text-gray-500 font-mono">repo</span>.</p>
+          <div className="flex gap-2">
+            <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500"/>
+            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 hover:bg-violet-700 text-violet-200'}`}>{tokenSaved?'✓':'Guardar'}</button>
+          </div>
+          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-2">⏳ Guardando en GitHub...</p>}
+          {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-2">✓ Guardado en GitHub</p>}
+          {ghStatus==='error'&&<p className="text-xs text-red-500 mt-2">✗ Error al guardar. Verifica el token.</p>}
+          {!getToken()&&<p className="text-xs text-yellow-600 mt-2">Sin token: los cambios solo se guardan en este dispositivo.</p>}
+        </div>
 
         {/* Notion sync */}
         <div className="border-t border-gray-800 pt-4">
@@ -1333,6 +1377,8 @@ function App(){
   const [showSettings,setShowSettings]=useState(false);
   const [omdbKey,setOmdbKey]=useState(()=>{try{return localStorage.getItem('mel_omdb_key')||'';}catch(e){return '';}});
   const [syncPending,setSyncPending]=useState(loadSync);
+  const [ghStatus,setGhStatus]=useState('');
+  const isFirstRender=React.useRef(true);
 
   function handleOmdbKey(k){ setOmdbKey(k); try{localStorage.setItem('mel_omdb_key',k);}catch(e){} }
   function addToSync(item, mediaType, watched){
@@ -1341,7 +1387,27 @@ function App(){
   }
   function clearSync(){ setSyncPending([]); saveSync([]); }
 
-  useEffect(()=>{saveData(data);},[data]);
+  useEffect(()=>{
+    const token=getToken();
+    if(!token) return;
+    loadFromGitHub().then(d=>{
+      if(d){ setData(d); saveData(d); }
+      else { const t=getToken(); if(t) pushToGitHub(loadData(),t); }
+    });
+  },[]);
+
+  useEffect(()=>{
+    if(isFirstRender.current){ isFirstRender.current=false; return; }
+    saveData(data);
+    const token=getToken();
+    if(token){
+      setGhStatus('saving');
+      pushToGitHub(data,token).then(ok=>{
+        setGhStatus(ok?'saved':'error');
+        setTimeout(()=>setGhStatus(''),4000);
+      });
+    }
+  },[data]);
 
   const isMovies=tab==='movies';
   const isStats=tab==='stats';
@@ -1411,6 +1477,9 @@ function App(){
               </p>
             </div>
             <div className="flex items-center gap-2">
+              {ghStatus==='saving'&&<span className="text-xs text-gray-500 animate-pulse">⏳</span>}
+              {ghStatus==='saved'&&<span className="text-xs text-green-500">✓</span>}
+              {ghStatus==='error'&&<span className="text-xs text-red-500">✗</span>}
               <button onClick={()=>setShowSettings(true)} title="Ajustes"
                 className="relative text-gray-600 hover:text-gray-400 px-2 py-1.5 rounded-xl text-sm transition-colors">
                 ⚙️
@@ -1509,7 +1578,7 @@ function App(){
       {showAdd&&<AddModal activeTab={tab} onClose={()=>setShowAdd(false)} onSave={handleAddSave}/>}
       {rateItem&&<RateModal item={rateItem} onClose={()=>setRateItem(null)} onSave={handleRateSave}/>}
       {detailItem&&<DetailPanel item={detailItem} isMovie={isMovies} omdbKey={omdbKey} onClose={()=>setDetailItem(null)}/>}
-      {showSettings&&<SettingsModal omdbKey={omdbKey} onChange={handleOmdbKey} syncPending={syncPending} onClearSync={clearSync} onClose={()=>setShowSettings(false)}/>}
+      {showSettings&&<SettingsModal omdbKey={omdbKey} onChange={handleOmdbKey} syncPending={syncPending} onClearSync={clearSync} onClose={()=>setShowSettings(false)} ghStatus={ghStatus}/>}
     </div>
   );
 }
