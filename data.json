@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-qm3xvi3",
+        "title": "Good time",
+        "genre": "Thriller",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-eldoha7",
         "title": "Insomnia",
         "genre": "Thriller",
