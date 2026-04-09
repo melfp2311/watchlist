@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-qomc058",
+        "title": "The illusionist",
+        "genre": "Thriller",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-ckyj4lm",
         "title": "Steve",
         "genre": "Drama",
