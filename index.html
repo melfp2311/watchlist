@@ -801,6 +801,9 @@ const SYNC_KEY = 'mel_sync_pending';
 const TOKEN_KEY = 'mel_github_token';
 const GITHUB_REPO = 'melfp2311/watchlist';
 const GITHUB_FILE = 'data.json';
+const TOKEN_KEY = 'mel_github_token';
+const GITHUB_REPO = 'melfp2311/watchlist';
+const GITHUB_FILE = 'data.json';
 function loadData(){
   try{ const s=localStorage.getItem(STORAGE_KEY); if(s) return JSON.parse(s); }catch(e){}
   return { movies:{toWatch:MOVIES_TO_WATCH,watched:MOVIES_WATCHED}, shows:{toWatch:SHOWS_TO_WATCH,watched:SHOWS_WATCHED} };
@@ -826,16 +829,57 @@ async function pushToGitHub(data,token){
     return p.ok;
   }catch(e){ return false; }
 }
+function getToken(){ try{return localStorage.getItem(TOKEN_KEY)||'';}catch(e){return '';} }
+function saveToken(t){ try{localStorage.setItem(TOKEN_KEY,t);}catch(e){} }
 
+async function loadFromGitHub(){
+  try{
+    const r=await fetch('https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+GITHUB_FILE+'?t='+Date.now());
+    if(r.ok) return await r.json();
+  }catch(e){}
+  return null;
+}
+
+async function pushToGitHub(data, token){
+  try{
+    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+GITHUB_FILE;
+    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
+    let sha;
+    if(getRes.ok){ const info=await getRes.json(); sha=info.sha; }
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    const body={message:'Update watchlist '+new Date().toISOString().slice(0,10),content};
+    if(sha) body.sha=sha;
+    const putRes=await fetch(apiUrl,{method:'PUT',headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    return putRes.ok;
+  }catch(e){ return false; }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   SMALL COMPONENTS
+────────────────────────────────────────────────────────────── */
+const GENRE_COLORS = {
+  Drama:'bg-blue-950 text-blue-300', Comedy:'bg-yellow-950 text-yellow-300',
+  Crime:'bg-orange-950 text-orange-300', Action:'bg-red-950 text-red-300',
+  Horror:'bg-purple-950 text-purple-300', Thriller:'bg-indigo-950 text-indigo-300',
+  Romance:'bg-pink-950 text-pink-300', Historical:'bg-amber-950 text-amber-300',
+  'Sci-Fi':'bg-cyan-950 text-cyan-300', Musical:'bg-emerald-950 text-emerald-300',
+  Documentary:'bg-teal-950 text-teal-300', Animation:'bg-lime-950 text-lime-300',
+};
+function GenreTag({genre}){
+  const c = GENRE_COLORS[genre]||'bg-gray-800 text-gray-400';
+  return <span className={`text-xs px-1.5 py-0.5 rounded-md font-medium flex-shrink-0 ${c}`}>{genre}</span>;
+}
+
+/* compact list row */
 function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
   const [sx,setSx]=React.useState(0); const tr=React.useRef(null);
   function ts(e){ tr.current=e.touches[0].clientX; }
   function tm(e){ if(tr.current===null)return; setSx(Math.max(-90,Math.min(90,e.touches[0].clientX-tr.current))); }
   function te(){ if(isEditor){ if(sx>65) onRate(item); else if(sx<-65&&confirm('¿Eliminar?')) onDelete(item.id); } setSx(0); tr.current=null; }
-  const bg=sx>30?'rgba(109,40,217,'+(Math.min(sx/90,.7))+')':sx<-30?'rgba(185,28,28,'+(Math.min(-sx/90,.7))+')':'transparent';
+  const bg=sx>30?'rgba(109,40,217,'+(Math.min(sx/90,.7))+')':sx<-30?'rgba(185,28,28,'+(Math.min(-sx/90,.7))+')':\'transparent\';
   return (
     <div className="row relative overflow-hidden rounded-lg" style={{background:bg}} onTouchStart={ts} onTouchMove={tm} onTouchEnd={te}>
-      {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?'✏️':'✓'}</span>}
+      {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?\'✏️\':\'✓\'}</span>}
       {sx<-30&&isEditor&&<span className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">✕</span>}
       <div className="flex items-center gap-2 px-3 py-2" style={{transform:'translateX('+sx+'px)',transition:sx===0?'transform .2s':'none'}}>
       <button onClick={()=>onDetail(item)} className="flex-1 text-sm text-gray-200 min-w-0 truncate text-left hover:text-violet-300 transition-colors" title={item.title}>{item.title}</button>
@@ -1249,10 +1293,7 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
 
     if(files.length===1){
       const url=URL.createObjectURL(files[0]);
-      setImgPreview(url);
-      setScanning(true);
-      setSuggestions([]);
-      setBatchItems([]);
+      setImgPreview(url);setScanning(true);setSuggestions([]);setBatchItems([]);
       try{
         const result=await Tesseract.recognize(url,['eng','spa'],{logger:()=>{}});
         const deduped=extractTitles(result.data.text);
@@ -1261,13 +1302,10 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
       }catch(err){}
       setScanning(false);
     } else {
-      setImgPreview(null);
-      setSuggestions([]);
-      setBatchItems([]);
-      setScanning(true);
+      setImgPreview(null);setSuggestions([]);setBatchItems([]);setScanning(true);
       const collected=[];
       for(let i=0;i<files.length;i++){
-        setScanProgress(`Procesando ${i+1}/${files.length}…`);
+        setScanProgress('Procesando '+(i+1)+'/'+files.length+'…');
         const url=URL.createObjectURL(files[i]);
         try{
           const result=await Tesseract.recognize(url,['eng','spa'],{logger:()=>{}});
@@ -1275,9 +1313,7 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
           if(titles.length>0) collected.push({title:titles[0],selected:true});
         }catch(err){}
       }
-      setScanning(false);
-      setScanProgress('');
-      setBatchItems(collected);
+      setScanning(false);setScanProgress('');setBatchItems(collected);
     }
   }
 
@@ -1354,7 +1390,6 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
             </button>
           </div>
         )}
-
         <div className="flex flex-col gap-3">
           <input autoFocus value={title} onChange={e=>setTitle(e.target.value)} onKeyDown={e=>e.key==='Enter'&&save()}
             placeholder="Título" className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 w-full"/>
@@ -1522,7 +1557,7 @@ function App(){
     setData(p=>({...p,[key]:{...p[key],toWatch:[...items,...p[key].toWatch]}}));
     setShowAdd(false);
   }
-  function handleRateSave(newRating,newNotes){
+function handleRateSave(newRating,newNotes){
     const key=isMovies?'movies':'shows';
     setData(p=>({
       ...p,
