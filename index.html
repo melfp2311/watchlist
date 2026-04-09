@@ -844,7 +844,7 @@ function GenreTag({genre}){
 }
 
 /* compact list row */
-function Row({item, isWatched, onRate, onDelete, onDetail}){
+function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
   return (
     <div className="row flex items-center gap-2 px-3 py-2 rounded-lg group">
       <button onClick={()=>onDetail(item)} className="flex-1 text-sm text-gray-200 min-w-0 truncate text-left hover:text-violet-300 transition-colors" title={item.title}>{item.title}</button>
@@ -853,7 +853,7 @@ function Row({item, isWatched, onRate, onDelete, onDetail}){
         ? <span className="text-sm flex-shrink-0 min-w-[60px] text-right">{item.rating||<span className="text-gray-700 text-xs">—</span>}</span>
         : null
       }
-      <div className="actions flex gap-1 flex-shrink-0">
+      {isEditor&&<div className="actions flex gap-1 flex-shrink-0">
         <button
           onClick={()=>onRate(item)}
           className="text-xs text-violet-500 hover:text-violet-300 px-1.5 py-0.5 rounded hover:bg-violet-950"
@@ -862,7 +862,7 @@ function Row({item, isWatched, onRate, onDelete, onDetail}){
           onClick={()=>{if(confirm('¿Eliminar "'+item.title+'"?')) onDelete(item.id);}}
           className="text-xs text-gray-700 hover:text-red-400 px-1.5 py-0.5 rounded hover:bg-red-950"
         >✕</button>
-      </div>
+      </div>}
     </div>
   );
 }
@@ -1378,6 +1378,7 @@ function App(){
   const [omdbKey,setOmdbKey]=useState(()=>{try{return localStorage.getItem('mel_omdb_key')||'';}catch(e){return '';}});
   const [syncPending,setSyncPending]=useState(loadSync);
   const [ghStatus,setGhStatus]=useState('');
+  const [isEditor,setIsEditor]=useState(()=>!!getToken());
   const isFirstRender=React.useRef(true);
 
   function handleOmdbKey(k){ setOmdbKey(k); try{localStorage.setItem('mel_omdb_key',k);}catch(e){} }
@@ -1485,7 +1486,8 @@ function App(){
                 ⚙️
                 {syncPending.length>0&&<span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-violet-500 rounded-full text-white text-center leading-3.5 font-bold" style={{fontSize:'8px',lineHeight:'14px'}}>{syncPending.length}</span>}
               </button>
-              {!isStats&&<button onClick={()=>setShowAdd(true)}
+              {!isEditor&&<span className="text-xs text-gray-700 px-2">👁 Solo vista</span>}
+              {!isStats&&isEditor&&<button onClick={()=>setShowAdd(true)}
                 className="bg-violet-700 hover:bg-violet-600 text-white px-3 py-1.5 rounded-xl text-sm font-medium transition-colors flex items-center gap-1">
                 <span className="text-base leading-none">+</span> Agregar
               </button>}
@@ -1557,7 +1559,7 @@ function App(){
                 <div key={year}>
                   <YearHeader year={year} count={items.length}/>
                   {items.map(item=>(
-                    <Row key={item.id} item={item} isWatched={true} onRate={setRateItem} onDelete={handleDelete} onDetail={setDetailItem}/>
+                    <Row key={item.id} item={item} isWatched={true} onRate={setRateItem} onDelete={handleDelete} onDetail={setDetailItem} isEditor={isEditor}/>
                   ))}
                 </div>
               ))}
@@ -1568,7 +1570,7 @@ function App(){
                 <p className="text-xs text-gray-700 px-3 mb-1 italic">Mostrando resultados de todos los años</p>
               )}
               {filtered.map(item=>(
-                <Row key={item.id} item={item} isWatched={view==='watched'} onRate={setRateItem} onDelete={handleDelete} onDetail={setDetailItem}/>
+                <Row key={item.id} item={item} isWatched={view==='watched'} onRate={setRateItem} onDelete={handleDelete} onDetail={setDetailItem} isEditor={isEditor}/>
               ))}
             </div>
           )}
@@ -1578,7 +1580,7 @@ function App(){
       {showAdd&&<AddModal activeTab={tab} onClose={()=>setShowAdd(false)} onSave={handleAddSave}/>}
       {rateItem&&<RateModal item={rateItem} onClose={()=>setRateItem(null)} onSave={handleRateSave}/>}
       {detailItem&&<DetailPanel item={detailItem} isMovie={isMovies} omdbKey={omdbKey} onClose={()=>setDetailItem(null)}/>}
-      {showSettings&&<SettingsModal omdbKey={omdbKey} onChange={handleOmdbKey} syncPending={syncPending} onClearSync={clearSync} onClose={()=>setShowSettings(false)} ghStatus={ghStatus}/>}
+      {showSettings&&<SettingsModal omdbKey={omdbKey} onChange={handleOmdbKey} syncPending={syncPending} onClearSync={clearSync} onClose={()=>{setShowSettings(false);setIsEditor(!!getToken());}} ghStatus={ghStatus}/>}
     </div>
   );
 }
