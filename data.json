@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-ckyj4lm",
+        "title": "Steve",
+        "genre": "Drama",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-274myw0",
         "title": "Song sung blue",
         "genre": "Musical",
