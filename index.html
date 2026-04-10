@@ -1037,33 +1037,6 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
           {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-1">✓ Guardado</p>}
           {ghStatus==='error'&&<p className="text-xs text-red-500 mt-1">✗ Error</p>}
         </div>
-          {syncPending.length===0?(
-            <p className="text-xs text-gray-600 py-2">✓ Todo sincronizado con Notion</p>
-          ):(
-            <div>
-              <p className="text-xs text-gray-500 mb-2">Estos títulos fueron agregados en la app y aún no están en tu Notion:</p>
-              <div className="bg-gray-800 rounded-xl p-3 mb-3 max-h-36 overflow-y-auto space-y-1">
-                {syncPending.map((i,idx)=>(
-                  <div key={idx} className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500">{i.mediaType==='movies'?'🎥':'📺'}</span>
-                    <span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>
-                    {i.watched&&<span className="text-xs text-gray-600">{i.rating?.slice(0,4)||'—'}</span>}
-                  </div>
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <button onClick={copyToClipboard}
-                  className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${copied?'bg-green-800 text-green-300':'bg-violet-800 hover:bg-violet-700 text-violet-200'}`}>
-                  {copied?'✓ Copiado':'📋 Copiar para Notion'}
-                </button>
-                <button onClick={()=>{if(confirm('¿Marcar todos como sincronizados?'))onClearSync();}}
-                  className="px-3 py-2 rounded-xl text-xs text-gray-500 hover:text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors">
-                  ✓ Sync hecho
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
 
         <div className="flex gap-2 mt-4">
           <button onClick={onClose} className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 py-2 rounded-xl text-sm">Cancelar</button>
