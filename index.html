@@ -13,10 +13,8 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' }
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <style>
     *{box-sizing:border-box}
@@ -48,7 +46,7 @@
   input, textarea, select { color: #2a1510 !important; }
   </style>
 </head>
-<body>
+<body style="background-color:#FAF6F1">
 <div id="root"></div>
 <script type="text/babel">
 const {useState,useEffect,useMemo} = React;
