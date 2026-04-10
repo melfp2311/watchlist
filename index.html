@@ -13,6 +13,9 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <style>
@@ -1532,9 +1535,9 @@ function App(){
   const wCount=isMovies?data.movies.watched.length:data.shows.watched.length;
 
   return (
-    <div className="min-h-screen bg-[#FAF6F1]" style={{background:'#09090f'}}>
+    <div className="min-h-screen" style={{background:'#09090f'}}>
       {/* ── HEADER ── */}
-      <div className="sticky top-0 z-40 border-b border-[#DDD3C8]" style={{background:'#09090f'}}>
+      <div className="sticky top-0 z-40 border-b border-gray-900" style={{background:'#09090f'}}>
         <div className="max-w-3xl mx-auto px-4 pt-5 pb-0">
           <div className="flex items-center justify-between mb-4">
             <div>
