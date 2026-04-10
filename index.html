@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mel's Watch List 🎬</title>
   <link rel="manifest" href="manifest.json">
@@ -36,6 +38,14 @@
     .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
     .year-fade{animation:fadeUp 0.2s ease}
     @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+
+  <style>
+    *, body { font-family: 'DM Sans', sans-serif; }
+    body { background-color: #100805; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #100805; }
+    ::-webkit-scrollbar-thumb { background: #3a2820; border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -836,7 +846,7 @@ const GENRE_COLORS = {
   Documentary:'bg-teal-950 text-teal-300', Animation:'bg-lime-950 text-lime-300',
 };
 function GenreTag({genre}){
-  const c = GENRE_COLORS[genre]||'bg-gray-800 text-gray-400';
+  const c = GENRE_COLORS[genre]||'bg-[#1a0f0a] text-[#BDC9CB]';
   return <span className={`text-xs px-1.5 py-0.5 rounded-md font-medium flex-shrink-0 ${c}`}>{genre}</span>;
 }
 
@@ -852,20 +862,20 @@ function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
       {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?'✏️':'✓'}</span>}
       {sx<-30&&isEditor&&<span className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">✕</span>}
       <div className="flex items-center gap-2 px-3 py-2" style={{transform:'translateX('+sx+'px)',transition:sx===0?'transform .2s':'none'}}>
-      <button onClick={()=>onDetail(item)} className="flex-1 text-sm text-gray-200 min-w-0 truncate text-left hover:text-violet-300 transition-colors" title={item.title}>{item.title}</button>
+      <button onClick={()=>onDetail(item)} className="flex-1 text-sm text-[#faf5f2] min-w-0 truncate text-left hover:text-[#E1AFA1] transition-colors" title={item.title}>{item.title}</button>
       {item.genre && <GenreTag genre={item.genre}/>}
       {isWatched
-        ? <span className="text-sm flex-shrink-0 min-w-[60px] text-right">{item.rating||<span className="text-gray-700 text-xs">—</span>}</span>
+        ? <span className="text-sm flex-shrink-0 min-w-[60px] text-right">{item.rating||<span className="text-[#4a3830] text-xs">—</span>}</span>
         : null
       }
       {isEditor&&<div className="actions flex gap-1 flex-shrink-0">
         <button
           onClick={()=>onRate(item)}
-          className="text-xs text-violet-500 hover:text-violet-300 px-1.5 py-0.5 rounded hover:bg-violet-950"
+          className="text-xs text-[#D62411] hover:text-[#E1AFA1] px-1.5 py-0.5 rounded hover:bg-[#300a06]"
         >{isWatched?'✏️':'✓'}</button>
         <button
           onClick={()=>{if(confirm('¿Eliminar "'+item.title+'"?')) onDelete(item.id);}}
-          className="text-xs text-gray-700 hover:text-red-400 px-1.5 py-0.5 rounded hover:bg-red-950"
+          className="text-xs text-[#4a3830] hover:text-red-400 px-1.5 py-0.5 rounded hover:bg-red-950"
         >✕</button>
       </div>}
       </div>
@@ -877,9 +887,9 @@ function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
 function YearHeader({year, count}){
   return (
     <div className="year-fade flex items-center gap-3 px-3 pt-5 pb-1">
-      <span className="text-violet-400 font-bold text-sm">{year}</span>
-      <div className="flex-1 h-px bg-gray-800"/>
-      <span className="text-gray-600 text-xs">{count} {count===1?'vista':'vistas'}</span>
+      <span className="text-[#E1AFA1] font-bold text-sm">{year}</span>
+      <div className="flex-1 h-px bg-[#1a0f0a]"/>
+      <span className="text-[#6b5040] text-xs">{count} {count===1?'vista':'vistas'}</span>
     </div>
   );
 }
@@ -915,13 +925,13 @@ function DetailPanel({item, isMovie, omdbKey, onClose}){
 
   return (
     <div className="modal-bg fixed inset-0 bg-black/70 flex items-end sm:items-center justify-center z-50 p-4" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
-      <div className="modal-box bg-gray-900 border border-gray-800 rounded-2xl p-5 w-full max-w-sm">
+      <div className="modal-box bg-[#100805] border border-[#2a1a12] rounded-2xl p-5 w-full max-w-sm">
         <div className="flex items-start gap-3 mb-4">
           <div className="flex-1 min-w-0">
             <p className="font-bold text-white text-sm leading-snug">{item.title}</p>
-            {info&&<p className="text-xs text-gray-500 mt-0.5">{info.Year} · {info.Runtime} · {info.Rated}</p>}
+            {info&&<p className="text-xs text-[#9a8070] mt-0.5">{info.Year} · {info.Runtime} · {info.Rated}</p>}
           </div>
-          <button onClick={onClose} className="text-gray-600 hover:text-gray-400 flex-shrink-0 text-sm">✕</button>
+          <button onClick={onClose} className="text-[#6b5040] hover:text-[#BDC9CB] flex-shrink-0 text-sm">✕</button>
         </div>
 
         {info&&(
@@ -929,7 +939,7 @@ function DetailPanel({item, isMovie, omdbKey, onClose}){
             {info.Poster&&info.Poster!=='N/A'&&(
               <img src={info.Poster} alt={info.Title} className="w-full h-48 object-cover rounded-xl mb-3" style={{objectPosition:'center top'}}/>
             )}
-            {info.Plot&&info.Plot!=='N/A'&&<p className="text-xs text-gray-400 mb-3 leading-relaxed">{info.Plot}</p>}
+            {info.Plot&&info.Plot!=='N/A'&&<p className="text-xs text-[#BDC9CB] mb-3 leading-relaxed">{info.Plot}</p>}
             <div className="flex gap-3">
               {info.imdbRating&&info.imdbRating!=='N/A'&&(
                 <div className="flex-1 bg-yellow-950 rounded-xl p-2 text-center">
@@ -946,9 +956,9 @@ function DetailPanel({item, isMovie, omdbKey, onClose}){
             </div>
           </div>
         )}
-        {loading&&<p className="text-xs text-gray-600 mb-4 text-center py-4">Buscando info…</p>}
-        {err&&omdbKey&&<p className="text-xs text-gray-600 mb-4 text-center">No se encontró en OMDB</p>}
-        {!omdbKey&&<p className="text-xs text-gray-700 mb-4 text-center">Agrega tu OMDB key en ajustes para ver ratings e info</p>}
+        {loading&&<p className="text-xs text-[#6b5040] mb-4 text-center py-4">Buscando info…</p>}
+        {err&&omdbKey&&<p className="text-xs text-[#6b5040] mb-4 text-center">No se encontró en OMDB</p>}
+        {!omdbKey&&<p className="text-xs text-[#4a3830] mb-4 text-center">Agrega tu OMDB key en ajustes para ver ratings e info</p>}
 
         <div className="flex gap-2">
           <a href={jwUrl} target="_blank" rel="noreferrer"
@@ -1004,43 +1014,43 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
 
   return (
     <div className="modal-bg fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
-      <div className="modal-box bg-gray-900 border border-gray-800 rounded-2xl p-5 w-full max-w-sm max-h-[90vh] overflow-y-auto">
+      <div className="modal-box bg-[#100805] border border-[#2a1a12] rounded-2xl p-5 w-full max-w-sm max-h-[90vh] overflow-y-auto">
         <p className="font-bold text-white mb-4">⚙️ Ajustes</p>
 
         {/* OMDB key */}
-        <p className="text-xs font-semibold text-gray-400 mb-1">OMDB API Key</p>
-        <p className="text-xs text-gray-600 mb-2">Para ver ratings e info. Gratis en omdbapi.com</p>
+        <p className="text-xs font-semibold text-[#BDC9CB] mb-1">OMDB API Key</p>
+        <p className="text-xs text-[#6b5040] mb-2">Para ver ratings e info. Gratis en omdbapi.com</p>
         <input value={val} onChange={e=>setVal(e.target.value)} placeholder="Tu OMDB API key..."
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 mb-4"/>
+          className="w-full bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-3 py-2 text-white text-sm focus:border-[#D62411] mb-4"/>
 
         {/* GitHub sync */}
-        <div className="border-t border-gray-800 pt-4 mb-4">
-          <p className="text-xs font-semibold text-gray-400 mb-1">GitHub Token</p>
-          <p className="text-xs text-gray-600 mb-2">Para guardar cambios desde cualquier dispositivo. Genera uno en github.com/settings/tokens con permiso <span className="text-gray-500 font-mono">repo</span>.</p>
+        <div className="border-t border-[#2a1a12] pt-4 mb-4">
+          <p className="text-xs font-semibold text-[#BDC9CB] mb-1">GitHub Token</p>
+          <p className="text-xs text-[#6b5040] mb-2">Para guardar cambios desde cualquier dispositivo. Genera uno en github.com/settings/tokens con permiso <span className="text-[#9a8070] font-mono">repo</span>.</p>
           <div className="flex gap-2">
-            <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500"/>
-            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 hover:bg-violet-700 text-violet-200'}`}>{tokenSaved?'✓':'Guardar'}</button>
+            <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-3 py-2 text-white text-sm focus:border-[#D62411]"/>
+            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${tokenSaved?'bg-green-800 text-green-300':'bg-[#8b1a0e] hover:bg-[#D62411] text-[#F5EDE8]'}`}>{tokenSaved?'✓':'Guardar'}</button>
           </div>
-          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-2">⏳ Guardando en GitHub...</p>}
+          {ghStatus==='saving'&&<p className="text-xs text-[#9a8070] mt-2">⏳ Guardando en GitHub...</p>}
           {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-2">✓ Guardado en GitHub</p>}
           {ghStatus==='error'&&<p className="text-xs text-red-500 mt-2">✗ Error al guardar. Verifica el token.</p>}
           {!getToken()&&<p className="text-xs text-yellow-600 mt-2">Sin token: los cambios solo se guardan en este dispositivo.</p>}
         </div>
 
-        <div className="border-t border-gray-800 pt-4 mb-4">
-          <p className="text-xs font-semibold text-gray-400 mb-1">GitHub Token</p>
+        <div className="border-t border-[#2a1a12] pt-4 mb-4">
+          <p className="text-xs font-semibold text-[#BDC9CB] mb-1">GitHub Token</p>
           <div className="flex gap-2">
-            <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm"/>
-            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 text-violet-200'}`}>{tokenSaved?'✓':'Guardar'}</button>
+            <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-3 py-2 text-white text-sm"/>
+            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium ${tokenSaved?'bg-green-800 text-green-300':'bg-[#8b1a0e] text-[#F5EDE8]'}`}>{tokenSaved?'✓':'Guardar'}</button>
           </div>
-          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-1">⏳ Guardando...</p>}
+          {ghStatus==='saving'&&<p className="text-xs text-[#9a8070] mt-1">⏳ Guardando...</p>}
           {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-1">✓ Guardado</p>}
           {ghStatus==='error'&&<p className="text-xs text-red-500 mt-1">✗ Error</p>}
         </div>
 
         <div className="flex gap-2 mt-4">
-          <button onClick={onClose} className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 py-2 rounded-xl text-sm">Cancelar</button>
-          <button onClick={()=>{onChange(val);onClose();}} className="flex-1 bg-violet-700 hover:bg-violet-600 text-white py-2 rounded-xl text-sm font-medium">Guardar</button>
+          <button onClick={onClose} className="flex-1 bg-[#1a0f0a] hover:bg-[#241510] text-[#F5EDE8] py-2 rounded-xl text-sm">Cancelar</button>
+          <button onClick={()=>{onChange(val);onClose();}} className="flex-1 bg-[#D62411] hover:bg-[#c9200e] text-white py-2 rounded-xl text-sm font-medium">Guardar</button>
         </div>
       </div>
     </div>
@@ -1057,10 +1067,10 @@ function ratingNum(rating){
 
 function StatCard({label,value,sub}){
   return (
-    <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4 flex flex-col items-center text-center">
-      <p className="text-2xl font-bold text-violet-400">{value}</p>
-      <p className="text-xs text-gray-300 mt-0.5">{label}</p>
-      {sub&&<p className="text-xs text-gray-700 mt-0.5">{sub}</p>}
+    <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4 flex flex-col items-center text-center">
+      <p className="text-2xl font-bold text-[#E1AFA1]">{value}</p>
+      <p className="text-xs text-[#F5EDE8] mt-0.5">{label}</p>
+      {sub&&<p className="text-xs text-[#4a3830] mt-0.5">{sub}</p>}
     </div>
   );
 }
@@ -1069,11 +1079,11 @@ function MiniBar({label,count,max,color}){
   const pct=max>0?Math.round((count/max)*100):0;
   return (
     <div className="flex items-center gap-2 py-0.5">
-      <span className="text-xs text-gray-500 w-10 text-right flex-shrink-0">{label}</span>
-      <div className="flex-1 h-4 bg-gray-900 rounded overflow-hidden">
+      <span className="text-xs text-[#9a8070] w-10 text-right flex-shrink-0">{label}</span>
+      <div className="flex-1 h-4 bg-[#100805] rounded overflow-hidden">
         <div className={`h-full ${color} rounded transition-all`} style={{width:`${pct}%`}}/>
       </div>
-      <span className="text-xs text-gray-500 w-6 text-right flex-shrink-0">{count}</span>
+      <span className="text-xs text-[#9a8070] w-6 text-right flex-shrink-0">{count}</span>
     </div>
   );
 }
@@ -1124,39 +1134,39 @@ function StatsPage({data}){
       </div>
 
       {/* movies per year */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">🎥 Películas por año</p>
+      <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4">
+        <p className="text-xs font-semibold text-[#BDC9CB] mb-3">🎥 Películas por año</p>
         {years.map(y=>(
-          <MiniBar key={y} label={y} count={(moviesByYear[y]||[]).length} max={maxM} color="bg-violet-700"/>
+          <MiniBar key={y} label={y} count={(moviesByYear[y]||[]).length} max={maxM} color="bg-[#D62411]"/>
         ))}
       </div>
 
       {/* shows per year */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">📺 Series por año</p>
+      <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4">
+        <p className="text-xs font-semibold text-[#BDC9CB] mb-3">📺 Series por año</p>
         {years.map(y=>(
           <MiniBar key={y} label={y} count={(showsByYear[y]||[]).length} max={maxS} color="bg-teal-700"/>
         ))}
       </div>
 
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">⭐️ Scores — películas</p>
-        {scoreDist.reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDist} color={n===5?'bg-violet-600':n===4?'bg-violet-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
+      <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4">
+        <p className="text-xs font-semibold text-[#BDC9CB] mb-3">⭐️ Scores — películas</p>
+        {scoreDist.reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDist} color={n===5?'bg-[#c9200e]':n===4?'bg-[#D62411]':n===3?'bg-[#2e1a12]':n===2?'bg-[#241510]':'bg-[#1a0f0a]'}/>))}
       </div>
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">⭐️ Scores — series</p>
-        {[...scoreDistS].reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDistS} color={n===5?'bg-teal-600':n===4?'bg-teal-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
+      <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4">
+        <p className="text-xs font-semibold text-[#BDC9CB] mb-3">⭐️ Scores — series</p>
+        {[...scoreDistS].reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDistS} color={n===5?'bg-teal-600':n===4?'bg-teal-700':n===3?'bg-[#2e1a12]':n===2?'bg-[#241510]':'bg-[#1a0f0a]'}/>))}
       </div>
 
       {/* top movies */}
       {top5M.length>0&&(
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-          <p className="text-xs font-semibold text-gray-400 mb-3">🏆 Películas 5 estrellas ({top5M.length})</p>
+        <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4">
+          <p className="text-xs font-semibold text-[#BDC9CB] mb-3">🏆 Películas 5 estrellas ({top5M.length})</p>
           <div className="space-y-1">
             {top5M.map(i=>(
               <div key={i.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-300 flex-1 truncate">{cleanForSearch(i.title)}</span>
-                <span className="text-xs text-gray-600">{i.year}</span>
+                <span className="text-xs text-[#F5EDE8] flex-1 truncate">{cleanForSearch(i.title)}</span>
+                <span className="text-xs text-[#6b5040]">{i.year}</span>
                 <span className="text-xs flex-shrink-0">{i.rating.slice(0,2)}</span>
               </div>
             ))}
@@ -1166,13 +1176,13 @@ function StatsPage({data}){
 
       {/* top shows */}
       {top5S.length>0&&(
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-          <p className="text-xs font-semibold text-gray-400 mb-3">🏆 Series 5 estrellas ({top5S.length})</p>
+        <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4">
+          <p className="text-xs font-semibold text-[#BDC9CB] mb-3">🏆 Series 5 estrellas ({top5S.length})</p>
           <div className="space-y-1">
             {top5S.map(i=>(
               <div key={i.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-300 flex-1 truncate">{cleanForSearch(i.title)}</span>
-                <span className="text-xs text-gray-600">{i.year}</span>
+                <span className="text-xs text-[#F5EDE8] flex-1 truncate">{cleanForSearch(i.title)}</span>
+                <span className="text-xs text-[#6b5040]">{i.year}</span>
                 <span className="text-xs flex-shrink-0">{i.rating.slice(0,2)}</span>
               </div>
             ))}
@@ -1181,13 +1191,13 @@ function StatsPage({data}){
       )}
 
       {/* genre breakdown */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">🎭 Géneros en lista pendiente (películas)</p>
+      <div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4">
+        <p className="text-xs font-semibold text-[#BDC9CB] mb-3">🎭 Géneros en lista pendiente (películas)</p>
         {genreList.map(([g,c])=>(
           <MiniBar key={g} label={g} count={c} max={maxG} color="bg-indigo-700"/>
         ))}
       </div>
-      {(rmovies.length>0||rshows.length>0)&&(<div className="bg-gray-900 border border-gray-800 rounded-2xl p-4"><p className="text-xs font-semibold text-gray-400 mb-1">✨ Para ver pronto</p><p className="text-xs text-gray-600 mb-2">Géneros favoritos: {tg.join(', ')}</p>{rmovies.length>0&&(<div className="mb-2"><p className="text-xs text-gray-500 mb-1">🎥 Películas</p><div className="space-y-1">{rmovies.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}{rshows.length>0&&(<div><p className="text-xs text-gray-500 mb-1">📺 Series</p><div className="space-y-1">{rshows.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}</div>)}
+      {(rmovies.length>0||rshows.length>0)&&(<div className="bg-[#100805] border border-[#2a1a12] rounded-2xl p-4"><p className="text-xs font-semibold text-[#BDC9CB] mb-1">✨ Para ver pronto</p><p className="text-xs text-[#6b5040] mb-2">Géneros favoritos: {tg.join(', ')}</p>{rmovies.length>0&&(<div className="mb-2"><p className="text-xs text-[#9a8070] mb-1">🎥 Películas</p><div className="space-y-1">{rmovies.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-[#F5EDE8] flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-[#4a3830]">{i.genre}</span>}</div>))}</div></div>)}{rshows.length>0&&(<div><p className="text-xs text-[#9a8070] mb-1">📺 Series</p><div className="space-y-1">{rshows.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-[#F5EDE8] flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-[#4a3830]">{i.genre}</span>}</div>))}</div></div>)}</div>)}
     </div>
   );
 }
@@ -1271,10 +1281,10 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
 
   return (
     <div className="modal-bg fixed inset-0 bg-black/70 flex items-end sm:items-center justify-center z-50 p-4">
-      <div className="modal-box bg-gray-900 border border-gray-800 rounded-2xl p-5 w-full max-w-sm max-h-[90vh] overflow-y-auto">
+      <div className="modal-box bg-[#100805] border border-[#2a1a12] rounded-2xl p-5 w-full max-w-sm max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-bold text-white">{activeTab==='movies'?'🎥 Agregar película':'📺 Agregar serie'}</h2>
-          <label className="cursor-pointer flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-gray-300 transition-colors" title="Subir screenshot">
+          <label className="cursor-pointer flex items-center gap-1.5 bg-[#1a0f0a] hover:bg-[#241510] border border-[#3a2820] rounded-lg px-2.5 py-1.5 text-xs text-[#F5EDE8] transition-colors" title="Subir screenshot">
             📸 Screenshot
             <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleScreenshot}/>
           </label>
@@ -1286,37 +1296,37 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
             <img src={imgPreview} alt="screenshot" className="w-full max-h-40 object-cover rounded-xl mb-2" style={{objectFit:'contain',background:'#111'}}/>
             {scanning&&(
               <div className="flex items-center gap-2 py-2">
-                <div className="w-3 h-3 rounded-full bg-violet-500 animate-pulse flex-shrink-0"/>
-                <p className="text-xs text-gray-500">Leyendo imagen…</p>
+                <div className="w-3 h-3 rounded-full bg-[#e02b17] animate-pulse flex-shrink-0"/>
+                <p className="text-xs text-[#9a8070]">Leyendo imagen…</p>
               </div>
             )}
             {!scanning&&suggestions.length>0&&(
               <div>
-                <p className="text-xs text-gray-600 mb-1.5">Toca el título detectado:</p>
+                <p className="text-xs text-[#6b5040] mb-1.5">Toca el título detectado:</p>
                 <div className="flex flex-wrap gap-1.5">
                   {suggestions.map((s,i)=>(
                     <button key={i} onClick={()=>setTitle(s)}
-                      className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${title===s?'bg-violet-800 border-violet-600 text-violet-200':'bg-gray-800 border-gray-700 text-gray-300 hover:border-violet-700 hover:text-white'}`}>
+                      className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${title===s?'bg-[#8b1a0e] border-violet-600 text-[#F5EDE8]':'bg-[#1a0f0a] border-[#3a2820] text-[#F5EDE8] hover:border-[#9b1a0a] hover:text-white'}`}>
                       {s}
                     </button>
                   ))}
                 </div>
               </div>
             )}
-            {!scanning&&suggestions.length===0&&<p className="text-xs text-gray-600">No se detectó texto — escríbelo manualmente</p>}
+            {!scanning&&suggestions.length===0&&<p className="text-xs text-[#6b5040]">No se detectó texto — escríbelo manualmente</p>}
           </div>
         )}
 
         {/* Batch mode: scanning progress + results */}
         {!imgPreview&&scanning&&(
           <div className="flex items-center gap-2 py-3 mb-2">
-            <div className="w-3 h-3 rounded-full bg-violet-500 animate-pulse flex-shrink-0"/>
-            <p className="text-xs text-gray-400">{scanProgress||'Procesando…'}</p>
+            <div className="w-3 h-3 rounded-full bg-[#e02b17] animate-pulse flex-shrink-0"/>
+            <p className="text-xs text-[#BDC9CB]">{scanProgress||'Procesando…'}</p>
           </div>
         )}
         {!imgPreview&&!scanning&&batchItems.length>0&&(
           <div className="mb-3">
-            <p className="text-xs text-gray-500 mb-2">Títulos detectados — selecciona cuáles agregar:</p>
+            <p className="text-xs text-[#9a8070] mb-2">Títulos detectados — selecciona cuáles agregar:</p>
             <div className="flex flex-col gap-1.5 mb-3">
               {batchItems.map((b,i)=>(
                 <label key={i} className="flex items-center gap-2.5 cursor-pointer group">
@@ -1325,13 +1335,13 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
                   }} className="accent-violet-500 w-4 h-4"/>
                   <input value={b.title} onChange={ev=>{
                     setBatchItems(prev=>prev.map((x,j)=>j===i?{...x,title:ev.target.value}:x));
-                  }} className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-xs focus:border-violet-500"/>
+                  }} className="flex-1 bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-2.5 py-1.5 text-white text-xs focus:border-[#D62411]"/>
                 </label>
               ))}
             </div>
             <button onClick={handleBatchSave}
               disabled={!batchItems.some(b=>b.selected&&b.title.trim())}
-              className="w-full bg-violet-700 hover:bg-violet-600 disabled:opacity-40 text-white py-2 rounded-xl text-sm font-medium">
+              className="w-full bg-[#D62411] hover:bg-[#c9200e] disabled:opacity-40 text-white py-2 rounded-xl text-sm font-medium">
               Agregar {batchItems.filter(b=>b.selected).length} títulos
             </button>
           </div>
@@ -1339,14 +1349,14 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
 
         <div className="flex flex-col gap-3">
           <input autoFocus value={title} onChange={e=>setTitle(e.target.value)} onKeyDown={e=>e.key==='Enter'&&save()}
-            placeholder="Título" className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 w-full"/>
+            placeholder="Título" className="bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-3 py-2 text-white text-sm focus:border-[#D62411] w-full"/>
           <select value={genre} onChange={e=>setGenre(e.target.value)}
-            className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500">
+            className="bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-3 py-2 text-white text-sm focus:border-[#D62411]">
             <option value="">Sin género</option>
             {genres.map(g=><option key={g} value={g}>{g}</option>)}
           </select>
-          <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer select-none">
-            <div onClick={()=>setWatched(!watched)} className={`w-10 h-5 rounded-full transition-colors flex items-center px-0.5 ${watched?'bg-violet-600':'bg-gray-700'}`}>
+          <label className="flex items-center gap-2 text-sm text-[#F5EDE8] cursor-pointer select-none">
+            <div onClick={()=>setWatched(!watched)} className={`w-10 h-5 rounded-full transition-colors flex items-center px-0.5 ${watched?'bg-[#c9200e]':'bg-[#241510]'}`}>
               <div className={`w-4 h-4 bg-white rounded-full shadow transition-transform ${watched?'translate-x-5':'translate-x-0'}`}/>
             </div>
             Ya la vi
@@ -1354,22 +1364,22 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
           {watched&&<>
             <div className="flex flex-wrap gap-1.5">
               {RATING_EMOJIS.map(e=>(
-                <button key={e} onClick={()=>setEmoji(e)} className={`text-lg p-1 rounded-lg ${emoji===e?'bg-violet-800':'bg-gray-800 hover:bg-gray-700'}`}>{e}</button>
+                <button key={e} onClick={()=>setEmoji(e)} className={`text-lg p-1 rounded-lg ${emoji===e?'bg-[#8b1a0e]':'bg-[#1a0f0a] hover:bg-[#241510]'}`}>{e}</button>
               ))}
             </div>
             <div className="flex gap-1.5">
               {[1,2,3,4,5].map(n=>(
-                <button key={n} onClick={()=>setCount(n)} className={`flex-1 py-1 rounded-lg text-sm ${count===n?'bg-violet-700 text-white':'bg-gray-800 text-gray-400'}`}>{n}</button>
+                <button key={n} onClick={()=>setCount(n)} className={`flex-1 py-1 rounded-lg text-sm ${count===n?'bg-[#D62411] text-white':'bg-[#1a0f0a] text-[#BDC9CB]'}`}>{n}</button>
               ))}
             </div>
             <p className="text-center text-base">{emoji.repeat(count)}</p>
           </>}
           <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Notas (opcional)"
-            className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 resize-none h-14"/>
+            className="bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-3 py-2 text-white text-sm focus:border-[#D62411] resize-none h-14"/>
         </div>
         <div className="flex gap-2 mt-4">
-          <button onClick={onClose} className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 py-2 rounded-xl text-sm">Cancelar</button>
-          <button onClick={save} disabled={!title.trim()} className="flex-1 bg-violet-700 hover:bg-violet-600 disabled:opacity-40 text-white py-2 rounded-xl text-sm font-medium">Guardar</button>
+          <button onClick={onClose} className="flex-1 bg-[#1a0f0a] hover:bg-[#241510] text-[#F5EDE8] py-2 rounded-xl text-sm">Cancelar</button>
+          <button onClick={save} disabled={!title.trim()} className="flex-1 bg-[#D62411] hover:bg-[#c9200e] disabled:opacity-40 text-white py-2 rounded-xl text-sm font-medium">Guardar</button>
         </div>
       </div>
     </div>
@@ -1388,25 +1398,25 @@ function RateModal({item, onClose, onSave}){
   },[item]);
   return (
     <div className="modal-bg fixed inset-0 bg-black/70 flex items-end sm:items-center justify-center z-50 p-4">
-      <div className="modal-box bg-gray-900 border border-gray-800 rounded-2xl p-5 w-full max-w-sm">
+      <div className="modal-box bg-[#100805] border border-[#2a1a12] rounded-2xl p-5 w-full max-w-sm">
         <p className="font-bold text-white text-sm mb-0.5">Calificar</p>
-        <p className="text-xs text-gray-400 mb-4 truncate">{item.title}</p>
+        <p className="text-xs text-[#BDC9CB] mb-4 truncate">{item.title}</p>
         <div className="flex flex-wrap gap-1.5 mb-3">
           {RATING_EMOJIS.map(e=>(
-            <button key={e} onClick={()=>setEmoji(e)} className={`text-lg p-1 rounded-lg ${emoji===e?'bg-violet-800':'bg-gray-800 hover:bg-gray-700'}`}>{e}</button>
+            <button key={e} onClick={()=>setEmoji(e)} className={`text-lg p-1 rounded-lg ${emoji===e?'bg-[#8b1a0e]':'bg-[#1a0f0a] hover:bg-[#241510]'}`}>{e}</button>
           ))}
         </div>
         <div className="flex gap-1.5 mb-2">
           {[1,2,3,4,5].map(n=>(
-            <button key={n} onClick={()=>setCount(n)} className={`flex-1 py-1.5 rounded-lg text-sm ${count===n?'bg-violet-700 text-white':'bg-gray-800 text-gray-400'}`}>{n}</button>
+            <button key={n} onClick={()=>setCount(n)} className={`flex-1 py-1.5 rounded-lg text-sm ${count===n?'bg-[#D62411] text-white':'bg-[#1a0f0a] text-[#BDC9CB]'}`}>{n}</button>
           ))}
         </div>
         <p className="text-center text-base mb-3">{emoji.repeat(count)}</p>
         <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Tu reseña corta..."
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 resize-none h-14 mb-4"/>
+          className="w-full bg-[#1a0f0a] border border-[#3a2820] rounded-lg px-3 py-2 text-white text-sm focus:border-[#D62411] resize-none h-14 mb-4"/>
         <div className="flex gap-2">
-          <button onClick={onClose} className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 py-2 rounded-xl text-sm">Cancelar</button>
-          <button onClick={()=>onSave(emoji.repeat(count),notes)} className="flex-1 bg-violet-700 hover:bg-violet-600 text-white py-2 rounded-xl text-sm font-medium">Guardar</button>
+          <button onClick={onClose} className="flex-1 bg-[#1a0f0a] hover:bg-[#241510] text-[#F5EDE8] py-2 rounded-xl text-sm">Cancelar</button>
+          <button onClick={()=>onSave(emoji.repeat(count),notes)} className="flex-1 bg-[#D62411] hover:bg-[#c9200e] text-white py-2 rounded-xl text-sm font-medium">Guardar</button>
         </div>
       </div>
     </div>
@@ -1532,33 +1542,33 @@ function App(){
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-lg font-bold text-white leading-none mb-1">Mel's Watch List</h1>
-              <p className="text-xs text-gray-600">
-                🎥 <span className="text-violet-400">{data.movies.watched.length}</span> vistas · <span className="text-gray-500">{data.movies.toWatch.length}</span> pendientes
+              <p className="text-xs text-[#6b5040]">
+                🎥 <span className="text-[#E1AFA1]">{data.movies.watched.length}</span> vistas · <span className="text-[#9a8070]">{data.movies.toWatch.length}</span> pendientes
                 &nbsp;·&nbsp;
-                📺 <span className="text-violet-400">{data.shows.watched.length}</span> vistas · <span className="text-gray-500">{data.shows.toWatch.length}</span> pendientes
+                📺 <span className="text-[#E1AFA1]">{data.shows.watched.length}</span> vistas · <span className="text-[#9a8070]">{data.shows.toWatch.length}</span> pendientes
               </p>
             </div>
             <div className="flex items-center gap-2">
-              {ghStatus==='saving'&&<span className="text-xs text-gray-500 animate-pulse">⏳</span>}
+              {ghStatus==='saving'&&<span className="text-xs text-[#9a8070] animate-pulse">⏳</span>}
               {ghStatus==='saved'&&<span className="text-xs text-green-500">✓</span>}
               {ghStatus==='error'&&<span className="text-xs text-red-500">✗</span>}
               <button onClick={()=>setShowSettings(true)} title="Ajustes"
-                className="relative text-gray-600 hover:text-gray-400 px-2 py-1.5 rounded-xl text-sm transition-colors">
+                className="relative text-[#6b5040] hover:text-[#BDC9CB] px-2 py-1.5 rounded-xl text-sm transition-colors">
                 ⚙️
-                {syncPending.length>0&&<span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-violet-500 rounded-full text-white text-center leading-3.5 font-bold" style={{fontSize:'8px',lineHeight:'14px'}}>{syncPending.length}</span>}
+                {syncPending.length>0&&<span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-[#e02b17] rounded-full text-white text-center leading-3.5 font-bold" style={{fontSize:'8px',lineHeight:'14px'}}>{syncPending.length}</span>}
               </button>
-              {!isEditor&&<span className="text-xs text-gray-700 px-2">👁 Solo vista</span>}
+              {!isEditor&&<span className="text-xs text-[#4a3830] px-2">👁 Solo vista</span>}
               {!isStats&&isEditor&&<button onClick={()=>setShowAdd(true)}
-                className="bg-violet-700 hover:bg-violet-600 text-white px-3 py-1.5 rounded-xl text-sm font-medium transition-colors flex items-center gap-1">
+                className="bg-[#D62411] hover:bg-[#c9200e] text-white px-3 py-1.5 rounded-xl text-sm font-medium transition-colors flex items-center gap-1">
                 <span className="text-base leading-none">+</span> Agregar
               </button>}
             </div>
           </div>
           {/* Main tabs */}
-          <div className="flex gap-6 border-b border-gray-800">
+          <div className="flex gap-6 border-b border-[#2a1a12]">
             {[['movies','🎥 Películas'],['shows','📺 Series'],['stats','📊 Stats']].map(([t,label])=>(
               <button key={t} onClick={()=>{setTab(t);setView('toWatch');setSearch('');}}
-                className={`pb-2 text-sm font-medium transition-colors ${tab===t?'tab-active':'text-gray-600 hover:text-gray-300'}`}>
+                className={`pb-2 text-sm font-medium transition-colors ${tab===t?'tab-active':'text-[#6b5040] hover:text-[#F5EDE8]'}`}>
                 {label}
               </button>
             ))}
@@ -1577,7 +1587,7 @@ function App(){
           <div className="flex gap-2 mb-4">
             {[['toWatch','🔖 Quiero ver',twCount],['watched','✅ Vistas',wCount]].map(([v,label,c])=>(
               <button key={v} onClick={()=>setView(v)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${view===v?'chip-active text-violet-200':'bg-gray-900 text-gray-500 hover:bg-gray-800'}`}>
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${view===v?'chip-active text-[#F5EDE8]':'bg-[#100805] text-[#9a8070] hover:bg-[#1a0f0a]'}`}>
                 {label} <span className="opacity-60">{c}</span>
               </button>
             ))}
@@ -1585,18 +1595,18 @@ function App(){
 
           {/* Search */}
           <div className="relative mb-3">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs">🔍</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b5040] text-xs">🔍</span>
             <input value={search} onChange={e=>setSearch(e.target.value)}
               placeholder={`Buscar ${isMovies?'películas':'series'}...`}
-              className="w-full bg-gray-900 border border-gray-800 rounded-xl pl-8 pr-8 py-2 text-sm text-white placeholder-gray-700 focus:border-violet-700"/>
-            {search&&<button onClick={()=>setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-400 text-xs">✕</button>}
+              className="w-full bg-[#100805] border border-[#2a1a12] rounded-xl pl-8 pr-8 py-2 text-sm text-white placeholder-gray-700 focus:border-[#9b1a0a]"/>
+            {search&&<button onClick={()=>setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6b5040] hover:text-[#BDC9CB] text-xs">✕</button>}
           </div>
 
           {/* Genre chips */}
           <div className="flex gap-1.5 overflow-x-auto scrollbar-hide pb-2 mb-1">
             {genres.map(g=>(
               <button key={g} onClick={()=>setGenre(g)}
-                className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${genre===g?'chip-active text-violet-200':'bg-gray-900 text-gray-600 hover:bg-gray-800 hover:text-gray-300'}`}>
+                className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${genre===g?'chip-active text-[#F5EDE8]':'bg-[#100805] text-[#6b5040] hover:bg-[#1a0f0a] hover:text-[#F5EDE8]'}`}>
                 {g}
               </button>
             ))}
@@ -1607,21 +1617,21 @@ function App(){
             {[['default',view==='watched'?'📅 Año':'Reciente'],['az','A→Z'],['za','Z→A'],...(view==='watched'?[['score','⭐ Score']]:[])]
               .map(([s,label])=>(
                 <button key={s} onClick={()=>setSort(s)}
-                  className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${sort===s?'chip-active text-violet-200':'bg-gray-900 text-gray-600 hover:bg-gray-800 hover:text-gray-300'}`}>
+                  className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${sort===s?'chip-active text-[#F5EDE8]':'bg-[#100805] text-[#6b5040] hover:bg-[#1a0f0a] hover:text-[#F5EDE8]'}`}>
                   {label}
                 </button>
               ))
             }
           </div>
           {/* Result count */}
-          <p className="text-xs text-gray-700 px-3 mb-1">
+          <p className="text-xs text-[#4a3830] px-3 mb-1">
             {filtered.length} {filtered.length===1?'resultado':'resultados'}
-            {search&&<> · "<span className="text-gray-500">{search}</span>"</>}
+            {search&&<> · "<span className="text-[#9a8070]">{search}</span>"</>}
           </p>
 
           {/* ── LIST ── */}
           {filtered.length===0?(
-            <div className="text-center py-16 text-gray-700">
+            <div className="text-center py-16 text-[#4a3830]">
               <div className="text-3xl mb-2">{isMovies?'🎬':'📺'}</div>
               <p className="text-sm">Sin resultados</p>
             </div>
@@ -1639,7 +1649,7 @@ function App(){
           ) : (
             <div className="pb-20">
               {view==='watched'&&(search||genre!=='Todos'||sort!=='default')&&(
-                <p className="text-xs text-gray-700 px-3 mb-1 italic">
+                <p className="text-xs text-[#4a3830] px-3 mb-1 italic">
                   {sort==='score'?'Ordenado por score':sort==='az'?'Ordenado A→Z':sort==='za'?'Ordenado Z→A':'Resultados de todos los años'}
                 </p>
               )}
