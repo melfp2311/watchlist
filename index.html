@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mel's Watch List ð¬</title>
+  <title>Mel's Watch List 🎬</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#09090f">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -43,12 +43,12 @@
 <script type="text/babel">
 const {useState,useEffect,useMemo} = React;
 
-/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-   DATA  â year field added per Notion section separators
-   Movies: 7 sections â 2020â2026
-   TV:     6 sections â 2020â2025
+/* ──────────────────────────────────────────────────────────────
+   DATA  — year field added per Notion section separators
+   Movies: 7 sections → 2020–2026
+   TV:     6 sections → 2020–2025
    "A." section removed from movies to-watch per user request
-ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+────────────────────────────────────────────────────────────── */
 
 const MOVIES_TO_WATCH = [
   // Action/Adventure
@@ -71,7 +71,7 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-27',title:'Dolemite Is My Name',genre:'Comedy'},
   {id:'tw-m-28',title:'El ciudadano ilustre',genre:'Comedy'},
   {id:'tw-m-29',title:'Fear and Loathing in Las Vegas',genre:'Comedy'},
-  {id:'tw-m-30',title:'Frances Ha â­ï¸',genre:'Comedy'},
+  {id:'tw-m-30',title:'Frances Ha ⭐️',genre:'Comedy'},
   {id:'tw-m-31',title:'Friendship (A24)',genre:'Comedy'},
   {id:'tw-m-32',title:'Ghost World',genre:'Comedy'},
   {id:'tw-m-33',title:'Good Luck to You, Leo Grande',genre:'Comedy'},
@@ -80,7 +80,7 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-36',title:"Monty Python's Life of Brian!!!",genre:'Comedy'},
   {id:'tw-m-37',title:'Obvious Child (A24)',genre:'Comedy'},
   {id:'tw-m-38',title:'One Flew Over the Cuckoo\'s Nest',genre:'Comedy'},
-  {id:'tw-m-39',title:'PremiÃ¨re AnnÃ©e',genre:'Comedy'},
+  {id:'tw-m-39',title:'Première Année',genre:'Comedy'},
   {id:'tw-m-40',title:'Red Rocket',genre:'Comedy'},
   {id:'tw-m-41',title:'Risky Business',genre:'Comedy'},
   {id:'tw-m-42',title:'Sword of Trust',genre:'Comedy'},
@@ -90,7 +90,7 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-46',title:'The Kings of Summer',genre:'Comedy'},
   {id:'tw-m-47',title:'The Phoenician Scheme',genre:'Comedy'},
   {id:'tw-m-48',title:'The Unbearable Weight of Massive Talent',genre:'Comedy'},
-  {id:'tw-m-49',title:'Thoroughbreds â­ï¸',genre:'Comedy'},
+  {id:'tw-m-49',title:'Thoroughbreds ⭐️',genre:'Comedy'},
   {id:'tw-m-50',title:'Twinless',genre:'Comedy'},
   {id:'tw-m-51',title:'While We\'re Young',genre:'Comedy'},
   {id:'tw-m-52',title:'Yes God Yes',genre:'Comedy'},
@@ -105,7 +105,7 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-60',title:'The Killer',genre:'Crime'},
   {id:'tw-m-61',title:'The Man and the Gun',genre:'Crime'},
   {id:'tw-m-62',title:'The Rivals of Amziah King',genre:'Crime'},
-  {id:'tw-m-63',title:'The Vanishing â­ï¸',genre:'Crime'},
+  {id:'tw-m-63',title:'The Vanishing ⭐️',genre:'Crime'},
   {id:'tw-m-64',title:'To Die For',genre:'Crime'},
   {id:'tw-m-65',title:'What Remains',genre:'Crime'},
   // Drama
@@ -113,21 +113,21 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-67',title:'After Yang (A24)',genre:'Drama'},
   {id:'tw-m-68',title:'A Ghost Story (A24)',genre:'Drama'},
   {id:'tw-m-69',title:'A Woman Under the Influence',genre:'Drama'},
-  {id:'tw-m-70',title:'Aftersun â­ï¸',genre:'Drama'},
-  {id:'tw-m-71',title:'Annette ð',genre:'Drama'},
+  {id:'tw-m-70',title:'Aftersun ⭐️',genre:'Drama'},
+  {id:'tw-m-71',title:'Annette 🏆',genre:'Drama'},
   {id:'tw-m-72',title:'Babygirl',genre:'Drama'},
   {id:'tw-m-73',title:'Ben Is Back',genre:'Drama'},
-  {id:'tw-m-74',title:'Being the Ricardos ð',genre:'Drama'},
-  {id:'tw-m-75',title:'Belfast ð',genre:'Drama'},
-  {id:'tw-m-76',title:'Bergman Island â­ï¸',genre:'Drama'},
-  {id:'tw-m-77',title:'Bones and All â­ï¸',genre:'Drama'},
+  {id:'tw-m-74',title:'Being the Ricardos 🏆',genre:'Drama'},
+  {id:'tw-m-75',title:'Belfast 🏆',genre:'Drama'},
+  {id:'tw-m-76',title:'Bergman Island ⭐️',genre:'Drama'},
+  {id:'tw-m-77',title:'Bones and All ⭐️',genre:'Drama'},
   {id:'tw-m-78',title:'Boy Erased',genre:'Drama'},
   {id:'tw-m-79',title:'Broken Flowers',genre:'Drama'},
   {id:'tw-m-80',title:'Close',genre:'Drama'},
-  {id:'tw-m-81',title:'Cruel Intentions â­ï¸',genre:'Drama'},
-  {id:'tw-m-82',title:'Dazed and Confused âï¸',genre:'Drama'},
+  {id:'tw-m-81',title:'Cruel Intentions ⭐️',genre:'Drama'},
+  {id:'tw-m-82',title:'Dazed and Confused ☀️',genre:'Drama'},
   {id:'tw-m-83',title:'Dead Poet Society',genre:'Drama'},
-  {id:'tw-m-84',title:'Drive My Car ð',genre:'Drama'},
+  {id:'tw-m-84',title:'Drive My Car 🏆',genre:'Drama'},
   {id:'tw-m-85',title:'Eddington (A24)',genre:'Drama'},
   {id:'tw-m-86',title:'Eighth Grade (A24)',genre:'Drama'},
   {id:'tw-m-87',title:'Familia',genre:'Drama'},
@@ -138,28 +138,28 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-92',title:'Her Smell',genre:'Drama'},
   {id:'tw-m-93',title:'His Three Daughters',genre:'Drama'},
   {id:'tw-m-94',title:'Honey Boy',genre:'Drama'},
-  {id:'tw-m-95',title:'Hot Summer Nights (A24) âï¸',genre:'Drama'},
+  {id:'tw-m-95',title:'Hot Summer Nights (A24) ☀️',genre:'Drama'},
   {id:'tw-m-96',title:'Judas and the Black Messiah',genre:'Drama'},
-  {id:'tw-m-97',title:'Killers of the Flower Moon â¨',genre:'Drama'},
+  {id:'tw-m-97',title:'Killers of the Flower Moon ✨',genre:'Drama'},
   {id:'tw-m-98',title:'Kinds of Kindness',genre:'Drama'},
   {id:'tw-m-99',title:'La Chimera',genre:'Drama'},
   {id:'tw-m-100',title:'La cocina',genre:'Drama'},
-  {id:'tw-m-101',title:'La mujer que sabÃ­a leer',genre:'Drama'},
+  {id:'tw-m-101',title:'La mujer que sabía leer',genre:'Drama'},
   {id:'tw-m-102',title:'Lady Macbeth (Florence Pugh)',genre:'Drama'},
   {id:'tw-m-103',title:'Last Flag Flying',genre:'Drama'},
   {id:'tw-m-104',title:'Living',genre:'Drama'},
-  {id:'tw-m-105',title:'Love (Gaspar NoÃ©)',genre:'Drama'},
-  {id:'tw-m-106',title:'Madres paralelas (AlmodÃ³var) ð',genre:'Drama'},
+  {id:'tw-m-105',title:'Love (Gaspar Noé)',genre:'Drama'},
+  {id:'tw-m-106',title:'Madres paralelas (Almodóvar) 🏆',genre:'Drama'},
   {id:'tw-m-107',title:'Mass',genre:'Drama'},
   {id:'tw-m-108',title:'Malcolm and Marie',genre:'Drama'},
-  {id:'tw-m-109',title:'Mank ð',genre:'Drama'},
+  {id:'tw-m-109',title:'Mank 🏆',genre:'Drama'},
   {id:'tw-m-110',title:'Michael Clayton',genre:'Drama'},
   {id:'tw-m-111',title:'Mid90s (A24)',genre:'Drama'},
   {id:'tw-m-112',title:'Moonlight',genre:'Drama'},
   {id:'tw-m-113',title:'Next Goal Wins',genre:'Drama'},
-  {id:'tw-m-114',title:'Nomadland ð',genre:'Drama'},
+  {id:'tw-m-114',title:'Nomadland 🏆',genre:'Drama'},
   {id:'tw-m-115',title:'Oslo, August 31st',genre:'Drama'},
-  {id:'tw-m-116',title:'Perfect Days â­ï¸',genre:'Drama'},
+  {id:'tw-m-116',title:'Perfect Days ⭐️',genre:'Drama'},
   {id:'tw-m-117',title:'Punch-Drunk Love (Paul T. Anderson)',genre:'Drama'},
   {id:'tw-m-118',title:'Queer (Luca Guadagnino)',genre:'Drama'},
   {id:'tw-m-119',title:'Reality',genre:'Drama'},
@@ -169,22 +169,22 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-123',title:'Spotlight',genre:'Drama'},
   {id:'tw-m-124',title:'The Art of Self-Defense',genre:'Drama'},
   {id:'tw-m-125',title:'The Boy and the Heron',genre:'Drama'},
-  {id:'tw-m-126',title:'The Banshees of Inisherin â­ï¸',genre:'Drama'},
+  {id:'tw-m-126',title:'The Banshees of Inisherin ⭐️',genre:'Drama'},
   {id:'tw-m-127',title:'The Brutalist',genre:'Drama'},
-  {id:'tw-m-128',title:'The Father ð',genre:'Drama'},
+  {id:'tw-m-128',title:'The Father 🏆',genre:'Drama'},
   {id:'tw-m-129',title:'The Green Mile',genre:'Drama'},
-  {id:'tw-m-130',title:'The Human Voice (AlmodÃ³var)',genre:'Drama'},
+  {id:'tw-m-130',title:'The Human Voice (Almodóvar)',genre:'Drama'},
   {id:'tw-m-131',title:'The Humans',genre:'Drama'},
-  {id:'tw-m-132',title:'The Iron Claw â­ï¸',genre:'Drama'},
+  {id:'tw-m-132',title:'The Iron Claw ⭐️',genre:'Drama'},
   {id:'tw-m-133',title:'The Last Duel',genre:'Drama'},
   {id:'tw-m-134',title:'The Killing of Two Lovers',genre:'Drama'},
-  {id:'tw-m-135',title:'The Room Next Door (AlmodÃ³var)',genre:'Drama'},
+  {id:'tw-m-135',title:'The Room Next Door (Almodóvar)',genre:'Drama'},
   {id:'tw-m-136',title:'The Souvenir I & II (A24)',genre:'Drama'},
   {id:'tw-m-137',title:'The Squid and the Whale',genre:'Drama'},
-  {id:'tw-m-138',title:'The Tragedy of Macbeth ð',genre:'Drama'},
-  {id:'tw-m-139',title:'The Trial of the Chicago 7 ð',genre:'Drama'},
-  {id:'tw-m-140',title:'To Leslie ð',genre:'Drama'},
-  {id:'tw-m-141',title:'Vortex (Gaspar NoÃ©)',genre:'Drama'},
+  {id:'tw-m-138',title:'The Tragedy of Macbeth 🏆',genre:'Drama'},
+  {id:'tw-m-139',title:'The Trial of the Chicago 7 🏆',genre:'Drama'},
+  {id:'tw-m-140',title:'To Leslie 🏆',genre:'Drama'},
+  {id:'tw-m-141',title:'Vortex (Gaspar Noé)',genre:'Drama'},
   {id:'tw-m-142',title:'What They Had',genre:'Drama'},
   {id:'tw-m-143',title:'When You Finish Saving the World',genre:'Drama'},
   {id:'tw-m-144',title:'Wildlife',genre:'Drama'},
@@ -192,7 +192,7 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-146',title:'You Were Never Really Here',genre:'Drama'},
   {id:'tw-m-146b',title:'Jeanne Dielman, 23 Commerce Quay, 1080 Brussels',genre:'Drama'},
   {id:'tw-m-146c',title:'The Darkest Hour',genre:'Drama'},
-  {id:'tw-m-146d',title:'The Long Goodbye (short film ð)',genre:'Drama'},
+  {id:'tw-m-146d',title:'The Long Goodbye (short film 🏆)',genre:'Drama'},
   {id:'tw-m-146e',title:'Talentos Ocultos',genre:'Drama'},
   // Thriller
   {id:'tw-m-147',title:'A Different Man',genre:'Thriller'},
@@ -213,12 +213,12 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-161',title:'A Complete Unknown',genre:'Historical'},
   {id:'tw-m-162',title:'Bird',genre:'Historical'},
   {id:'tw-m-163',title:'Cassandro',genre:'Historical'},
-  {id:'tw-m-164',title:"I'm Still Here â¨",genre:'Historical'},
+  {id:'tw-m-164',title:"I'm Still Here ✨",genre:'Historical'},
   {id:'tw-m-165',title:'Jackie',genre:'Historical'},
   {id:'tw-m-166',title:'Judy',genre:'Historical'},
-  {id:'tw-m-167',title:'Maria (Pablo LarraÃ­n)',genre:'Historical'},
+  {id:'tw-m-167',title:'Maria (Pablo Larraín)',genre:'Historical'},
   {id:'tw-m-168',title:'Springsteen',genre:'Historical'},
-  {id:'tw-m-169',title:'TÃ¡r ð',genre:'Historical'},
+  {id:'tw-m-169',title:'Tár 🏆',genre:'Historical'},
   {id:'tw-m-170',title:'The Last of the Sea Women',genre:'Historical'},
   {id:'tw-m-171',title:'The Post',genre:'Historical'},
   {id:'tw-m-172',title:'Till',genre:'Historical'},
@@ -229,41 +229,41 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-175',title:'Babadook',genre:'Horror'},
   {id:'tw-m-176',title:'Beau Is Afraid (Ari Aster)',genre:'Horror'},
   {id:'tw-m-177',title:'Bodies Bodies Bodies',genre:'Horror'},
-  {id:'tw-m-178',title:'Bring Her Back â­ï¸',genre:'Horror'},
+  {id:'tw-m-178',title:'Bring Her Back ⭐️',genre:'Horror'},
   {id:'tw-m-179',title:'Cuando acecha la maldad',genre:'Horror'},
-  {id:'tw-m-180',title:'Cuckoo â­ï¸',genre:'Horror'},
+  {id:'tw-m-180',title:'Cuckoo ⭐️',genre:'Horror'},
   {id:'tw-m-181',title:'Crimes of the Future (Cronenberg)',genre:'Horror'},
   {id:'tw-m-182',title:'Evil Dead Rise',genre:'Horror'},
-  {id:'tw-m-183',title:'Fresh â­ï¸',genre:'Horror'},
+  {id:'tw-m-183',title:'Fresh ⭐️',genre:'Horror'},
   {id:'tw-m-184',title:'Hatching',genre:'Horror'},
-  {id:'tw-m-185',title:'Host ð',genre:'Horror'},
+  {id:'tw-m-185',title:'Host 😈',genre:'Horror'},
   {id:'tw-m-186',title:'Infinity Pool',genre:'Horror'},
   {id:'tw-m-187',title:'It Comes at Night (A24)',genre:'Horror'},
   {id:'tw-m-188',title:'MaXXXine',genre:'Horror'},
   {id:'tw-m-189',title:'Malignant',genre:'Horror'},
   {id:'tw-m-190',title:'Titane',genre:'Horror'},
-  {id:'tw-m-191',title:'The Autopsy of Jane Doe ð',genre:'Horror'},
+  {id:'tw-m-191',title:'The Autopsy of Jane Doe 🎃',genre:'Horror'},
   {id:'tw-m-192',title:'The Conjuring 4',genre:'Horror'},
   {id:'tw-m-193',title:"The Devil's Bath",genre:'Horror'},
   {id:'tw-m-194',title:'The Eternal Daughter',genre:'Horror'},
-  {id:'tw-m-195',title:'The House That Jack Built ð',genre:'Horror'},
-  {id:'tw-m-196',title:'The Lodge â­ï¸ (Ari Aster)',genre:'Horror'},
+  {id:'tw-m-195',title:'The House That Jack Built 😈',genre:'Horror'},
+  {id:'tw-m-196',title:'The Lodge ⭐️ (Ari Aster)',genre:'Horror'},
   {id:'tw-m-197',title:'The Night House',genre:'Horror'},
   {id:'tw-m-198',title:'The Northman',genre:'Horror'},
-  {id:'tw-m-199',title:'Together â­ï¸',genre:'Horror'},
-  {id:'tw-m-200',title:'Smile â­ï¸',genre:'Horror'},
+  {id:'tw-m-199',title:'Together ⭐️',genre:'Horror'},
+  {id:'tw-m-200',title:'Smile ⭐️',genre:'Horror'},
   {id:'tw-m-201',title:'Smile 2',genre:'Horror'},
-  {id:'tw-m-202',title:'Unsane ð',genre:'Horror'},
+  {id:'tw-m-202',title:'Unsane 😈',genre:'Horror'},
   {id:'tw-m-203',title:"What's Inside",genre:'Horror'},
   {id:'tw-m-203b',title:'Disappointment Blvd (A24)',genre:'Horror'},
-  {id:'tw-m-203c',title:'Doctor SueÃ±o ð',genre:'Horror'},
+  {id:'tw-m-203c',title:'Doctor Sueño 🎃',genre:'Horror'},
   {id:'tw-m-203d',title:'The Dead Don\'t Die (zom-com, J. Jarmusch)',genre:'Horror'},
   // Musical
   {id:'tw-m-204',title:'Beatles 64',genre:'Musical'},
   {id:'tw-m-205',title:'Once',genre:'Musical'},
   {id:'tw-m-206',title:'Teen Spirit (Elle Fanning)',genre:'Musical'},
   {id:'tw-m-207',title:'Walk the Line',genre:'Musical'},
-  {id:'tw-m-208',title:'West Side Story ð',genre:'Musical'},
+  {id:'tw-m-208',title:'West Side Story 🏆',genre:'Musical'},
   // Romance
   {id:'tw-m-209',title:'40 Year Old Virgin',genre:'Romance'},
   {id:'tw-m-210',title:'Amante fiel',genre:'Romance'},
@@ -273,14 +273,14 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-214',title:'Fingernails',genre:'Romance'},
   {id:'tw-m-215',title:'If Beale Street Could Talk',genre:'Romance'},
   {id:'tw-m-216',title:'Laggies (A24)',genre:'Romance'},
-  {id:'tw-m-217',title:'Les Ã©motifs anonymes',genre:'Romance'},
+  {id:'tw-m-217',title:'Les émotifs anonymes',genre:'Romance'},
   {id:'tw-m-218',title:'Los amores imaginarios',genre:'Romance'},
   {id:'tw-m-219',title:'Lonely Planet',genre:'Romance'},
   {id:'tw-m-220',title:'Love, Simon',genre:'Romance'},
   {id:'tw-m-221',title:'Mona Lisa Smile',genre:'Romance'},
   {id:'tw-m-222',title:"Mr. Malcolm's List",genre:'Romance'},
   {id:'tw-m-223',title:'Oh, Hi!',genre:'Romance'},
-  {id:'tw-m-224',title:'Palm Springs ð',genre:'Romance'},
+  {id:'tw-m-224',title:'Palm Springs 🏆',genre:'Romance'},
   {id:'tw-m-225',title:'She Came to Me',genre:'Romance'},
   {id:'tw-m-226',title:'Strange Way of Life',genre:'Romance'},
   {id:'tw-m-227',title:'The Dish and the Spoon',genre:'Romance'},
@@ -290,14 +290,14 @@ const MOVIES_TO_WATCH = [
   {id:'tw-m-231',title:'Vivir Deprisa, Amar Despacio',genre:'Romance'},
   {id:'tw-m-232',title:'Your Monster',genre:'Romance'},
   {id:'tw-m-233',title:'Waitress',genre:'Romance'},
-  {id:'tw-m-234',title:'We Live in Time â¨',genre:'Romance'},
+  {id:'tw-m-234',title:'We Live in Time ✨',genre:'Romance'},
   {id:'tw-m-235',title:'While You Were Sleeping',genre:'Romance'},
   // Sci-Fi
   {id:'tw-m-236',title:'Contact',genre:'Sci-Fi'},
   // Documentary
   {id:'tw-m-237',title:'20 Feet from Stardom',genre:'Documentary'},
   {id:'tw-m-238',title:'7 Days Out, Chanel',genre:'Documentary'},
-  {id:'tw-m-239',title:'A Hell of a Story â Kathy Griffin',genre:'Documentary'},
+  {id:'tw-m-239',title:'A Hell of a Story — Kathy Griffin',genre:'Documentary'},
   {id:'tw-m-240',title:'Bob Ross: Happy Accidents, Betrayal & Greed',genre:'Documentary'},
   {id:'tw-m-241',title:'Dior & I',genre:'Documentary'},
   {id:'tw-m-242',title:'High and Low',genre:'Documentary'},
@@ -323,254 +323,254 @@ const MOVIES_TO_WATCH = [
 
 // year = section number from Notion (each --- = new year, starting 2020)
 const MOVIES_WATCHED = [
-  // ââ 2020 âââââââââââââââââââââââââââââ
-  {id:'w-m-1',year:2020,title:'Whiplash',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-2',year:2020,title:'Silver Linings Playbook',rating:'ð¯ð¯ð¯ð¯',notes:''},
-  {id:'w-m-3',year:2020,title:'Sour Grapes',rating:'ð·ð·ð·',notes:''},
-  {id:'w-m-4',year:2020,title:'Enredados',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-5',year:2020,title:'Tahilina Sky',rating:'ð¸ð¸',notes:''},
-  {id:'w-m-6',year:2020,title:'The Killing of a Sacred Deer',rating:'ðððð',notes:''},
-  {id:'w-m-7',year:2020,title:'The National: Mistaken for Strangers',rating:'ð¸ð¸ð¸',notes:''},
-  {id:'w-m-8',year:2020,title:'Us',rating:'ððððð',notes:''},
-  {id:'w-m-9',year:2020,title:'Isle of Dogs',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-10',year:2020,title:'Get Out',rating:'ððððð',notes:''},
-  {id:'w-m-11',year:2020,title:'Lost in Translation',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-12',year:2020,title:'The Intern',rating:'ð¯ð¯ð¯ð¯',notes:''},
-  {id:'w-m-13',year:2020,title:'The Gentleman',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-14',year:2020,title:'Jersey Boys',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-15',year:2020,title:'Top Gun',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-16',year:2020,title:'Back to the Future',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-17',year:2020,title:'A Quiet Place',rating:'ððð',notes:''},
-  {id:'w-m-18',year:2020,title:'Rogue One',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-19',year:2020,title:'Rush',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-20',year:2020,title:'What If',rating:'ð¯ð¯ð¯',notes:''},
-  {id:'w-m-21',year:2020,title:"Molly's Game",rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-22',year:2020,title:"I'm Thinking of Ending Things",rating:'ð¿',notes:''},
-  {id:'w-m-23',year:2020,title:'The Florida Project',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-24',year:2020,title:'The Devil All the Time',rating:'â­ï¸â­ï¸',notes:''},
+  // ── 2020 ─────────────────────────────
+  {id:'w-m-1',year:2020,title:'Whiplash',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-2',year:2020,title:'Silver Linings Playbook',rating:'🍯🍯🍯🍯',notes:''},
+  {id:'w-m-3',year:2020,title:'Sour Grapes',rating:'🍷🍷🍷',notes:''},
+  {id:'w-m-4',year:2020,title:'Enredados',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-5',year:2020,title:'Tahilina Sky',rating:'🎸🎸',notes:''},
+  {id:'w-m-6',year:2020,title:'The Killing of a Sacred Deer',rating:'😈😈😈😈',notes:''},
+  {id:'w-m-7',year:2020,title:'The National: Mistaken for Strangers',rating:'🎸🎸🎸',notes:''},
+  {id:'w-m-8',year:2020,title:'Us',rating:'😈😈😈😈😈',notes:''},
+  {id:'w-m-9',year:2020,title:'Isle of Dogs',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-10',year:2020,title:'Get Out',rating:'😈😈😈😈😈',notes:''},
+  {id:'w-m-11',year:2020,title:'Lost in Translation',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-12',year:2020,title:'The Intern',rating:'🍯🍯🍯🍯',notes:''},
+  {id:'w-m-13',year:2020,title:'The Gentleman',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-14',year:2020,title:'Jersey Boys',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-15',year:2020,title:'Top Gun',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-16',year:2020,title:'Back to the Future',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-17',year:2020,title:'A Quiet Place',rating:'😈😈😈',notes:''},
+  {id:'w-m-18',year:2020,title:'Rogue One',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-19',year:2020,title:'Rush',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-20',year:2020,title:'What If',rating:'🍯🍯🍯',notes:''},
+  {id:'w-m-21',year:2020,title:"Molly's Game",rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-22',year:2020,title:"I'm Thinking of Ending Things",rating:'👿',notes:''},
+  {id:'w-m-23',year:2020,title:'The Florida Project',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-24',year:2020,title:'The Devil All the Time',rating:'⭐️⭐️',notes:''},
   {id:'w-m-25',year:2020,title:'LOTR',rating:'',notes:''},
-  {id:'w-m-26',year:2020,title:'La La Land',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-27',year:2020,title:'Moonrise Kingdom',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-28',year:2020,title:'Enola Holmes',rating:'â­ï¸',notes:''},
-  {id:'w-m-29',year:2020,title:'Hush',rating:'ð¿ð¿',notes:''},
-  {id:'w-m-30',year:2020,title:'The Lighthouse (A24)',rating:'ð¿ð¿',notes:''},
-  {id:'w-m-31',year:2020,title:'Rebecca',rating:'â­ï¸',notes:''},
-  {id:'w-m-32',year:2020,title:'On the Rocks',rating:'ð¯ð¯ð¯',notes:''},
-  {id:'w-m-33',year:2020,title:'Love Actually',rating:'ð¯ð¯ð¯ð¯ð¯',notes:''},
-  {id:'w-m-34',year:2020,title:'Interstellar',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-35',year:2020,title:'The Grand Budapest Hotel',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-36',year:2020,title:'Soul',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-37',year:2020,title:'Jojo Rabbit',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  // ââ 2021 âââââââââââââââââââââââââââââ
-  {id:'w-m-38',year:2021,title:"Pan's Labyrinth",rating:'â­ï¸â­ï¸â­ï¸',notes:''},
+  {id:'w-m-26',year:2020,title:'La La Land',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-27',year:2020,title:'Moonrise Kingdom',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-28',year:2020,title:'Enola Holmes',rating:'⭐️',notes:''},
+  {id:'w-m-29',year:2020,title:'Hush',rating:'👿👿',notes:''},
+  {id:'w-m-30',year:2020,title:'The Lighthouse (A24)',rating:'👿👿',notes:''},
+  {id:'w-m-31',year:2020,title:'Rebecca',rating:'⭐️',notes:''},
+  {id:'w-m-32',year:2020,title:'On the Rocks',rating:'🍯🍯🍯',notes:''},
+  {id:'w-m-33',year:2020,title:'Love Actually',rating:'🍯🍯🍯🍯🍯',notes:''},
+  {id:'w-m-34',year:2020,title:'Interstellar',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-35',year:2020,title:'The Grand Budapest Hotel',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-36',year:2020,title:'Soul',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-37',year:2020,title:'Jojo Rabbit',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  // ── 2021 ─────────────────────────────
+  {id:'w-m-38',year:2021,title:"Pan's Labyrinth",rating:'⭐️⭐️⭐️',notes:''},
   {id:'w-m-39',year:2021,title:'Harry Potter 1, 2, 3',rating:'',notes:''},
-  {id:'w-m-40',year:2021,title:'Tenet',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-41',year:2021,title:'Shutter Island',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-42',year:2021,title:'Uncut Gems (A24)',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-43',year:2021,title:"You've Got Mail",rating:'ð¯ð¯ð¯ð¯ð¯',notes:''},
-  {id:'w-m-44',year:2021,title:'The Big Sick',rating:'ð¯ð¯ð¯',notes:''},
-  {id:'w-m-45',year:2021,title:"To All the Boys I've Loved Before 1, 2 & 3",rating:'ð¯ð¯ð¯ð¯ð¯',notes:''},
-  {id:'w-m-46',year:2021,title:'Descuida, yo te cuido',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-47',year:2021,title:'Emma',rating:'ð¯ð¯ð¯',notes:''},
-  {id:'w-m-48',year:2021,title:'Relatos salvajes',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-49',year:2021,title:'Nightcrawler',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-50',year:2021,title:'El viaje de Chihiro',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-51',year:2021,title:'Corre (Run)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-52',year:2021,title:'Fargo',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-53',year:2021,title:'Prom',rating:'ð«',notes:''},
-  {id:'w-m-54',year:2021,title:'Borat',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-55',year:2021,title:'Sound of Metal',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-56',year:2021,title:'Promising Young Woman',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-57',year:2021,title:'Yes Day!',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-58',year:2021,title:'Things Heard and Seen',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-59',year:2021,title:'La mujer en la ventana',rating:'â­ï¸',notes:''},
-  {id:'w-m-60',year:2021,title:'The Bee Gees (HBO)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-61',year:2021,title:'Cruella',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-62',year:2021,title:'Midsommar',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-63',year:2021,title:'Luca',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-64',year:2021,title:'Inside Man',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-65',year:2021,title:'Space Jam',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-66',year:2021,title:'Holidate',rating:'â­ï¸',notes:''},
-  {id:'w-m-67',year:2021,title:'Anchorman',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-68',year:2021,title:'Kill Bill 1 & 2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-69',year:2021,title:'The Farewell (A24)',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-70',year:2021,title:'The Godfather',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-71',year:2021,title:'CapitÃ¡n AmÃ©rica',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-72',year:2021,title:'Capitana Marvel',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-73',year:2021,title:'Iron Man 1 & 2',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-74',year:2021,title:'Hulk',rating:'â­ï¸',notes:''},
-  {id:'w-m-75',year:2021,title:'Thor',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-76',year:2021,title:'Avengers',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-77',year:2021,title:'Thor: Dark World',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-78',year:2021,title:'Iron Man 3',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-79',year:2021,title:'Guardianes de la Galaxia 1 & 2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-80',year:2021,title:'Avengers: Age of Ultron',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-81',year:2021,title:'Ant-Man',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-82',year:2021,title:'Civil War',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-83',year:2021,title:'Black Widow',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-84',year:2021,title:'Black Panther',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-85',year:2021,title:'Doctor Strange',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-86',year:2021,title:'Spider-Man: Homecoming',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-87',year:2021,title:'Thor: Ragnarok',rating:'â­ï¸',notes:''},
-  {id:'w-m-88',year:2021,title:'Ant-Man and the Wasp',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-89',year:2021,title:'Avengers: Infinity War',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-90',year:2021,title:'No Time to Die',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-91',year:2021,title:'Avengers: Endgame',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-92',year:2021,title:'Spider-Man: Far from Home',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-93',year:2021,title:'The Shining',rating:'ðððð',notes:''},
-  {id:'w-m-94',year:2021,title:'Halloween',rating:'ðððð',notes:''},
-  {id:'w-m-95',year:2021,title:'Dune',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-96',year:2021,title:'13 Going on 30',rating:'ð¯ð¯ð¯',notes:''},
-  {id:'w-m-97',year:2021,title:'Folklore (Taylor Swift)',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-98',year:2021,title:'Eternals',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-99',year:2021,title:'The French Dispatch',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-100',year:2021,title:'House of Gucci',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-101',year:2021,title:'Spider-Man: No Way Home',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-102',year:2021,title:'Shang-Chi',rating:'â­ï¸',notes:''},
-  // ââ 2022 âââââââââââââââââââââââââââââ
-  {id:'w-m-103',year:2022,title:'Licorice Pizza',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Cool nostalgic photo, slow, funny at times'},
-  {id:'w-m-104',year:2022,title:'The Green Knight',rating:'â­ï¸â­ï¸',notes:'Long, hard to watch, Arturo slept'},
-  {id:'w-m-105',year:2022,title:"Don't Look Up",rating:'â­ï¸â­ï¸â­ï¸',notes:'Ironic, funny, great cast'},
-  {id:'w-m-106',year:2022,title:'Encanto',rating:'â­ï¸â­ï¸â­ï¸',notes:'Disney, latin-inspired, great soundtrack'},
-  {id:'w-m-107',year:2022,title:'Another Round',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Nostalgic, real, artsy, foreign'},
-  {id:'w-m-108',year:2022,title:'Spencer',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Outstanding performance, dialogue-focused, latino-directed'},
-  {id:'w-m-109',year:2022,title:'Nightmare Alley',rating:'â­ï¸â­ï¸â­ï¸',notes:'Dark, creepy'},
-  {id:'w-m-110',year:2022,title:'The Power of the Dog',rating:'â­ï¸â­ï¸â­ï¸',notes:'Long dialogs, nice performance, Arturo slept'},
-  {id:'w-m-111',year:2022,title:'Batman (2022)',rating:'â­ï¸â­ï¸â­ï¸',notes:'Long, very dark, great villain'},
-  {id:'w-m-112',year:2022,title:'Period. End of Sentence.',rating:'ðððð',notes:'Short, emotional'},
-  {id:'w-m-113',year:2022,title:'The Lost Daughter',rating:'ðððð',notes:'Creepy, real, awkward'},
-  {id:'w-m-114',year:2022,title:'Worst Person in the World',rating:'ððððð',notes:''},
-  {id:'w-m-115',year:2022,title:'Death on the Nile',rating:'â­ï¸â­ï¸',notes:'Predictable'},
-  {id:'w-m-116',year:2022,title:'Let Them All Talk',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-117',year:2022,title:'Top Gun: Maverick',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-118',year:2022,title:'Coda',rating:'ððð',notes:'Predictable, sweet, long'},
-  {id:'w-m-119',year:2022,title:'Everything Everywhere All at Once',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Fun, touching, epic'},
-  {id:'w-m-120',year:2022,title:'Minari',rating:'ððð',notes:'Touching, real, beautiful photo'},
-  {id:'w-m-121',year:2022,title:'Last Night in Soho',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-122',year:2022,title:'Elvis',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-123',year:2022,title:"C'mon C'mon",rating:'ðððð',notes:'Touching, nostalgic, b&w'},
-  {id:'w-m-124',year:2022,title:'Nope',rating:'â­ï¸â­ï¸â­ï¸',notes:'Suspense, creepy, different'},
-  {id:'w-m-125',year:2022,title:'Jiro Dreams of Sushi',rating:'ð£ð£ð£ð£',notes:''},
-  {id:'w-m-126',year:2022,title:'The Eyes of Tammy Faye',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-127',year:2022,title:"Don't Worry Darling",rating:'â­ï¸â­ï¸',notes:'Holes in the plot'},
-  {id:'w-m-128',year:2022,title:'Fantastic Mr. Fox',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Lovely, stop motion'},
-  {id:'w-m-129',year:2022,title:'Stutz',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Touching, real'},
-  {id:'w-m-130',year:2022,title:'Amsterdam',rating:'â­ï¸â­ï¸',notes:'Good cast, hard to follow'},
-  {id:'w-m-131',year:2022,title:'Pinocchio (Guillermo del Toro)',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Touching'},
-  // ââ 2023 âââââââââââââââââââââââââââââ
-  {id:'w-m-132',year:2023,title:'Glass Onion',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-133',year:2023,title:'Klaus',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-134',year:2023,title:'A Ghost Story',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-135',year:2023,title:'Bardo',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-136',year:2023,title:'Bullet Train',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-137',year:2023,title:'Babylon',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-138',year:2023,title:'The Meyerowitz Stories',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-139',year:2023,title:'Do Revenge',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-140',year:2023,title:'Wakanda Forever',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-141',year:2023,title:'Your Place or Mine',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-142',year:2023,title:'The Whale',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-143',year:2023,title:'My Octopus Teacher',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-144',year:2023,title:'Inherent Vice',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-145',year:2023,title:'Triangle of Sadness',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-146',year:2023,title:'The Royal Tenenbaums',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-147',year:2023,title:'Super Mario Bros',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-148',year:2023,title:'The Fabelmans',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-149',year:2023,title:'Pasaje al paraÃ­so',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-150',year:2023,title:'Crazy Rich Asians',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-151',year:2023,title:'Asteroid City',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-152',year:2023,title:'Oppenheimer',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-153',year:2023,title:'Barbie',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-154',year:2023,title:'No Sudden Move',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-155',year:2023,title:'The Boy, the Mole, the Fox and the Horse',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-156',year:2023,title:'Marcel the Shell with Shoes On',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-157',year:2023,title:'John Wick',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-158',year:2023,title:'Stop Making Sense (Talking Heads)',rating:'ð¸ð¸ð¸',notes:'Great as Sunday morning background'},
-  {id:'w-m-159',year:2023,title:'Red White and Royal Blue',rating:'ð¯ð¯ð¯',notes:'Gay flick, sweet'},
-  // ââ 2024 âââââââââââââââââââââââââââââ
-  {id:'w-m-160',year:2024,title:'Saltburn',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-161',year:2024,title:'La sociedad de la nieve',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-162',year:2024,title:'King Richard',rating:'ð¾ð¾ð¾',notes:''},
-  {id:'w-m-163',year:2024,title:'Priscilla',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-164',year:2024,title:'Sitting in Bars with Cake',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-165',year:2024,title:'Under the Tuscan Sun',rating:'â­ï¸',notes:''},
-  {id:'w-m-166',year:2024,title:'Wine Country',rating:'â­ï¸',notes:''},
-  {id:'w-m-167',year:2024,title:'Poor Things',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-168',year:2024,title:'Anatomy of a Fall',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-169',year:2024,title:'Ferrari',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-170',year:2024,title:'La idea de ti',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-171',year:2024,title:'Challengers',rating:'ð¾ð¾ð¾ð¾ð¾',notes:''},
-  {id:'w-m-172',year:2024,title:'Anyone but You',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-173',year:2024,title:'Barbarian',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-174',year:2024,title:'The X Movie (A24)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-175',year:2024,title:'Intensamente 2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-176',year:2024,title:'The Zone of Interest',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
+  {id:'w-m-40',year:2021,title:'Tenet',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-41',year:2021,title:'Shutter Island',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-42',year:2021,title:'Uncut Gems (A24)',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-43',year:2021,title:"You've Got Mail",rating:'🍯🍯🍯🍯🍯',notes:''},
+  {id:'w-m-44',year:2021,title:'The Big Sick',rating:'🍯🍯🍯',notes:''},
+  {id:'w-m-45',year:2021,title:"To All the Boys I've Loved Before 1, 2 & 3",rating:'🍯🍯🍯🍯🍯',notes:''},
+  {id:'w-m-46',year:2021,title:'Descuida, yo te cuido',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-47',year:2021,title:'Emma',rating:'🍯🍯🍯',notes:''},
+  {id:'w-m-48',year:2021,title:'Relatos salvajes',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-49',year:2021,title:'Nightcrawler',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-50',year:2021,title:'El viaje de Chihiro',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-51',year:2021,title:'Corre (Run)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-52',year:2021,title:'Fargo',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-53',year:2021,title:'Prom',rating:'🚫',notes:''},
+  {id:'w-m-54',year:2021,title:'Borat',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-55',year:2021,title:'Sound of Metal',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-56',year:2021,title:'Promising Young Woman',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-57',year:2021,title:'Yes Day!',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-58',year:2021,title:'Things Heard and Seen',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-59',year:2021,title:'La mujer en la ventana',rating:'⭐️',notes:''},
+  {id:'w-m-60',year:2021,title:'The Bee Gees (HBO)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-61',year:2021,title:'Cruella',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-62',year:2021,title:'Midsommar',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-63',year:2021,title:'Luca',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-64',year:2021,title:'Inside Man',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-65',year:2021,title:'Space Jam',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-66',year:2021,title:'Holidate',rating:'⭐️',notes:''},
+  {id:'w-m-67',year:2021,title:'Anchorman',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-68',year:2021,title:'Kill Bill 1 & 2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-69',year:2021,title:'The Farewell (A24)',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-70',year:2021,title:'The Godfather',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-71',year:2021,title:'Capitán América',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-72',year:2021,title:'Capitana Marvel',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-73',year:2021,title:'Iron Man 1 & 2',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-74',year:2021,title:'Hulk',rating:'⭐️',notes:''},
+  {id:'w-m-75',year:2021,title:'Thor',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-76',year:2021,title:'Avengers',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-77',year:2021,title:'Thor: Dark World',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-78',year:2021,title:'Iron Man 3',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-79',year:2021,title:'Guardianes de la Galaxia 1 & 2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-80',year:2021,title:'Avengers: Age of Ultron',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-81',year:2021,title:'Ant-Man',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-82',year:2021,title:'Civil War',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-83',year:2021,title:'Black Widow',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-84',year:2021,title:'Black Panther',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-85',year:2021,title:'Doctor Strange',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-86',year:2021,title:'Spider-Man: Homecoming',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-87',year:2021,title:'Thor: Ragnarok',rating:'⭐️',notes:''},
+  {id:'w-m-88',year:2021,title:'Ant-Man and the Wasp',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-89',year:2021,title:'Avengers: Infinity War',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-90',year:2021,title:'No Time to Die',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-91',year:2021,title:'Avengers: Endgame',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-92',year:2021,title:'Spider-Man: Far from Home',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-93',year:2021,title:'The Shining',rating:'🎃🎃🎃🎃',notes:''},
+  {id:'w-m-94',year:2021,title:'Halloween',rating:'🎃🎃🎃🎃',notes:''},
+  {id:'w-m-95',year:2021,title:'Dune',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-96',year:2021,title:'13 Going on 30',rating:'🍯🍯🍯',notes:''},
+  {id:'w-m-97',year:2021,title:'Folklore (Taylor Swift)',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-98',year:2021,title:'Eternals',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-99',year:2021,title:'The French Dispatch',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-100',year:2021,title:'House of Gucci',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-101',year:2021,title:'Spider-Man: No Way Home',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-102',year:2021,title:'Shang-Chi',rating:'⭐️',notes:''},
+  // ── 2022 ─────────────────────────────
+  {id:'w-m-103',year:2022,title:'Licorice Pizza',rating:'⭐️⭐️⭐️⭐️',notes:'Cool nostalgic photo, slow, funny at times'},
+  {id:'w-m-104',year:2022,title:'The Green Knight',rating:'⭐️⭐️',notes:'Long, hard to watch, Arturo slept'},
+  {id:'w-m-105',year:2022,title:"Don't Look Up",rating:'⭐️⭐️⭐️',notes:'Ironic, funny, great cast'},
+  {id:'w-m-106',year:2022,title:'Encanto',rating:'⭐️⭐️⭐️',notes:'Disney, latin-inspired, great soundtrack'},
+  {id:'w-m-107',year:2022,title:'Another Round',rating:'⭐️⭐️⭐️⭐️',notes:'Nostalgic, real, artsy, foreign'},
+  {id:'w-m-108',year:2022,title:'Spencer',rating:'⭐️⭐️⭐️⭐️⭐️',notes:'Outstanding performance, dialogue-focused, latino-directed'},
+  {id:'w-m-109',year:2022,title:'Nightmare Alley',rating:'⭐️⭐️⭐️',notes:'Dark, creepy'},
+  {id:'w-m-110',year:2022,title:'The Power of the Dog',rating:'⭐️⭐️⭐️',notes:'Long dialogs, nice performance, Arturo slept'},
+  {id:'w-m-111',year:2022,title:'Batman (2022)',rating:'⭐️⭐️⭐️',notes:'Long, very dark, great villain'},
+  {id:'w-m-112',year:2022,title:'Period. End of Sentence.',rating:'💜💜💜💜',notes:'Short, emotional'},
+  {id:'w-m-113',year:2022,title:'The Lost Daughter',rating:'🏆🏆🏆🏆',notes:'Creepy, real, awkward'},
+  {id:'w-m-114',year:2022,title:'Worst Person in the World',rating:'🏆🏆🏆🏆🏆',notes:''},
+  {id:'w-m-115',year:2022,title:'Death on the Nile',rating:'⭐️⭐️',notes:'Predictable'},
+  {id:'w-m-116',year:2022,title:'Let Them All Talk',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-117',year:2022,title:'Top Gun: Maverick',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-118',year:2022,title:'Coda',rating:'🏆🏆🏆',notes:'Predictable, sweet, long'},
+  {id:'w-m-119',year:2022,title:'Everything Everywhere All at Once',rating:'⭐️⭐️⭐️⭐️⭐️',notes:'Fun, touching, epic'},
+  {id:'w-m-120',year:2022,title:'Minari',rating:'🌞🌞🌞',notes:'Touching, real, beautiful photo'},
+  {id:'w-m-121',year:2022,title:'Last Night in Soho',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-122',year:2022,title:'Elvis',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-123',year:2022,title:"C'mon C'mon",rating:'🏆🏆🏆🏆',notes:'Touching, nostalgic, b&w'},
+  {id:'w-m-124',year:2022,title:'Nope',rating:'⭐️⭐️⭐️',notes:'Suspense, creepy, different'},
+  {id:'w-m-125',year:2022,title:'Jiro Dreams of Sushi',rating:'🍣🍣🍣🍣',notes:''},
+  {id:'w-m-126',year:2022,title:'The Eyes of Tammy Faye',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-127',year:2022,title:"Don't Worry Darling",rating:'⭐️⭐️',notes:'Holes in the plot'},
+  {id:'w-m-128',year:2022,title:'Fantastic Mr. Fox',rating:'⭐️⭐️⭐️⭐️',notes:'Lovely, stop motion'},
+  {id:'w-m-129',year:2022,title:'Stutz',rating:'⭐️⭐️⭐️⭐️',notes:'Touching, real'},
+  {id:'w-m-130',year:2022,title:'Amsterdam',rating:'⭐️⭐️',notes:'Good cast, hard to follow'},
+  {id:'w-m-131',year:2022,title:'Pinocchio (Guillermo del Toro)',rating:'⭐️⭐️⭐️⭐️',notes:'Touching'},
+  // ── 2023 ─────────────────────────────
+  {id:'w-m-132',year:2023,title:'Glass Onion',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-133',year:2023,title:'Klaus',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-134',year:2023,title:'A Ghost Story',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-135',year:2023,title:'Bardo',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-136',year:2023,title:'Bullet Train',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-137',year:2023,title:'Babylon',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-138',year:2023,title:'The Meyerowitz Stories',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-139',year:2023,title:'Do Revenge',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-140',year:2023,title:'Wakanda Forever',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-141',year:2023,title:'Your Place or Mine',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-142',year:2023,title:'The Whale',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-143',year:2023,title:'My Octopus Teacher',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-144',year:2023,title:'Inherent Vice',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-145',year:2023,title:'Triangle of Sadness',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-146',year:2023,title:'The Royal Tenenbaums',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-147',year:2023,title:'Super Mario Bros',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-148',year:2023,title:'The Fabelmans',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-149',year:2023,title:'Pasaje al paraíso',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-150',year:2023,title:'Crazy Rich Asians',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-151',year:2023,title:'Asteroid City',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-152',year:2023,title:'Oppenheimer',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-153',year:2023,title:'Barbie',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-154',year:2023,title:'No Sudden Move',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-155',year:2023,title:'The Boy, the Mole, the Fox and the Horse',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-156',year:2023,title:'Marcel the Shell with Shoes On',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-157',year:2023,title:'John Wick',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-158',year:2023,title:'Stop Making Sense (Talking Heads)',rating:'🎸🎸🎸',notes:'Great as Sunday morning background'},
+  {id:'w-m-159',year:2023,title:'Red White and Royal Blue',rating:'🍯🍯🍯',notes:'Gay flick, sweet'},
+  // ── 2024 ─────────────────────────────
+  {id:'w-m-160',year:2024,title:'Saltburn',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-161',year:2024,title:'La sociedad de la nieve',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-162',year:2024,title:'King Richard',rating:'🎾🎾🎾',notes:''},
+  {id:'w-m-163',year:2024,title:'Priscilla',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-164',year:2024,title:'Sitting in Bars with Cake',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-165',year:2024,title:'Under the Tuscan Sun',rating:'⭐️',notes:''},
+  {id:'w-m-166',year:2024,title:'Wine Country',rating:'⭐️',notes:''},
+  {id:'w-m-167',year:2024,title:'Poor Things',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-168',year:2024,title:'Anatomy of a Fall',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-169',year:2024,title:'Ferrari',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-170',year:2024,title:'La idea de ti',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-171',year:2024,title:'Challengers',rating:'🎾🎾🎾🎾🎾',notes:''},
+  {id:'w-m-172',year:2024,title:'Anyone but You',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-173',year:2024,title:'Barbarian',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-174',year:2024,title:'The X Movie (A24)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-175',year:2024,title:'Intensamente 2',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-176',year:2024,title:'The Zone of Interest',rating:'⭐️⭐️⭐️',notes:''},
   {id:'w-m-177',year:2024,title:'All of Us Strangers',rating:'',notes:''},
-  {id:'w-m-178',year:2024,title:'Deadpool and Wolverine',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-179',year:2024,title:'Pride and Prejudice',rating:'ð¯ð¯ð¯',notes:''},
-  {id:'w-m-180',year:2024,title:'A Rainy Day in New York',rating:'ð¯ð¯',notes:''},
-  {id:'w-m-181',year:2024,title:'Late Night with the Devil',rating:'ð¿ð¿',notes:''},
-  {id:'w-m-182',year:2024,title:'Beetlejuice Beetlejuice',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-183',year:2024,title:'Decision to Leave',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-184',year:2024,title:'Talented Mr. Ripley',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-185',year:2024,title:'Father of the Bride',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-186',year:2024,title:'Hitman',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-187',year:2024,title:'Pearl (A24)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-188',year:2024,title:'The Departed',rating:'ð¥ð¥',notes:''},
-  {id:'w-m-189',year:2024,title:'Robot Dreams',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-190',year:2024,title:'The Holdovers',rating:'ððð',notes:''},
-  {id:'w-m-191',year:2024,title:'It Ends with Us',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-192',year:2024,title:'Code Red',rating:'ðð',notes:''},
-  {id:'w-m-193',year:2024,title:'Dune: Part Two',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  // ââ 2025 âââââââââââââââââââââââââââââ
-  {id:'w-m-194',year:2025,title:'Roadrunner: A Film About Anthony Bourdain',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-195',year:2025,title:'Blink Twice',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-196',year:2025,title:'Valley Uprising',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-197',year:2025,title:'Long Legs',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-198',year:2025,title:'Sleepless in Seattle',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-199',year:2025,title:'Anora',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-200',year:2025,title:'Conclave',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-201',year:2025,title:'Saturday Night',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-202',year:2025,title:'Argentina 1985',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-203',year:2025,title:'Kedi',rating:'ð±ð±ð±',notes:''},
-  {id:'w-m-204',year:2025,title:'Mountainhead',rating:'â­ï¸',notes:''},
-  {id:'w-m-205',year:2025,title:'Before Sunrise',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-206',year:2025,title:'Sinners',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-207',year:2025,title:'F1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-208',year:2025,title:'A Real Pain',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-209',year:2025,title:'I, Tonya',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-210',year:2025,title:'The Substance',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-211',year:2025,title:'Wicked',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-212',year:2025,title:'Materialistas',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-213',year:2025,title:'Weapons',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-214',year:2025,title:'Parthenope (Sorrentino, A24)',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-215',year:2025,title:'Oldboy',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-216',year:2025,title:'Arrival',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-217',year:2025,title:'Heretic (A24)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-218',year:2025,title:'The Silence of the Lambs',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-219',year:2025,title:'Practical Magic',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-220',year:2025,title:'Talk to Me',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-221',year:2025,title:'The Menu',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-222',year:2025,title:'May December',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-223',year:2025,title:'One Battle After Another',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-224',year:2025,title:'Heathers',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-225',year:2025,title:'Nosferatu',rating:'â­ï¸',notes:''},
-  {id:'w-m-226',year:2025,title:'Frankenstein',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-227',year:2025,title:'After the Hunt',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-228',year:2025,title:'Wake Up Dead Man',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-229',year:2025,title:'Emily the Criminal',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-230',year:2025,title:'The Master (Paul Thomas Anderson)',rating:'â­ï¸â­ï¸',notes:''},
-  // ââ 2026 âââââââââââââââââââââââââââââ
-  {id:'w-m-231',year:2026,title:'Eternity',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-232',year:2026,title:'The Prestige',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-233',year:2026,title:'Marty Supreme',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-234',year:2026,title:'Marie Antoinette',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-235',year:2026,title:'The Roses',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-m-236',year:2026,title:'Bugonia',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-237',year:2026,title:'Past Lives',rating:'ðððð',notes:''},
-  {id:'w-m-238',year:2026,title:'Wuthering Heights',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-m-239',year:2026,title:'Zootopia 2',rating:'ððð',notes:''},
-  {id:'w-m-240',year:2026,title:'Hoppers',rating:'ð¦«ð¦«ð¦«ð¦«',notes:''},
-  {id:'w-m-241',year:2026,title:'Sorry, Baby',rating:'â¤ï¸âð©¹â¤ï¸âð©¹â¤ï¸âð©¹',notes:''},
+  {id:'w-m-178',year:2024,title:'Deadpool and Wolverine',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-179',year:2024,title:'Pride and Prejudice',rating:'🍯🍯🍯',notes:''},
+  {id:'w-m-180',year:2024,title:'A Rainy Day in New York',rating:'🍯🍯',notes:''},
+  {id:'w-m-181',year:2024,title:'Late Night with the Devil',rating:'👿👿',notes:''},
+  {id:'w-m-182',year:2024,title:'Beetlejuice Beetlejuice',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-183',year:2024,title:'Decision to Leave',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-184',year:2024,title:'Talented Mr. Ripley',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-185',year:2024,title:'Father of the Bride',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-186',year:2024,title:'Hitman',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-187',year:2024,title:'Pearl (A24)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-188',year:2024,title:'The Departed',rating:'💥💥',notes:''},
+  {id:'w-m-189',year:2024,title:'Robot Dreams',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-190',year:2024,title:'The Holdovers',rating:'🎄🎄🎄',notes:''},
+  {id:'w-m-191',year:2024,title:'It Ends with Us',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-192',year:2024,title:'Code Red',rating:'🎄🎄',notes:''},
+  {id:'w-m-193',year:2024,title:'Dune: Part Two',rating:'⭐️⭐️⭐️',notes:''},
+  // ── 2025 ─────────────────────────────
+  {id:'w-m-194',year:2025,title:'Roadrunner: A Film About Anthony Bourdain',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-195',year:2025,title:'Blink Twice',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-196',year:2025,title:'Valley Uprising',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-197',year:2025,title:'Long Legs',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-198',year:2025,title:'Sleepless in Seattle',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-199',year:2025,title:'Anora',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-200',year:2025,title:'Conclave',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-201',year:2025,title:'Saturday Night',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-202',year:2025,title:'Argentina 1985',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-203',year:2025,title:'Kedi',rating:'🐱🐱🐱',notes:''},
+  {id:'w-m-204',year:2025,title:'Mountainhead',rating:'⭐️',notes:''},
+  {id:'w-m-205',year:2025,title:'Before Sunrise',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-206',year:2025,title:'Sinners',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-207',year:2025,title:'F1',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-208',year:2025,title:'A Real Pain',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-209',year:2025,title:'I, Tonya',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-210',year:2025,title:'The Substance',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-211',year:2025,title:'Wicked',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-212',year:2025,title:'Materialistas',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-213',year:2025,title:'Weapons',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-214',year:2025,title:'Parthenope (Sorrentino, A24)',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-215',year:2025,title:'Oldboy',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-216',year:2025,title:'Arrival',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-217',year:2025,title:'Heretic (A24)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-218',year:2025,title:'The Silence of the Lambs',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-219',year:2025,title:'Practical Magic',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-220',year:2025,title:'Talk to Me',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-221',year:2025,title:'The Menu',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-222',year:2025,title:'May December',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-223',year:2025,title:'One Battle After Another',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-224',year:2025,title:'Heathers',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-225',year:2025,title:'Nosferatu',rating:'⭐️',notes:''},
+  {id:'w-m-226',year:2025,title:'Frankenstein',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-227',year:2025,title:'After the Hunt',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-228',year:2025,title:'Wake Up Dead Man',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-229',year:2025,title:'Emily the Criminal',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-230',year:2025,title:'The Master (Paul Thomas Anderson)',rating:'⭐️⭐️',notes:''},
+  // ── 2026 ─────────────────────────────
+  {id:'w-m-231',year:2026,title:'Eternity',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-232',year:2026,title:'The Prestige',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-233',year:2026,title:'Marty Supreme',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-234',year:2026,title:'Marie Antoinette',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-235',year:2026,title:'The Roses',rating:'⭐️⭐️',notes:''},
+  {id:'w-m-236',year:2026,title:'Bugonia',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-m-237',year:2026,title:'Past Lives',rating:'💖💖💖💖',notes:''},
+  {id:'w-m-238',year:2026,title:'Wuthering Heights',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-m-239',year:2026,title:'Zootopia 2',rating:'🐍🐍🐍',notes:''},
+  {id:'w-m-240',year:2026,title:'Hoppers',rating:'🦫🦫🦫🦫',notes:''},
+  {id:'w-m-241',year:2026,title:'Sorry, Baby',rating:'❤️‍🩹❤️‍🩹❤️‍🩹',notes:''},
 ];
 
 const SHOWS_TO_WATCH = [
@@ -580,13 +580,13 @@ const SHOWS_TO_WATCH = [
   {id:'tw-s-4',title:'First Day on Earth',genre:'Drama'},
   {id:'tw-s-5',title:'Halston',genre:'Drama'},
   {id:'tw-s-6',title:'High Fidelity',genre:'Drama'},
-  {id:'tw-s-7',title:'Industry â­ï¸',genre:'Drama'},
+  {id:'tw-s-7',title:'Industry ⭐️',genre:'Drama'},
   {id:'tw-s-8',title:'Julia',genre:'Drama'},
-  {id:'tw-s-9',title:'Mad Men â­ï¸',genre:'Drama'},
-  {id:'tw-s-10',title:'Nada â­ï¸',genre:'Drama'},
-  {id:'tw-s-11',title:'Ozark ð',genre:'Drama'},
+  {id:'tw-s-9',title:'Mad Men ⭐️',genre:'Drama'},
+  {id:'tw-s-10',title:'Nada ⭐️',genre:'Drama'},
+  {id:'tw-s-11',title:'Ozark 🏆',genre:'Drama'},
   {id:'tw-s-12',title:'Scenes from a Marriage',genre:'Drama'},
-  {id:'tw-s-13',title:'Slow Horses â­ï¸',genre:'Drama'},
+  {id:'tw-s-13',title:'Slow Horses ⭐️',genre:'Drama'},
   {id:'tw-s-14',title:'The New Look',genre:'Drama'},
   {id:'tw-s-15',title:'The Wilds',genre:'Drama'},
   {id:'tw-s-16',title:'Moonknight',genre:'Action'},
@@ -594,7 +594,7 @@ const SHOWS_TO_WATCH = [
   {id:'tw-s-18',title:'Shogun',genre:'Action'},
   {id:'tw-s-19',title:'Delicious in Dungeon',genre:'Animation'},
   {id:'tw-s-20',title:'The Midnight Gospel',genre:'Animation'},
-  {id:'tw-s-21',title:'Undone âââââ',genre:'Animation'},
+  {id:'tw-s-21',title:'Undone ★★★★★',genre:'Animation'},
   {id:'tw-s-22',title:'Wolfwalkers',genre:'Animation'},
   {id:'tw-s-23',title:'Black Bird',genre:'Crime'},
   {id:'tw-s-24',title:'Cape Fear',genre:'Crime'},
@@ -605,7 +605,7 @@ const SHOWS_TO_WATCH = [
   {id:'tw-s-29',title:'The Outsider',genre:'Crime'},
   {id:'tw-s-30',title:'Unbelievable',genre:'Crime'},
   {id:'tw-s-31',title:'Anthony Bourdain: No Reservations',genre:'Documentary'},
-  {id:'tw-s-32',title:'CarÃªme',genre:'Documentary'},
+  {id:'tw-s-32',title:'Carême',genre:'Documentary'},
   {id:'tw-s-33',title:'1971: The Year That Music Changed Everything',genre:'Documentary'},
   {id:'tw-s-34',title:"Eater's Guide to the World",genre:'Documentary'},
   {id:'tw-s-35',title:'Faces Places',genre:'Documentary'},
@@ -613,13 +613,13 @@ const SHOWS_TO_WATCH = [
   {id:'tw-s-37',title:'Fat Sick and Nearly Dead',genre:'Documentary'},
   {id:'tw-s-38',title:'Heal',genre:'Documentary'},
   {id:'tw-s-39',title:'Nonnas',genre:'Documentary'},
-  {id:'tw-s-40',title:'Sin lÃ­mites',genre:'Documentary'},
+  {id:'tw-s-40',title:'Sin límites',genre:'Documentary'},
   {id:'tw-s-41',title:'Sugar vs Fat',genre:'Documentary'},
   {id:'tw-s-42',title:'The Kids Menu',genre:'Documentary'},
   {id:'tw-s-43',title:'Tucci in Italy',genre:'Documentary'},
-  {id:'tw-s-44',title:'Omnivore â­ï¸',genre:'Documentary'},
+  {id:'tw-s-44',title:'Omnivore ⭐️',genre:'Documentary'},
   {id:'tw-s-45',title:'One Strange Rock',genre:'Documentary'},
-  {id:'tw-s-46',title:'Streetfood LatinoamÃ©rica',genre:'Documentary'},
+  {id:'tw-s-46',title:'Streetfood Latinoamérica',genre:'Documentary'},
   {id:'tw-s-47',title:'The Crime of the Century',genre:'Documentary'},
   {id:'tw-s-48',title:'The Jinx',genre:'Documentary'},
   {id:'tw-s-49',title:'Marianne',genre:'Horror'},
@@ -633,168 +633,168 @@ const SHOWS_TO_WATCH = [
   {id:'tw-s-57',title:'The Bold Type',genre:'Comedy'},
   {id:'tw-s-58',title:'The Curse',genre:'Comedy'},
   {id:'tw-s-59',title:'The Four Seasons',genre:'Comedy'},
-  {id:'tw-s-60',title:'The Great ð',genre:'Comedy'},
+  {id:'tw-s-60',title:'The Great 🏆',genre:'Comedy'},
   {id:'tw-s-61',title:'Trying',genre:'Comedy'},
   {id:'tw-s-62',title:'30 Rock',genre:'Comedy'},
 ];
 
 const SHOWS_WATCHED = [
-  // ââ 2020 âââââââââââââââââââââââââââââ
-  {id:'w-s-1',year:2020,title:'Modern Love',rating:'ð¯ð¯ð¯ð¯ð¯',notes:''},
-  {id:'w-s-2',year:2020,title:'La Casa de Papel',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-3',year:2020,title:'Friends',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-4',year:2020,title:'Ratched',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-5',year:2020,title:"Queen's Gambit",rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-6',year:2020,title:'Rick and Morty',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-7',year:2020,title:'The Last Dance',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-8',year:2020,title:'The Undoing',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-9',year:2020,title:'The Mandalorian',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-10',year:2020,title:'The Haunting of Bly Manor',rating:'ðððð',notes:''},
-  // ââ 2021 âââââââââââââââââââââââââââââ
-  {id:'w-s-11',year:2021,title:'Salt Fat Acid Heat',rating:'ð¥ð¥ð¥ð¥ð¥',notes:''},
-  {id:'w-s-12',year:2021,title:'Cecil Hotel',rating:'ððð',notes:''},
-  {id:'w-s-13',year:2021,title:'Mare of Easttown',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-14',year:2021,title:'QuiÃ©n matÃ³ a Sara',rating:'â­ï¸',notes:''},
-  {id:'w-s-15',year:2021,title:"The Handmaid's Tale",rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-16',year:2021,title:'Calls',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Ver en orden'},
-  {id:'w-s-17',year:2021,title:'The Office',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-18',year:2021,title:'The Serpent',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-19',year:2021,title:'Bridgerton s1',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-20',year:2021,title:'Vox Explained',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-21',year:2021,title:'Waffles + Mochi',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-22',year:2021,title:'Sex and the City',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-23',year:2021,title:'Succession',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-24',year:2021,title:'Emily in Paris',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-25',year:2021,title:'Love Death + Robots',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-26',year:2021,title:'Close Enough',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-27',year:2021,title:'The Crown',rating:'ðððð',notes:''},
-  {id:'w-s-28',year:2021,title:'Squid Game',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-29',year:2021,title:'White Lotus s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-30',year:2021,title:'CrÃ³nicas del taco',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-31',year:2021,title:'Loki',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-32',year:2021,title:'Narcos',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-33',year:2021,title:'And Just Like That s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-34',year:2021,title:'This Is a Robbery',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-35',year:2021,title:'A Charlie Brown Christmas',rating:'ðððð',notes:''},
+  // ── 2020 ─────────────────────────────
+  {id:'w-s-1',year:2020,title:'Modern Love',rating:'🍯🍯🍯🍯🍯',notes:''},
+  {id:'w-s-2',year:2020,title:'La Casa de Papel',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-3',year:2020,title:'Friends',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-4',year:2020,title:'Ratched',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-5',year:2020,title:"Queen's Gambit",rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-6',year:2020,title:'Rick and Morty',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-7',year:2020,title:'The Last Dance',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-8',year:2020,title:'The Undoing',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-9',year:2020,title:'The Mandalorian',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-10',year:2020,title:'The Haunting of Bly Manor',rating:'🎃🎃🎃🎃',notes:''},
+  // ── 2021 ─────────────────────────────
+  {id:'w-s-11',year:2021,title:'Salt Fat Acid Heat',rating:'🥐🥐🥐🥐🥐',notes:''},
+  {id:'w-s-12',year:2021,title:'Cecil Hotel',rating:'🎃🎃🎃',notes:''},
+  {id:'w-s-13',year:2021,title:'Mare of Easttown',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-14',year:2021,title:'Quién mató a Sara',rating:'⭐️',notes:''},
+  {id:'w-s-15',year:2021,title:"The Handmaid's Tale",rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-16',year:2021,title:'Calls',rating:'⭐️⭐️⭐️⭐️',notes:'Ver en orden'},
+  {id:'w-s-17',year:2021,title:'The Office',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-18',year:2021,title:'The Serpent',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-19',year:2021,title:'Bridgerton s1',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-20',year:2021,title:'Vox Explained',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-21',year:2021,title:'Waffles + Mochi',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-22',year:2021,title:'Sex and the City',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-23',year:2021,title:'Succession',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-24',year:2021,title:'Emily in Paris',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-25',year:2021,title:'Love Death + Robots',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-26',year:2021,title:'Close Enough',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-27',year:2021,title:'The Crown',rating:'🏆🏆🏆🏆',notes:''},
+  {id:'w-s-28',year:2021,title:'Squid Game',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-29',year:2021,title:'White Lotus s1',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-30',year:2021,title:'Crónicas del taco',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-31',year:2021,title:'Loki',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-32',year:2021,title:'Narcos',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-33',year:2021,title:'And Just Like That s1',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-34',year:2021,title:'This Is a Robbery',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-35',year:2021,title:'A Charlie Brown Christmas',rating:'🎄🎄🎄🎄',notes:''},
   {id:'w-s-35b',year:2021,title:'Silicon Valley',rating:'',notes:''},
-  // ââ 2022 âââââââââââââââââââââââââââââ
-  {id:'w-s-36',year:2022,title:'Euphoria',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-37',year:2022,title:'The Brain, Explained',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-38',year:2022,title:'Money Explained',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Quick bites, perfectly explained'},
-  {id:'w-s-39',year:2022,title:'The Dropout',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-40',year:2022,title:'Bridgerton s2',rating:'â­ï¸â­ï¸â­ï¸',notes:'Soapy, pretty production, cheesy'},
-  {id:'w-s-41',year:2022,title:'WeCrashed',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Great performances, cool cast, true story'},
-  {id:'w-s-42',year:2022,title:'Severance s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Psychological thriller, uncomfortable, visually beautiful'},
-  {id:'w-s-43',year:2022,title:'Shining Girls',rating:'â­ï¸â­ï¸',notes:'Promising, weird twist'},
-  {id:'w-s-44',year:2022,title:'Little Fires Everywhere',rating:'â­ï¸â­ï¸â­ï¸',notes:'Great cast, predictable'},
-  {id:'w-s-45',year:2022,title:'WandaVision s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:'Fun, witty and essential to MCU'},
-  {id:'w-s-46',year:2022,title:'Obi-Wan Kenobi',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-47',year:2022,title:'Only Murders in the Building s1 & 2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-48',year:2022,title:'Stranger Things',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-49',year:2022,title:'Grace and Frankie',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-50',year:2022,title:'House of the Dragon s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-51',year:2022,title:'LOTR (series)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-52',year:2022,title:'Andor',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-53',year:2022,title:'Wednesday',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-54',year:2022,title:'White Lotus s2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-55',year:2022,title:"Handmaid's Tale s5",rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-56',year:2022,title:'The Bear s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
+  // ── 2022 ─────────────────────────────
+  {id:'w-s-36',year:2022,title:'Euphoria',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-37',year:2022,title:'The Brain, Explained',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-38',year:2022,title:'Money Explained',rating:'⭐️⭐️⭐️⭐️⭐️',notes:'Quick bites, perfectly explained'},
+  {id:'w-s-39',year:2022,title:'The Dropout',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-40',year:2022,title:'Bridgerton s2',rating:'⭐️⭐️⭐️',notes:'Soapy, pretty production, cheesy'},
+  {id:'w-s-41',year:2022,title:'WeCrashed',rating:'⭐️⭐️⭐️⭐️',notes:'Great performances, cool cast, true story'},
+  {id:'w-s-42',year:2022,title:'Severance s1',rating:'⭐️⭐️⭐️⭐️⭐️',notes:'Psychological thriller, uncomfortable, visually beautiful'},
+  {id:'w-s-43',year:2022,title:'Shining Girls',rating:'⭐️⭐️',notes:'Promising, weird twist'},
+  {id:'w-s-44',year:2022,title:'Little Fires Everywhere',rating:'⭐️⭐️⭐️',notes:'Great cast, predictable'},
+  {id:'w-s-45',year:2022,title:'WandaVision s1',rating:'⭐️⭐️⭐️⭐️',notes:'Fun, witty and essential to MCU'},
+  {id:'w-s-46',year:2022,title:'Obi-Wan Kenobi',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-47',year:2022,title:'Only Murders in the Building s1 & 2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-48',year:2022,title:'Stranger Things',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-49',year:2022,title:'Grace and Frankie',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-50',year:2022,title:'House of the Dragon s1',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-51',year:2022,title:'LOTR (series)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-52',year:2022,title:'Andor',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-53',year:2022,title:'Wednesday',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-54',year:2022,title:'White Lotus s2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-55',year:2022,title:"Handmaid's Tale s5",rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-56',year:2022,title:'The Bear s1',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
   {id:'w-s-56b',year:2022,title:'History Level 1',rating:'',notes:''},
   {id:'w-s-56c',year:2022,title:'The Chef Show',rating:'',notes:''},
   {id:'w-s-56d',year:2022,title:'La mente',rating:'',notes:''},
   {id:'w-s-56e',year:2022,title:'Ted Lasso',rating:'',notes:''},
-  // ââ 2023 âââââââââââââââââââââââââââââ
-  {id:'w-s-57',year:2023,title:'The Rehearsal s1',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-58',year:2023,title:'The Last of Us s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-59',year:2023,title:'Abbott Elementary',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-60',year:2023,title:'Beef',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-61',year:2023,title:'Fleabag',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-62',year:2023,title:'Working: What We Do All Day',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-63',year:2023,title:'Queen Charlotte',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-64',year:2023,title:'Love and Death',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-65',year:2023,title:'The Night Of',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-66',year:2023,title:'Yellowjackets',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-67',year:2023,title:'Get Back (Beatles)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-68',year:2023,title:'The Bear s2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-69',year:2023,title:'Only Murders in the Building s3',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-70',year:2023,title:'The Fall of the House of Usher',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-71',year:2023,title:'The Gilded Age s1',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  // ââ 2024 âââââââââââââââââââââââââââââ
-  {id:'w-s-72',year:2024,title:'Ojitos de huevo',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-73',year:2024,title:'Scavengers Reign',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-74',year:2024,title:'True Detective: Night Country',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-75',year:2024,title:'Lessons in Chemistry',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-76',year:2024,title:'Carol at the End of the World',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-77',year:2024,title:'Shrinking s1',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-78',year:2024,title:'The Summer I Turned Pretty s1 & 2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-79',year:2024,title:'Platonic',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-80',year:2024,title:'The Afterparty',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-81',year:2024,title:'Baby Reindeer',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-82',year:2024,title:'Palm Beach',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-83',year:2024,title:'The Crowded Room',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-84',year:2024,title:'Girls',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-85',year:2024,title:'Presumed Innocent',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-86',year:2024,title:'The Bear s3',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-87',year:2024,title:'Emily in Paris s3',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-88',year:2024,title:'House of the Dragon s2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-89',year:2024,title:'The Perfect Couple',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-90',year:2024,title:'The Penguin',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-91',year:2024,title:'Nobody Wants This',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-92',year:2024,title:'Disclaimer',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
+  // ── 2023 ─────────────────────────────
+  {id:'w-s-57',year:2023,title:'The Rehearsal s1',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-58',year:2023,title:'The Last of Us s1',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-59',year:2023,title:'Abbott Elementary',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-60',year:2023,title:'Beef',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-61',year:2023,title:'Fleabag',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-62',year:2023,title:'Working: What We Do All Day',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-63',year:2023,title:'Queen Charlotte',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-64',year:2023,title:'Love and Death',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-65',year:2023,title:'The Night Of',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-66',year:2023,title:'Yellowjackets',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-67',year:2023,title:'Get Back (Beatles)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-68',year:2023,title:'The Bear s2',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-69',year:2023,title:'Only Murders in the Building s3',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-70',year:2023,title:'The Fall of the House of Usher',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-71',year:2023,title:'The Gilded Age s1',rating:'⭐️⭐️⭐️',notes:''},
+  // ── 2024 ─────────────────────────────
+  {id:'w-s-72',year:2024,title:'Ojitos de huevo',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-73',year:2024,title:'Scavengers Reign',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-74',year:2024,title:'True Detective: Night Country',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-75',year:2024,title:'Lessons in Chemistry',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-76',year:2024,title:'Carol at the End of the World',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-77',year:2024,title:'Shrinking s1',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-78',year:2024,title:'The Summer I Turned Pretty s1 & 2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-79',year:2024,title:'Platonic',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-80',year:2024,title:'The Afterparty',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-81',year:2024,title:'Baby Reindeer',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-82',year:2024,title:'Palm Beach',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-83',year:2024,title:'The Crowded Room',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-84',year:2024,title:'Girls',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-85',year:2024,title:'Presumed Innocent',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-86',year:2024,title:'The Bear s3',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-87',year:2024,title:'Emily in Paris s3',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-88',year:2024,title:'House of the Dragon s2',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-89',year:2024,title:'The Perfect Couple',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-90',year:2024,title:'The Penguin',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-91',year:2024,title:'Nobody Wants This',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-92',year:2024,title:'Disclaimer',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
   {id:'w-s-92b',year:2024,title:'Jury Duty',rating:'',notes:''},
   {id:'w-s-92c',year:2024,title:'Malcolm',rating:'',notes:''},
   {id:'w-s-92d',year:2024,title:'Barry',rating:'',notes:''},
-  // ââ 2025 âââââââââââââââââââââââââââââ
-  {id:'w-s-93',year:2025,title:'Severance s2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-94',year:2025,title:'Fargo (series)',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-95',year:2025,title:'The Beast Games',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-96',year:2025,title:'Apple Cider Vinegar',rating:'â­ï¸',notes:''},
-  {id:'w-s-97',year:2025,title:'Shrinking s2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-98',year:2025,title:'Normal People',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-99',year:2025,title:'The White Lotus s3',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-100',year:2025,title:'Common Side Effects',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-101',year:2025,title:'The Last of Us s2',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-102',year:2025,title:'Adolescence',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-103',year:2025,title:'Your Friends & Neighbors',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-104',year:2025,title:'Only Murders in the Building s4',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-105',year:2025,title:'The Studio',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-106',year:2025,title:'The Bear s5',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-107',year:2025,title:'The Summer I Turned Pretty s3',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-108',year:2025,title:'Untamed',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-109',year:2025,title:'The Gilded Age s3',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-110',year:2025,title:'Sirens',rating:'â­ï¸',notes:''},
-  {id:'w-s-111',year:2025,title:'We Were Liars',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-112',year:2025,title:'Task',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-113',year:2025,title:'The Girlfriend',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-114',year:2025,title:'Stranger Things s5',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-115',year:2025,title:'Pluribus',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-116',year:2025,title:"Knife's Edge",rating:'â­ï¸â­ï¸â­ï¸',notes:''},
+  // ── 2025 ─────────────────────────────
+  {id:'w-s-93',year:2025,title:'Severance s2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-94',year:2025,title:'Fargo (series)',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-95',year:2025,title:'The Beast Games',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-96',year:2025,title:'Apple Cider Vinegar',rating:'⭐️',notes:''},
+  {id:'w-s-97',year:2025,title:'Shrinking s2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-98',year:2025,title:'Normal People',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-99',year:2025,title:'The White Lotus s3',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-100',year:2025,title:'Common Side Effects',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-101',year:2025,title:'The Last of Us s2',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-102',year:2025,title:'Adolescence',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-103',year:2025,title:'Your Friends & Neighbors',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-104',year:2025,title:'Only Murders in the Building s4',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-105',year:2025,title:'The Studio',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-106',year:2025,title:'The Bear s5',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-107',year:2025,title:'The Summer I Turned Pretty s3',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-108',year:2025,title:'Untamed',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-109',year:2025,title:'The Gilded Age s3',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-110',year:2025,title:'Sirens',rating:'⭐️',notes:''},
+  {id:'w-s-111',year:2025,title:'We Were Liars',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-112',year:2025,title:'Task',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-113',year:2025,title:'The Girlfriend',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-114',year:2025,title:'Stranger Things s5',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-115',year:2025,title:'Pluribus',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-116',year:2025,title:"Knife's Edge",rating:'⭐️⭐️⭐️',notes:''},
   {id:'w-s-116b',year:2025,title:'Dream Productions',rating:'',notes:''},
   {id:'w-s-116c',year:2025,title:'Midnight Family',rating:'',notes:''},
-  // ââ 2026 âââââââââââââââââââââââââââââ
-  {id:'w-s-117',year:2026,title:'Department Q',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-118',year:2026,title:'Desperate Housewives',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-119',year:2026,title:'Knight of the Seven Kingdoms',rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-120',year:2026,title:'The Pitt',rating:'â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-121',year:2026,title:'Long Bright River',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-122',year:2026,title:'Love Story',rating:'â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-123',year:2026,title:'Bridgerton s4',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-124',year:2026,title:'Como agua para chocolate',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-125',year:2026,title:"Handmaid's Tale (final season)",rating:'â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸',notes:''},
-  {id:'w-s-126',year:2026,title:'And Just Like That s2',rating:'â­ï¸â­ï¸',notes:''},
-  {id:'w-s-127',year:2026,title:'Greys Anatomy (s1â17)',rating:'',notes:''},
+  // ── 2026 ─────────────────────────────
+  {id:'w-s-117',year:2026,title:'Department Q',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-118',year:2026,title:'Desperate Housewives',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-119',year:2026,title:'Knight of the Seven Kingdoms',rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-120',year:2026,title:'The Pitt',rating:'⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-121',year:2026,title:'Long Bright River',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-122',year:2026,title:'Love Story',rating:'⭐️⭐️⭐️',notes:''},
+  {id:'w-s-123',year:2026,title:'Bridgerton s4',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-124',year:2026,title:'Como agua para chocolate',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-125',year:2026,title:"Handmaid's Tale (final season)",rating:'⭐️⭐️⭐️⭐️⭐️',notes:''},
+  {id:'w-s-126',year:2026,title:'And Just Like That s2',rating:'⭐️⭐️',notes:''},
+  {id:'w-s-127',year:2026,title:'Greys Anatomy (s1–17)',rating:'',notes:''},
   {id:'w-s-128',year:2026,title:'Rooster',rating:'',notes:''},
   {id:'w-s-129',year:2026,title:'Something Very Bad Is Going to Happen',rating:'',notes:''},
   {id:'w-s-130',year:2026,title:'Imperfect Women',rating:'',notes:''},
 ];
 
-const RATING_EMOJIS = ['â­ï¸','ð¯','ð','ð','ð','ð¸','ð·','ð','ð±','ð¾','ð¥','â¤ï¸âð©¹','ð','ð','ð¦«','ð','ð£','ð','ð¿','ð¥'];
+const RATING_EMOJIS = ['⭐️','🍯','😈','🎃','🏆','🎸','🍷','💜','🐱','🎾','💥','❤️‍🩹','🌞','💖','🦫','🐍','🍣','🎄','👿','🥐'];
 const MOVIE_GENRES = ['Todos','Drama','Comedy','Crime','Action','Horror','Thriller','Romance','Historical','Sci-Fi','Musical','Documentary'];
 const SHOW_GENRES  = ['Todos','Drama','Comedy','Crime','Action','Horror','Thriller','Documentary','Animation'];
 
-/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ──────────────────────────────────────────────────────────────
    HELPERS
-ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+────────────────────────────────────────────────────────────── */
 function genId(){ return 'u-'+Math.random().toString(36).slice(2,9); }
 const STORAGE_KEY = 'mel_watchlist_v2';
 const SYNC_KEY = 'mel_sync_pending';
@@ -845,28 +845,28 @@ function Row({item, isWatched, onRate, onDelete, onDetail, isEditor}){
   const [sx,setSx]=React.useState(0); const tr=React.useRef(null);
   function ts(e){ tr.current=e.touches[0].clientX; }
   function tm(e){ if(tr.current===null)return; setSx(Math.max(-90,Math.min(90,e.touches[0].clientX-tr.current))); }
-  function te(){ if(isEditor){ if(sx>65) onRate(item); else if(sx<-65&&confirm('Â¿Eliminar?')) onDelete(item.id); } setSx(0); tr.current=null; }
+  function te(){ if(isEditor){ if(sx>65) onRate(item); else if(sx<-65&&confirm('¿Eliminar?')) onDelete(item.id); } setSx(0); tr.current=null; }
   const bg=sx>30?'rgba(109,40,217,'+(Math.min(sx/90,.7))+')':sx<-30?'rgba(185,28,28,'+(Math.min(-sx/90,.7))+')':'transparent';
   return (
     <div className="row relative overflow-hidden rounded-lg" style={{background:bg}} onTouchStart={ts} onTouchMove={tm} onTouchEnd={te}>
-      {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?'âï¸':'â'}</span>}
-      {sx<-30&&isEditor&&<span className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">â</span>}
+      {sx>30&&isEditor&&<span className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">{isWatched?'✏️':'✓'}</span>}
+      {sx<-30&&isEditor&&<span className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xs font-bold">✕</span>}
       <div className="flex items-center gap-2 px-3 py-2" style={{transform:'translateX('+sx+'px)',transition:sx===0?'transform .2s':'none'}}>
       <button onClick={()=>onDetail(item)} className="flex-1 text-sm text-gray-200 min-w-0 truncate text-left hover:text-violet-300 transition-colors" title={item.title}>{item.title}</button>
       {item.genre && <GenreTag genre={item.genre}/>}
       {isWatched
-        ? <span className="text-sm flex-shrink-0 min-w-[60px] text-right">{item.rating||<span className="text-gray-700 text-xs">â</span>}</span>
+        ? <span className="text-sm flex-shrink-0 min-w-[60px] text-right">{item.rating||<span className="text-gray-700 text-xs">—</span>}</span>
         : null
       }
       {isEditor&&<div className="actions flex gap-1 flex-shrink-0">
         <button
           onClick={()=>onRate(item)}
           className="text-xs text-violet-500 hover:text-violet-300 px-1.5 py-0.5 rounded hover:bg-violet-950"
-        >{isWatched?'âï¸':'â'}</button>
+        >{isWatched?'✏️':'✓'}</button>
         <button
-          onClick={()=>{if(confirm('Â¿Eliminar "'+item.title+'"?')) onDelete(item.id);}}
+          onClick={()=>{if(confirm('¿Eliminar "'+item.title+'"?')) onDelete(item.id);}}
           className="text-xs text-gray-700 hover:text-red-400 px-1.5 py-0.5 rounded hover:bg-red-950"
-        >â</button>
+        >✕</button>
       </div>}
       </div>
     </div>
@@ -884,9 +884,9 @@ function YearHeader({year, count}){
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ──────────────────────────────────────────────────────────────
    DETAIL PANEL
-ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+────────────────────────────────────────────────────────────── */
 function cleanForSearch(title){
   return title
     .replace(/\p{Emoji_Presentation}|\p{Extended_Pictographic}/gu,'')
@@ -919,9 +919,9 @@ function DetailPanel({item, isMovie, omdbKey, onClose}){
         <div className="flex items-start gap-3 mb-4">
           <div className="flex-1 min-w-0">
             <p className="font-bold text-white text-sm leading-snug">{item.title}</p>
-            {info&&<p className="text-xs text-gray-500 mt-0.5">{info.Year} Â· {info.Runtime} Â· {info.Rated}</p>}
+            {info&&<p className="text-xs text-gray-500 mt-0.5">{info.Year} · {info.Runtime} · {info.Rated}</p>}
           </div>
-          <button onClick={onClose} className="text-gray-600 hover:text-gray-400 flex-shrink-0 text-sm">â</button>
+          <button onClick={onClose} className="text-gray-600 hover:text-gray-400 flex-shrink-0 text-sm">✕</button>
         </div>
 
         {info&&(
@@ -946,18 +946,18 @@ function DetailPanel({item, isMovie, omdbKey, onClose}){
             </div>
           </div>
         )}
-        {loading&&<p className="text-xs text-gray-600 mb-4 text-center py-4">Buscando infoâ¦</p>}
-        {err&&omdbKey&&<p className="text-xs text-gray-600 mb-4 text-center">No se encontrÃ³ en OMDB</p>}
+        {loading&&<p className="text-xs text-gray-600 mb-4 text-center py-4">Buscando info…</p>}
+        {err&&omdbKey&&<p className="text-xs text-gray-600 mb-4 text-center">No se encontró en OMDB</p>}
         {!omdbKey&&<p className="text-xs text-gray-700 mb-4 text-center">Agrega tu OMDB key en ajustes para ver ratings e info</p>}
 
         <div className="flex gap-2">
           <a href={jwUrl} target="_blank" rel="noreferrer"
             className="flex-1 bg-teal-900 hover:bg-teal-800 text-teal-200 py-2 rounded-xl text-xs font-medium text-center transition-colors">
-            ð¬ JustWatch MX
+            🎬 JustWatch MX
           </a>
           <a href={rtUrl} target="_blank" rel="noreferrer"
             className="flex-1 bg-red-950 hover:bg-red-900 text-red-300 py-2 rounded-xl text-xs font-medium text-center transition-colors">
-            ð Rotten Tomatoes
+            🍅 Rotten Tomatoes
           </a>
         </div>
       </div>
@@ -965,9 +965,9 @@ function DetailPanel({item, isMovie, omdbKey, onClose}){
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ──────────────────────────────────────────────────────────────
    SETTINGS MODAL
-ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+────────────────────────────────────────────────────────────── */
 function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, ghStatus}){
   const [val,setVal]=useState(omdbKey);
   const [copied,setCopied]=useState(false);
@@ -980,17 +980,17 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
     const shows=syncPending.filter(i=>i.mediaType==='shows');
     let out='';
     if(movies.length){
-      out+='ð¥ PelÃ­culas nuevas:\n';
+      out+='🎥 Películas nuevas:\n';
       movies.forEach(i=>{
-        if(i.watched) out+=`${i.title} ${i.rating||''}${i.notes?' â '+i.notes:''}\n`;
+        if(i.watched) out+=`${i.title} ${i.rating||''}${i.notes?' — '+i.notes:''}\n`;
         else out+=`${i.title}${i.genre?' ('+i.genre+')':''}\n`;
       });
       out+='\n';
     }
     if(shows.length){
-      out+='ðº Series nuevas:\n';
+      out+='📺 Series nuevas:\n';
       shows.forEach(i=>{
-        if(i.watched) out+=`${i.title} ${i.rating||''}${i.notes?' â '+i.notes:''}\n`;
+        if(i.watched) out+=`${i.title} ${i.rating||''}${i.notes?' — '+i.notes:''}\n`;
         else out+=`${i.title}${i.genre?' ('+i.genre+')':''}\n`;
       });
     }
@@ -1005,7 +1005,7 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
   return (
     <div className="modal-bg fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
       <div className="modal-box bg-gray-900 border border-gray-800 rounded-2xl p-5 w-full max-w-sm max-h-[90vh] overflow-y-auto">
-        <p className="font-bold text-white mb-4">âï¸ Ajustes</p>
+        <p className="font-bold text-white mb-4">⚙️ Ajustes</p>
 
         {/* OMDB key */}
         <p className="text-xs font-semibold text-gray-400 mb-1">OMDB API Key</p>
@@ -1019,11 +1019,11 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
           <p className="text-xs text-gray-600 mb-2">Para guardar cambios desde cualquier dispositivo. Genera uno en github.com/settings/tokens con permiso <span className="text-gray-500 font-mono">repo</span>.</p>
           <div className="flex gap-2">
             <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500"/>
-            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 hover:bg-violet-700 text-violet-200'}`}>{tokenSaved?'â':'Guardar'}</button>
+            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 hover:bg-violet-700 text-violet-200'}`}>{tokenSaved?'✓':'Guardar'}</button>
           </div>
-          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-2">â³ Guardando en GitHub...</p>}
-          {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-2">â Guardado en GitHub</p>}
-          {ghStatus==='error'&&<p className="text-xs text-red-500 mt-2">â Error al guardar. Verifica el token.</p>}
+          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-2">⏳ Guardando en GitHub...</p>}
+          {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-2">✓ Guardado en GitHub</p>}
+          {ghStatus==='error'&&<p className="text-xs text-red-500 mt-2">✗ Error al guardar. Verifica el token.</p>}
           {!getToken()&&<p className="text-xs text-yellow-600 mt-2">Sin token: los cambios solo se guardan en este dispositivo.</p>}
         </div>
 
@@ -1031,34 +1031,34 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
           <p className="text-xs font-semibold text-gray-400 mb-1">GitHub Token</p>
           <div className="flex gap-2">
             <input type="password" value={tokenVal} onChange={e=>setTokenVal(e.target.value)} placeholder="ghp_..." className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm"/>
-            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 text-violet-200'}`}>{tokenSaved?'â':'Guardar'}</button>
+            <button onClick={handleSaveToken} className={`px-3 py-2 rounded-xl text-xs font-medium ${tokenSaved?'bg-green-800 text-green-300':'bg-violet-800 text-violet-200'}`}>{tokenSaved?'✓':'Guardar'}</button>
           </div>
-          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-1">â³ Guardando...</p>}
-          {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-1">â Guardado</p>}
-          {ghStatus==='error'&&<p className="text-xs text-red-500 mt-1">â Error</p>}
+          {ghStatus==='saving'&&<p className="text-xs text-gray-500 mt-1">⏳ Guardando...</p>}
+          {ghStatus==='saved'&&<p className="text-xs text-green-500 mt-1">✓ Guardado</p>}
+          {ghStatus==='error'&&<p className="text-xs text-red-500 mt-1">✗ Error</p>}
         </div>
           {syncPending.length===0?(
-            <p className="text-xs text-gray-600 py-2">â Todo sincronizado con Notion</p>
+            <p className="text-xs text-gray-600 py-2">✓ Todo sincronizado con Notion</p>
           ):(
             <div>
-              <p className="text-xs text-gray-500 mb-2">Estos tÃ­tulos fueron agregados en la app y aÃºn no estÃ¡n en tu Notion:</p>
+              <p className="text-xs text-gray-500 mb-2">Estos títulos fueron agregados en la app y aún no están en tu Notion:</p>
               <div className="bg-gray-800 rounded-xl p-3 mb-3 max-h-36 overflow-y-auto space-y-1">
                 {syncPending.map((i,idx)=>(
                   <div key={idx} className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500">{i.mediaType==='movies'?'ð¥':'ðº'}</span>
+                    <span className="text-xs text-gray-500">{i.mediaType==='movies'?'🎥':'📺'}</span>
                     <span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>
-                    {i.watched&&<span className="text-xs text-gray-600">{i.rating?.slice(0,4)||'â'}</span>}
+                    {i.watched&&<span className="text-xs text-gray-600">{i.rating?.slice(0,4)||'—'}</span>}
                   </div>
                 ))}
               </div>
               <div className="flex gap-2">
                 <button onClick={copyToClipboard}
                   className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${copied?'bg-green-800 text-green-300':'bg-violet-800 hover:bg-violet-700 text-violet-200'}`}>
-                  {copied?'â Copiado':'ð Copiar para Notion'}
+                  {copied?'✓ Copiado':'📋 Copiar para Notion'}
                 </button>
-                <button onClick={()=>{if(confirm('Â¿Marcar todos como sincronizados?'))onClearSync();}}
+                <button onClick={()=>{if(confirm('¿Marcar todos como sincronizados?'))onClearSync();}}
                   className="px-3 py-2 rounded-xl text-xs text-gray-500 hover:text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors">
-                  â Sync hecho
+                  ✓ Sync hecho
                 </button>
               </div>
             </div>
@@ -1074,9 +1074,9 @@ function SettingsModal({omdbKey, onChange, syncPending, onClearSync, onClose, gh
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ──────────────────────────────────────────────────────────────
    STATS PAGE
-ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+────────────────────────────────────────────────────────────── */
 function ratingNum(rating){
   if(!rating) return 0;
   return [...rating.matchAll(/\p{Emoji_Presentation}|\p{Extended_Pictographic}/gu)].length;
@@ -1144,15 +1144,15 @@ function StatsPage({data}){
     <div className="pb-20 space-y-6 pt-4">
       {/* overview cards */}
       <div className="grid grid-cols-2 gap-3">
-        <StatCard label="PelÃ­culas vistas" value={mw.length} sub={`${data.movies.toWatch.length} pendientes`}/>
+        <StatCard label="Películas vistas" value={mw.length} sub={`${data.movies.toWatch.length} pendientes`}/>
         <StatCard label="Series vistas" value={sw.length} sub={`${data.shows.toWatch.length} pendientes`}/>
-        <StatCard label="Score prom. pelÃ­culas" value={`${avgScore} / 5`} sub={`${rated.length} calificadas`}/>
+        <StatCard label="Score prom. películas" value={`${avgScore} / 5`} sub={`${rated.length} calificadas`}/>
         <StatCard label="Score prom. series" value={`${avgScoreS} / 5`} sub={`${ratedS.length} calificadas`}/>
       </div>
 
       {/* movies per year */}
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">ð¥ PelÃ­culas por aÃ±o</p>
+        <p className="text-xs font-semibold text-gray-400 mb-3">🎥 Películas por año</p>
         {years.map(y=>(
           <MiniBar key={y} label={y} count={(moviesByYear[y]||[]).length} max={maxM} color="bg-violet-700"/>
         ))}
@@ -1160,25 +1160,25 @@ function StatsPage({data}){
 
       {/* shows per year */}
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">ðº Series por aÃ±o</p>
+        <p className="text-xs font-semibold text-gray-400 mb-3">📺 Series por año</p>
         {years.map(y=>(
           <MiniBar key={y} label={y} count={(showsByYear[y]||[]).length} max={maxS} color="bg-teal-700"/>
         ))}
       </div>
 
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">â­ï¸ Scores â pelÃ­culas</p>
-        {scoreDist.reverse().map(({n,count})=>(<MiniBar key={n} label={'â'.repeat(n)} count={count} max={maxDist} color={n===5?'bg-violet-600':n===4?'bg-violet-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
+        <p className="text-xs font-semibold text-gray-400 mb-3">⭐️ Scores — películas</p>
+        {scoreDist.reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDist} color={n===5?'bg-violet-600':n===4?'bg-violet-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
       </div>
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">â­ï¸ Scores â series</p>
-        {[...scoreDistS].reverse().map(({n,count})=>(<MiniBar key={n} label={'â'.repeat(n)} count={count} max={maxDistS} color={n===5?'bg-teal-600':n===4?'bg-teal-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
+        <p className="text-xs font-semibold text-gray-400 mb-3">⭐️ Scores — series</p>
+        {[...scoreDistS].reverse().map(({n,count})=>(<MiniBar key={n} label={'★'.repeat(n)} count={count} max={maxDistS} color={n===5?'bg-teal-600':n===4?'bg-teal-700':n===3?'bg-gray-600':n===2?'bg-gray-700':'bg-gray-800'}/>))}
       </div>
 
       {/* top movies */}
       {top5M.length>0&&(
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-          <p className="text-xs font-semibold text-gray-400 mb-3">ð PelÃ­culas 5 estrellas ({top5M.length})</p>
+          <p className="text-xs font-semibold text-gray-400 mb-3">🏆 Películas 5 estrellas ({top5M.length})</p>
           <div className="space-y-1">
             {top5M.map(i=>(
               <div key={i.id} className="flex items-center gap-2">
@@ -1194,7 +1194,7 @@ function StatsPage({data}){
       {/* top shows */}
       {top5S.length>0&&(
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-          <p className="text-xs font-semibold text-gray-400 mb-3">ð Series 5 estrellas ({top5S.length})</p>
+          <p className="text-xs font-semibold text-gray-400 mb-3">🏆 Series 5 estrellas ({top5S.length})</p>
           <div className="space-y-1">
             {top5S.map(i=>(
               <div key={i.id} className="flex items-center gap-2">
@@ -1209,24 +1209,24 @@ function StatsPage({data}){
 
       {/* genre breakdown */}
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
-        <p className="text-xs font-semibold text-gray-400 mb-3">ð­ GÃ©neros en lista pendiente (pelÃ­culas)</p>
+        <p className="text-xs font-semibold text-gray-400 mb-3">🎭 Géneros en lista pendiente (películas)</p>
         {genreList.map(([g,c])=>(
           <MiniBar key={g} label={g} count={c} max={maxG} color="bg-indigo-700"/>
         ))}
       </div>
-      {(rmovies.length>0||rshows.length>0)&&(<div className="bg-gray-900 border border-gray-800 rounded-2xl p-4"><p className="text-xs font-semibold text-gray-400 mb-1">â¨ Para ver pronto</p><p className="text-xs text-gray-600 mb-2">GÃ©neros favoritos: {tg.join(', ')}</p>{rmovies.length>0&&(<div className="mb-2"><p className="text-xs text-gray-500 mb-1">ð¥ PelÃ­culas</p><div className="space-y-1">{rmovies.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}{rshows.length>0&&(<div><p className="text-xs text-gray-500 mb-1">ðº Series</p><div className="space-y-1">{rshows.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}</div>)}
+      {(rmovies.length>0||rshows.length>0)&&(<div className="bg-gray-900 border border-gray-800 rounded-2xl p-4"><p className="text-xs font-semibold text-gray-400 mb-1">✨ Para ver pronto</p><p className="text-xs text-gray-600 mb-2">Géneros favoritos: {tg.join(', ')}</p>{rmovies.length>0&&(<div className="mb-2"><p className="text-xs text-gray-500 mb-1">🎥 Películas</p><div className="space-y-1">{rmovies.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}{rshows.length>0&&(<div><p className="text-xs text-gray-500 mb-1">📺 Series</p><div className="space-y-1">{rshows.map(i=>(<div key={i.id} className="flex items-center gap-2"><span className="text-xs text-gray-300 flex-1 truncate">{i.title}</span>{i.genre&&<span className="text-xs text-gray-700">{i.genre}</span>}</div>))}</div></div>)}</div>)}
     </div>
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ──────────────────────────────────────────────────────────────
    MODALS
-ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+────────────────────────────────────────────────────────────── */
 function AddModal({onClose, onSave, onBatchSave, activeTab}){
   const [title,setTitle]=useState('');
   const [genre,setGenre]=useState('');
   const [watched,setWatched]=useState(false);
-  const [emoji,setEmoji]=useState('â­ï¸');
+  const [emoji,setEmoji]=useState('⭐️');
   const [count,setCount]=useState(3);
   const [notes,setNotes]=useState('');
   // screenshot OCR state
@@ -1246,7 +1246,7 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
   function extractTitles(text){
     const raw=text.split('\n')
       .map(l=>l.replace(/[|]/g,'I').trim())
-      .filter(l=>l.length>2 && /[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃÃÃÃÃÃ±ÃÃ¼Ã]/.test(l) && !/^[\d\s\W]+$/.test(l));
+      .filter(l=>l.length>2 && /[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]/.test(l) && !/^[\d\s\W]+$/.test(l));
     const seen=new Set();
     return raw.filter(l=>{const k=l.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;}).slice(0,8);
   }
@@ -1276,7 +1276,7 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
       setScanning(true);
       const collected=[];
       for(let i=0;i<files.length;i++){
-        setScanProgress(`Procesando ${i+1}/${files.length}â¦`);
+        setScanProgress(`Procesando ${i+1}/${files.length}…`);
         const url=URL.createObjectURL(files[i]);
         try{
           const result=await Tesseract.recognize(url,['eng','spa'],{logger:()=>{}});
@@ -1300,9 +1300,9 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
     <div className="modal-bg fixed inset-0 bg-black/70 flex items-end sm:items-center justify-center z-50 p-4">
       <div className="modal-box bg-gray-900 border border-gray-800 rounded-2xl p-5 w-full max-w-sm max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-bold text-white">{activeTab==='movies'?'ð¥ Agregar pelÃ­cula':'ðº Agregar serie'}</h2>
+          <h2 className="font-bold text-white">{activeTab==='movies'?'🎥 Agregar película':'📺 Agregar serie'}</h2>
           <label className="cursor-pointer flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-gray-300 transition-colors" title="Subir screenshot">
-            ð¸ Screenshot
+            📸 Screenshot
             <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleScreenshot}/>
           </label>
         </div>
@@ -1314,12 +1314,12 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
             {scanning&&(
               <div className="flex items-center gap-2 py-2">
                 <div className="w-3 h-3 rounded-full bg-violet-500 animate-pulse flex-shrink-0"/>
-                <p className="text-xs text-gray-500">Leyendo imagenâ¦</p>
+                <p className="text-xs text-gray-500">Leyendo imagen…</p>
               </div>
             )}
             {!scanning&&suggestions.length>0&&(
               <div>
-                <p className="text-xs text-gray-600 mb-1.5">Toca el tÃ­tulo detectado:</p>
+                <p className="text-xs text-gray-600 mb-1.5">Toca el título detectado:</p>
                 <div className="flex flex-wrap gap-1.5">
                   {suggestions.map((s,i)=>(
                     <button key={i} onClick={()=>setTitle(s)}
@@ -1330,7 +1330,7 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
                 </div>
               </div>
             )}
-            {!scanning&&suggestions.length===0&&<p className="text-xs text-gray-600">No se detectÃ³ texto â escrÃ­belo manualmente</p>}
+            {!scanning&&suggestions.length===0&&<p className="text-xs text-gray-600">No se detectó texto — escríbelo manualmente</p>}
           </div>
         )}
 
@@ -1338,12 +1338,12 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
         {!imgPreview&&scanning&&(
           <div className="flex items-center gap-2 py-3 mb-2">
             <div className="w-3 h-3 rounded-full bg-violet-500 animate-pulse flex-shrink-0"/>
-            <p className="text-xs text-gray-400">{scanProgress||'Procesandoâ¦'}</p>
+            <p className="text-xs text-gray-400">{scanProgress||'Procesando…'}</p>
           </div>
         )}
         {!imgPreview&&!scanning&&batchItems.length>0&&(
           <div className="mb-3">
-            <p className="text-xs text-gray-500 mb-2">TÃ­tulos detectados â selecciona cuÃ¡les agregar:</p>
+            <p className="text-xs text-gray-500 mb-2">Títulos detectados — selecciona cuáles agregar:</p>
             <div className="flex flex-col gap-1.5 mb-3">
               {batchItems.map((b,i)=>(
                 <label key={i} className="flex items-center gap-2.5 cursor-pointer group">
@@ -1359,17 +1359,17 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
             <button onClick={handleBatchSave}
               disabled={!batchItems.some(b=>b.selected&&b.title.trim())}
               className="w-full bg-violet-700 hover:bg-violet-600 disabled:opacity-40 text-white py-2 rounded-xl text-sm font-medium">
-              Agregar {batchItems.filter(b=>b.selected).length} tÃ­tulos
+              Agregar {batchItems.filter(b=>b.selected).length} títulos
             </button>
           </div>
         )}
 
         <div className="flex flex-col gap-3">
           <input autoFocus value={title} onChange={e=>setTitle(e.target.value)} onKeyDown={e=>e.key==='Enter'&&save()}
-            placeholder="TÃ­tulo" className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 w-full"/>
+            placeholder="Título" className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 w-full"/>
           <select value={genre} onChange={e=>setGenre(e.target.value)}
             className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500">
-            <option value="">Sin gÃ©nero</option>
+            <option value="">Sin género</option>
             {genres.map(g=><option key={g} value={g}>{g}</option>)}
           </select>
           <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer select-none">
@@ -1404,7 +1404,7 @@ function AddModal({onClose, onSave, onBatchSave, activeTab}){
 }
 
 function RateModal({item, onClose, onSave}){
-  const [emoji,setEmoji]=useState('â­ï¸');
+  const [emoji,setEmoji]=useState('⭐️');
   const [count,setCount]=useState(3);
   const [notes,setNotes]=useState(item.notes||'');
   useEffect(()=>{
@@ -1429,7 +1429,7 @@ function RateModal({item, onClose, onSave}){
           ))}
         </div>
         <p className="text-center text-base mb-3">{emoji.repeat(count)}</p>
-        <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Tu reseÃ±a corta..."
+        <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Tu reseña corta..."
           className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 resize-none h-14 mb-4"/>
         <div className="flex gap-2">
           <button onClick={onClose} className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 py-2 rounded-xl text-sm">Cancelar</button>
@@ -1440,9 +1440,9 @@ function RateModal({item, onClose, onSave}){
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+/* ──────────────────────────────────────────────────────────────
    APP
-ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+────────────────────────────────────────────────────────────── */
 function App(){
   const [data,setData]=useState(loadData);
   const [tab,setTab]=useState('movies');
@@ -1512,7 +1512,7 @@ function App(){
   const yearGroups=useMemo(()=>{
     if(view!=='watched'||sort!=='default') return null;
     const map={};
-    filtered.forEach(item=>{const y=item.year||'Sin aÃ±o';(map[y]=map[y]||[]).push(item);});
+    filtered.forEach(item=>{const y=item.year||'Sin año';(map[y]=map[y]||[]).push(item);});
     return Object.entries(map).sort((a,b)=>Number(b[0])-Number(a[0]));
   },[filtered,view,sort]);
 
@@ -1553,28 +1553,28 @@ function App(){
 
   return (
     <div className="min-h-screen" style={{background:'#09090f'}}>
-      {/* ââ HEADER ââ */}
+      {/* ── HEADER ── */}
       <div className="sticky top-0 z-40 border-b border-gray-900" style={{background:'#09090f'}}>
         <div className="max-w-3xl mx-auto px-4 pt-5 pb-0">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-lg font-bold text-white leading-none mb-1">Mel's Watch List</h1>
               <p className="text-xs text-gray-600">
-                ð¥ <span className="text-violet-400">{data.movies.watched.length}</span> vistas Â· <span className="text-gray-500">{data.movies.toWatch.length}</span> pendientes
-                &nbsp;Â·&nbsp;
-                ðº <span className="text-violet-400">{data.shows.watched.length}</span> vistas Â· <span className="text-gray-500">{data.shows.toWatch.length}</span> pendientes
+                🎥 <span className="text-violet-400">{data.movies.watched.length}</span> vistas · <span className="text-gray-500">{data.movies.toWatch.length}</span> pendientes
+                &nbsp;·&nbsp;
+                📺 <span className="text-violet-400">{data.shows.watched.length}</span> vistas · <span className="text-gray-500">{data.shows.toWatch.length}</span> pendientes
               </p>
             </div>
             <div className="flex items-center gap-2">
-              {ghStatus==='saving'&&<span className="text-xs text-gray-500 animate-pulse">â³</span>}
-              {ghStatus==='saved'&&<span className="text-xs text-green-500">â</span>}
-              {ghStatus==='error'&&<span className="text-xs text-red-500">â</span>}
+              {ghStatus==='saving'&&<span className="text-xs text-gray-500 animate-pulse">⏳</span>}
+              {ghStatus==='saved'&&<span className="text-xs text-green-500">✓</span>}
+              {ghStatus==='error'&&<span className="text-xs text-red-500">✗</span>}
               <button onClick={()=>setShowSettings(true)} title="Ajustes"
                 className="relative text-gray-600 hover:text-gray-400 px-2 py-1.5 rounded-xl text-sm transition-colors">
-                âï¸
+                ⚙️
                 {syncPending.length>0&&<span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-violet-500 rounded-full text-white text-center leading-3.5 font-bold" style={{fontSize:'8px',lineHeight:'14px'}}>{syncPending.length}</span>}
               </button>
-              {!isEditor&&<span className="text-xs text-gray-700 px-2">ð Solo vista</span>}
+              {!isEditor&&<span className="text-xs text-gray-700 px-2">👁 Solo vista</span>}
               {!isStats&&isEditor&&<button onClick={()=>setShowAdd(true)}
                 className="bg-violet-700 hover:bg-violet-600 text-white px-3 py-1.5 rounded-xl text-sm font-medium transition-colors flex items-center gap-1">
                 <span className="text-base leading-none">+</span> Agregar
@@ -1583,7 +1583,7 @@ function App(){
           </div>
           {/* Main tabs */}
           <div className="flex gap-6 border-b border-gray-800">
-            {[['movies','ð¥ PelÃ­culas'],['shows','ðº Series'],['stats','ð Stats']].map(([t,label])=>(
+            {[['movies','🎥 Películas'],['shows','📺 Series'],['stats','📊 Stats']].map(([t,label])=>(
               <button key={t} onClick={()=>{setTab(t);setView('toWatch');setSearch('');}}
                 className={`pb-2 text-sm font-medium transition-colors ${tab===t?'tab-active':'text-gray-600 hover:text-gray-300'}`}>
                 {label}
@@ -1595,14 +1595,14 @@ function App(){
 
       <div className="max-w-3xl mx-auto px-4 pt-4">
 
-        {/* ââ STATS PAGE ââ */}
+        {/* ── STATS PAGE ── */}
         {isStats&&<StatsPage data={data}/>}
 
-        {/* ââ MOVIES / SHOWS CONTENT ââ */}
+        {/* ── MOVIES / SHOWS CONTENT ── */}
         {!isStats&&<>
           {/* Sub-view toggle */}
           <div className="flex gap-2 mb-4">
-            {[['toWatch','ð Quiero ver',twCount],['watched','â Vistas',wCount]].map(([v,label,c])=>(
+            {[['toWatch','🔖 Quiero ver',twCount],['watched','✅ Vistas',wCount]].map(([v,label,c])=>(
               <button key={v} onClick={()=>setView(v)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${view===v?'chip-active text-violet-200':'bg-gray-900 text-gray-500 hover:bg-gray-800'}`}>
                 {label} <span className="opacity-60">{c}</span>
@@ -1612,11 +1612,11 @@ function App(){
 
           {/* Search */}
           <div className="relative mb-3">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs">ð</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs">🔍</span>
             <input value={search} onChange={e=>setSearch(e.target.value)}
-              placeholder={`Buscar ${isMovies?'pelÃ­culas':'series'}...`}
+              placeholder={`Buscar ${isMovies?'películas':'series'}...`}
               className="w-full bg-gray-900 border border-gray-800 rounded-xl pl-8 pr-8 py-2 text-sm text-white placeholder-gray-700 focus:border-violet-700"/>
-            {search&&<button onClick={()=>setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-400 text-xs">â</button>}
+            {search&&<button onClick={()=>setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-400 text-xs">✕</button>}
           </div>
 
           {/* Genre chips */}
@@ -1631,7 +1631,7 @@ function App(){
 
           {/* Sort chips */}
           <div className="flex gap-1.5 overflow-x-auto scrollbar-hide pb-1 mb-1">
-            {[['default',view==='watched'?'ð AÃ±o':'Reciente'],['az','AâZ'],['za','ZâA'],...(view==='watched'?[['score','â­ Score']]:[])]
+            {[['default',view==='watched'?'📅 Año':'Reciente'],['az','A→Z'],['za','Z→A'],...(view==='watched'?[['score','⭐ Score']]:[])]
               .map(([s,label])=>(
                 <button key={s} onClick={()=>setSort(s)}
                   className={`flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${sort===s?'chip-active text-violet-200':'bg-gray-900 text-gray-600 hover:bg-gray-800 hover:text-gray-300'}`}>
@@ -1643,13 +1643,13 @@ function App(){
           {/* Result count */}
           <p className="text-xs text-gray-700 px-3 mb-1">
             {filtered.length} {filtered.length===1?'resultado':'resultados'}
-            {search&&<> Â· "<span className="text-gray-500">{search}</span>"</>}
+            {search&&<> · "<span className="text-gray-500">{search}</span>"</>}
           </p>
 
-          {/* ââ LIST ââ */}
+          {/* ── LIST ── */}
           {filtered.length===0?(
             <div className="text-center py-16 text-gray-700">
-              <div className="text-3xl mb-2">{isMovies?'ð¬':'ðº'}</div>
+              <div className="text-3xl mb-2">{isMovies?'🎬':'📺'}</div>
               <p className="text-sm">Sin resultados</p>
             </div>
           ) : view==='watched' && !search && genre==='Todos' && yearGroups ? (
@@ -1667,7 +1667,7 @@ function App(){
             <div className="pb-20">
               {view==='watched'&&(search||genre!=='Todos'||sort!=='default')&&(
                 <p className="text-xs text-gray-700 px-3 mb-1 italic">
-                  {sort==='score'?'Ordenado por score':sort==='az'?'Ordenado AâZ':sort==='za'?'Ordenado ZâA':'Resultados de todos los aÃ±os'}
+                  {sort==='score'?'Ordenado por score':sort==='az'?'Ordenado A→Z':sort==='za'?'Ordenado Z→A':'Resultados de todos los años'}
                 </p>
               )}
               {filtered.map(item=>(
