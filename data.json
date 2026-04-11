@@ -72,6 +72,13 @@
         "notes": ""
       },
       {
+        "id": "u-lvv948o",
+        "title": "The drama",
+        "genre": "Comedy",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-n7a8o3b",
         "title": "The plague",
         "genre": "Thriller",
@@ -1554,14 +1561,6 @@
       }
     ],
     "watched": [
-      {
-        "id": "u-lvv948o",
-        "title": "The drama",
-        "genre": "Comedy",
-        "rating": "⭐️⭐️⭐️⭐️",
-        "notes": "",
-        "year": 2026
-      },
       {
         "id": "w-m-1",
         "year": 2020,
