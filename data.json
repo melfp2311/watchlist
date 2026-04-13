@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-4zwej4z",
+        "title": "Amarga navidad",
+        "genre": "Comedy",
+        "rating": "",
+        "notes": "Almodovar"
+      },
+      {
         "id": "u-aevsd5l",
         "title": "Hokum",
         "genre": "Horror",
