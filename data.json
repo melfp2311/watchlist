@@ -2,272 +2,6 @@
   "movies": {
     "toWatch": [
       {
-        "id": "u-yjxzwgi",
-        "title": "Mystic river",
-        "genre": "Crime",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-mdl19k4",
-        "title": "Coherence",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-lzxv0jf",
-        "title": "The invite",
-        "genre": "Comedy",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-c5bzq7p",
-        "title": "No country for old men",
-        "genre": "Crime",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-aeo652g",
-        "title": "High fidelity",
-        "genre": "Romance",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-4ef87n3",
-        "title": "If I had legs I’d kick you",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-phncwd6",
-        "title": "The secret agent",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-v90rf3d",
-        "title": "Hamnet",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-ks07tal",
-        "title": "Stepmom",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-ix6rgui",
-        "title": "The squid and the whale",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-n7a8o3b",
-        "title": "The plague",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-0l0yjmo",
-        "title": "Theater camp",
-        "genre": "Comedy",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-qomc058",
-        "title": "The illusionist",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-ckyj4lm",
-        "title": "Steve",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-274myw0",
-        "title": "Song sung blue",
-        "genre": "Musical",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-f352cw5",
-        "title": "Magnolia",
-        "genre": "Drama",
-        "rating": "",
-        "notes": "PTA"
-      },
-      {
-        "id": "u-a1dc2j7",
-        "title": "All of you",
-        "genre": "Romance",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-6t2gwfq",
-        "title": "Lurker",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-ucrhgit",
-        "title": "A bigger splash",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-o4nzjvw",
-        "title": "Jay Kelly",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-gdacpic",
-        "title": "It was just an accident",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-88xuxnv",
-        "title": "Blue moon",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-h9nygj3",
-        "title": "Anniversary",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-p3owukh",
-        "title": "Splitsville",
-        "genre": "Comedy",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-y87bp6z",
-        "title": "The Lost Bus",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-6wp5p84",
-        "title": "The story of sound",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-dg2k13d",
-        "title": "Mother Mary",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-7n5y869",
-        "title": "Amarga Navidad",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-88mwgay",
-        "title": "Hokum",
-        "genre": "Horror",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-qm3xvi3",
-        "title": "Good time",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-eldoha7",
-        "title": "Insomnia",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-lic8fmy",
-        "title": "Project hail mary",
-        "genre": "Sci-Fi",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-4fzxnx1",
-        "title": "The end of oak street",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-zruzwg9",
-        "title": "Mullholand drive",
-        "genre": "Horror",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-v4cwte0",
-        "title": "Outcome",
-        "genre": "Comedy",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-kz522pv",
-        "title": "Sentimental Value",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-i2u2ncm",
-        "title": "No other choice",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "u-gmrqffi",
-        "title": "Alps",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "tw-m-12",
         "title": "Fantastic Four",
         "genre": "Action"
@@ -1560,14 +1294,6 @@
         "title": "Sorry, Baby",
         "rating": "⭐️⭐️⭐️",
         "notes": ""
-      },
-      {
-        "id": "u-lvv948o",
-        "title": "The drama",
-        "genre": "Comedy",
-        "rating": "⭐️⭐️⭐️⭐️",
-        "notes": "",
-        "year": 2026
       },
       {
         "id": "w-m-1",
@@ -3254,13 +2980,6 @@
   "shows": {
     "toWatch": [
       {
-        "id": "u-d8simjv",
-        "title": "WIDOW'S BAY",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "tw-s-1",
         "title": "Atlanta",
         "genre": "Drama"
@@ -3572,13 +3291,6 @@
       }
     ],
     "watched": [
-      {
-        "id": "w-s-129",
-        "year": 2026,
-        "title": "Something Very Bad Is Going to Happen",
-        "rating": "😈😈😈",
-        "notes": ""
-      },
       {
         "id": "w-s-1",
         "year": 2020,
@@ -4542,6 +4254,13 @@
         "id": "w-s-128",
         "year": 2026,
         "title": "Rooster",
+        "rating": "",
+        "notes": ""
+      },
+      {
+        "id": "w-s-129",
+        "year": 2026,
+        "title": "Something Very Bad Is Going to Happen",
         "rating": "",
         "notes": ""
       },
