@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-xtoul96",
+        "title": "It was just an accident",
+        "genre": "Thriller",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-ye7w4o4",
         "title": "Anniversary",
         "genre": "Thriller",
