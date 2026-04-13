@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-gdefh34",
+        "title": "The illusionist",
+        "genre": "Thriller",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-utehyh4",
         "title": "Animal farm",
         "genre": "Comedy",
