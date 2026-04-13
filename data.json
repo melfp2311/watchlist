@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-algt0xc",
+        "title": "Blue Moon",
+        "genre": "Drama",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-rdbckbt",
         "title": "Splitsville",
         "genre": "Comedy",
