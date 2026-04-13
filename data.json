@@ -3573,6 +3573,13 @@
     ],
     "watched": [
       {
+        "id": "w-s-129",
+        "year": 2026,
+        "title": "Something Very Bad Is Going to Happen",
+        "rating": "😈😈😈",
+        "notes": ""
+      },
+      {
         "id": "w-s-1",
         "year": 2020,
         "title": "Modern Love",
@@ -4535,13 +4542,6 @@
         "id": "w-s-128",
         "year": 2026,
         "title": "Rooster",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "w-s-129",
-        "year": 2026,
-        "title": "Something Very Bad Is Going to Happen",
         "rating": "",
         "notes": ""
       },
