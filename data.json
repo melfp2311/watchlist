@@ -2,13 +2,6 @@
   "movies": {
     "toWatch": [
       {
-        "id": "u-ck5pjsu",
-        "title": "If i had legs I’d kick you",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-j9nj8pd",
         "title": "History of sound",
         "genre": "Drama",
@@ -1547,6 +1540,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-ck5pjsu",
+        "title": "If i had legs I’d kick you",
+        "genre": "Drama",
+        "rating": "⭐️⭐️",
+        "notes": "",
+        "year": 2026
+      },
       {
         "id": "w-m-241",
         "year": 2026,
