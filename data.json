@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-k7c872q",
+        "title": "The dink",
+        "genre": "Comedy",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-dg6av45",
         "title": "A bigger splash",
         "genre": "Crime",
