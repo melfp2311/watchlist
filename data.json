@@ -2,6 +2,13 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-csdwr68",
+        "title": "Mullholand drive",
+        "genre": "Horror",
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-e1qfv6k",
         "title": "Alps",
         "genre": "Thriller",
