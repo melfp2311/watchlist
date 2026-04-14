@@ -3559,6 +3559,13 @@
     ],
     "watched": [
       {
+        "id": "w-s-122",
+        "year": 2026,
+        "title": "Love Story",
+        "rating": "⭐⭐⭐",
+        "notes": ""
+      },
+      {
         "id": "w-s-129",
         "year": 2026,
         "title": "Something Very Bad Is Going to Happen",
@@ -4479,13 +4486,6 @@
         "id": "w-s-121",
         "year": 2026,
         "title": "Long Bright River",
-        "rating": "⭐️⭐️⭐️",
-        "notes": ""
-      },
-      {
-        "id": "w-s-122",
-        "year": 2026,
-        "title": "Love Story",
         "rating": "⭐️⭐️⭐️",
         "notes": ""
       },
