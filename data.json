@@ -3320,7 +3320,8 @@
         "year": 2020,
         "title": "Rick and Morty",
         "rating": "⭐️⭐️⭐️⭐️⭐️",
-        "notes": ""
+        "notes": "",
+        "genre": "Animation"
       },
       {
         "id": "w-s-7",
