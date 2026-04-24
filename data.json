@@ -3252,7 +3252,8 @@
         "year": 2025,
         "title": "Severance s2",
         "rating": "⭐⭐⭐⭐⭐",
-        "notes": ""
+        "notes": "",
+        "genre": "Thriller"
       },
       {
         "id": "w-s-125",
@@ -4190,7 +4191,8 @@
         "year": 2026,
         "title": "Long Bright River",
         "rating": "⭐️⭐️⭐️",
-        "notes": ""
+        "notes": "",
+        "genre": "Crime"
       },
       {
         "id": "w-s-123",
