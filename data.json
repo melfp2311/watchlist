@@ -3238,7 +3238,334 @@
     ]
   },
   "shows": {
+    "toWatch": [
+      {
+        "id": "u-wcins9l",
+        "title": "Widows bay",
+        "genre": "Thriller",
+        "rating": "",
+        "notes": ""
+      },
+      {
+        "id": "tw-s-1",
+        "title": "Atlanta",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-2",
+        "title": "Berlin ER",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-3",
+        "title": "East of Eden",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-4",
+        "title": "First Day on Earth",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-5",
+        "title": "Halston",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-6",
+        "title": "High Fidelity",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-7",
+        "title": "Industry ⭐️",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-8",
+        "title": "Julia",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-9",
+        "title": "Mad Men ⭐️",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-10",
+        "title": "Nada ⭐️",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-11",
+        "title": "Ozark 🏆",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-12",
+        "title": "Scenes from a Marriage",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-13",
+        "title": "Slow Horses ⭐️",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-14",
+        "title": "The New Look",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-15",
+        "title": "The Wilds",
+        "genre": "Drama"
+      },
+      {
+        "id": "tw-s-16",
+        "title": "Moonknight",
+        "genre": "Action"
+      },
+      {
+        "id": "tw-s-17",
+        "title": "Mr. & Mrs. Smith",
+        "genre": "Action"
+      },
+      {
+        "id": "tw-s-18",
+        "title": "Shogun",
+        "genre": "Action"
+      },
+      {
+        "id": "tw-s-19",
+        "title": "Delicious in Dungeon",
+        "genre": "Animation"
+      },
+      {
+        "id": "tw-s-20",
+        "title": "The Midnight Gospel",
+        "genre": "Animation"
+      },
+      {
+        "id": "tw-s-21",
+        "title": "Undone ★★★★★",
+        "genre": "Animation"
+      },
+      {
+        "id": "tw-s-22",
+        "title": "Wolfwalkers",
+        "genre": "Animation"
+      },
+      {
+        "id": "tw-s-23",
+        "title": "Black Bird",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-24",
+        "title": "Cape Fear",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-25",
+        "title": "CB Strike",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-26",
+        "title": "Dark Matter",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-27",
+        "title": "Landscapers",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-28",
+        "title": "Nine Perfect Strangers",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-29",
+        "title": "The Outsider",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-30",
+        "title": "Unbelievable",
+        "genre": "Crime"
+      },
+      {
+        "id": "tw-s-31",
+        "title": "Anthony Bourdain: No Reservations",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-32",
+        "title": "Carême",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-33",
+        "title": "1971: The Year That Music Changed Everything",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-34",
+        "title": "Eater's Guide to the World",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-35",
+        "title": "Faces Places",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-36",
+        "title": "Fresh, Fried & Crispy",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-37",
+        "title": "Fat Sick and Nearly Dead",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-38",
+        "title": "Heal",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-39",
+        "title": "Nonnas",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-40",
+        "title": "Sin límites",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-41",
+        "title": "Sugar vs Fat",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-42",
+        "title": "The Kids Menu",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-43",
+        "title": "Tucci in Italy",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-44",
+        "title": "Omnivore ⭐️",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-45",
+        "title": "One Strange Rock",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-46",
+        "title": "Streetfood Latinoamérica",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-47",
+        "title": "The Crime of the Century",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-48",
+        "title": "The Jinx",
+        "genre": "Documentary"
+      },
+      {
+        "id": "tw-s-49",
+        "title": "Marianne",
+        "genre": "Horror"
+      },
+      {
+        "id": "tw-s-50",
+        "title": "Extraordinary Tales",
+        "genre": "Horror"
+      },
+      {
+        "id": "tw-s-51",
+        "title": "Breeders",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-52",
+        "title": "Enlightened",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-53",
+        "title": "Laid",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-54",
+        "title": "Our Flag Means Death",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-55",
+        "title": "Parks and Rec",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-56",
+        "title": "Running Point",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-57",
+        "title": "The Bold Type",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-58",
+        "title": "The Curse",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-59",
+        "title": "The Four Seasons",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-60",
+        "title": "The Great 🏆",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-61",
+        "title": "Trying",
+        "genre": "Comedy"
+      },
+      {
+        "id": "tw-s-62",
+        "title": "30 Rock",
+        "genre": "Comedy"
+      }
+    ],
     "watched": [
+      {
+        "id": "w-s-128",
+        "year": 2026,
+        "title": "Rooster",
+        "rating": "⭐️⭐️⭐️⭐️",
+        "notes": "",
+        "genre": "Comedy"
+      },
       {
         "id": "u-gro5fsa",
         "title": "The testaments",
@@ -4250,338 +4577,11 @@
         "genre": "Drama"
       },
       {
-        "id": "w-s-128",
-        "year": 2026,
-        "title": "Rooster",
-        "rating": "",
-        "notes": "",
-        "genre": "Comedy"
-      },
-      {
         "id": "w-s-130",
         "year": 2026,
         "title": "Imperfect Women",
         "rating": "",
         "notes": ""
-      }
-    ],
-    "toWatch": [
-      {
-        "id": "u-wcins9l",
-        "title": "Widows bay",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
-        "id": "tw-s-1",
-        "title": "Atlanta",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-2",
-        "title": "Berlin ER",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-3",
-        "title": "East of Eden",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-4",
-        "title": "First Day on Earth",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-5",
-        "title": "Halston",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-6",
-        "title": "High Fidelity",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-7",
-        "title": "Industry ⭐️",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-8",
-        "title": "Julia",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-9",
-        "title": "Mad Men ⭐️",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-10",
-        "title": "Nada ⭐️",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-11",
-        "title": "Ozark 🏆",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-12",
-        "title": "Scenes from a Marriage",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-13",
-        "title": "Slow Horses ⭐️",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-14",
-        "title": "The New Look",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-15",
-        "title": "The Wilds",
-        "genre": "Drama"
-      },
-      {
-        "id": "tw-s-16",
-        "title": "Moonknight",
-        "genre": "Action"
-      },
-      {
-        "id": "tw-s-17",
-        "title": "Mr. & Mrs. Smith",
-        "genre": "Action"
-      },
-      {
-        "id": "tw-s-18",
-        "title": "Shogun",
-        "genre": "Action"
-      },
-      {
-        "id": "tw-s-19",
-        "title": "Delicious in Dungeon",
-        "genre": "Animation"
-      },
-      {
-        "id": "tw-s-20",
-        "title": "The Midnight Gospel",
-        "genre": "Animation"
-      },
-      {
-        "id": "tw-s-21",
-        "title": "Undone ★★★★★",
-        "genre": "Animation"
-      },
-      {
-        "id": "tw-s-22",
-        "title": "Wolfwalkers",
-        "genre": "Animation"
-      },
-      {
-        "id": "tw-s-23",
-        "title": "Black Bird",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-24",
-        "title": "Cape Fear",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-25",
-        "title": "CB Strike",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-26",
-        "title": "Dark Matter",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-27",
-        "title": "Landscapers",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-28",
-        "title": "Nine Perfect Strangers",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-29",
-        "title": "The Outsider",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-30",
-        "title": "Unbelievable",
-        "genre": "Crime"
-      },
-      {
-        "id": "tw-s-31",
-        "title": "Anthony Bourdain: No Reservations",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-32",
-        "title": "Carême",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-33",
-        "title": "1971: The Year That Music Changed Everything",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-34",
-        "title": "Eater's Guide to the World",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-35",
-        "title": "Faces Places",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-36",
-        "title": "Fresh, Fried & Crispy",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-37",
-        "title": "Fat Sick and Nearly Dead",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-38",
-        "title": "Heal",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-39",
-        "title": "Nonnas",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-40",
-        "title": "Sin límites",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-41",
-        "title": "Sugar vs Fat",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-42",
-        "title": "The Kids Menu",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-43",
-        "title": "Tucci in Italy",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-44",
-        "title": "Omnivore ⭐️",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-45",
-        "title": "One Strange Rock",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-46",
-        "title": "Streetfood Latinoamérica",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-47",
-        "title": "The Crime of the Century",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-48",
-        "title": "The Jinx",
-        "genre": "Documentary"
-      },
-      {
-        "id": "tw-s-49",
-        "title": "Marianne",
-        "genre": "Horror"
-      },
-      {
-        "id": "tw-s-50",
-        "title": "Extraordinary Tales",
-        "genre": "Horror"
-      },
-      {
-        "id": "tw-s-51",
-        "title": "Breeders",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-52",
-        "title": "Enlightened",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-53",
-        "title": "Laid",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-54",
-        "title": "Our Flag Means Death",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-55",
-        "title": "Parks and Rec",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-56",
-        "title": "Running Point",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-57",
-        "title": "The Bold Type",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-58",
-        "title": "The Curse",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-59",
-        "title": "The Four Seasons",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-60",
-        "title": "The Great 🏆",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-61",
-        "title": "Trying",
-        "genre": "Comedy"
-      },
-      {
-        "id": "tw-s-62",
-        "title": "30 Rock",
-        "genre": "Comedy"
       }
     ]
   }
