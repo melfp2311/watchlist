@@ -4174,14 +4174,16 @@
         "year": 2026,
         "title": "Knight of the Seven Kingdoms",
         "rating": "⭐️⭐️⭐️⭐️⭐️",
-        "notes": ""
+        "notes": "",
+        "genre": "Comedy"
       },
       {
         "id": "w-s-120",
         "year": 2026,
         "title": "The Pitt",
         "rating": "⭐️⭐️⭐️⭐️",
-        "notes": ""
+        "notes": "",
+        "genre": "Drama"
       },
       {
         "id": "w-s-121",
