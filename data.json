@@ -2,6 +2,14 @@
   "movies": {
     "watched": [
       {
+        "id": "u-yjj003n",
+        "title": "The devil wears prada 2",
+        "genre": "Comedy",
+        "year": 2026,
+        "rating": "⭐️⭐️⭐️",
+        "notes": ""
+      },
+      {
         "id": "u-ck5pjsu",
         "title": "If i had legs I’d kick you",
         "genre": "Drama",
