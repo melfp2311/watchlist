@@ -2,6 +2,14 @@
   "movies": {
     "watched": [
       {
+        "id": "u-957v4mc",
+        "title": "The housemaid",
+        "genre": "Thriller",
+        "year": 2026,
+        "rating": "⭐️⭐️⭐️",
+        "notes": ""
+      },
+      {
         "id": "u-yjj003n",
         "title": "The devil wears prada 2",
         "genre": "Comedy",
