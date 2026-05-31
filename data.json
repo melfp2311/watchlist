@@ -2,6 +2,14 @@
   "movies": {
     "watched": [
       {
+        "id": "u-44m6ljx",
+        "title": "The Thursday murder club",
+        "genre": "Comedy",
+        "year": 2026,
+        "rating": "❤️‍🩹❤️‍🩹",
+        "notes": ""
+      },
+      {
         "id": "u-957v4mc",
         "title": "The housemaid",
         "genre": "Thriller",
