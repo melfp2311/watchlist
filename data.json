@@ -3362,14 +3362,6 @@
         "notes": ""
       },
       {
-        "id": "u-59gbnlk",
-        "title": "Cape fear",
-        "genre": "Thriller",
-        "year": null,
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-wcins9l",
         "title": "Widows bay",
         "genre": "Thriller",
@@ -3688,6 +3680,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-59gbnlk",
+        "title": "Cape fear",
+        "genre": "Thriller",
+        "year": 2026,
+        "rating": "⭐️⭐️⭐️⭐️",
+        "notes": ""
+      },
       {
         "id": "u-di83jsm",
         "title": "Euphoria 3",
