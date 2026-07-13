@@ -2,6 +2,14 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-y1arf4j",
+        "title": "Digger",
+        "genre": "Comedy",
+        "year": null,
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-8yefdet",
         "title": "The invite",
         "genre": "Comedy",
