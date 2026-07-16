@@ -10,14 +10,6 @@
         "notes": ""
       },
       {
-        "id": "u-8yefdet",
-        "title": "The invite",
-        "genre": "Comedy",
-        "year": null,
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-ljg4vpm",
         "title": "El regreso del gato",
         "genre": "Drama",
@@ -1620,6 +1612,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-8yefdet",
+        "title": "The invite",
+        "genre": "Comedy",
+        "year": 2026,
+        "rating": "⭐️⭐️⭐️⭐️",
+        "notes": ""
+      },
       {
         "id": "u-xq5y9ct",
         "title": "The Sheep Detectives",
