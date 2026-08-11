@@ -3578,13 +3578,6 @@
         "notes": ""
       },
       {
-        "id": "u-wcins9l",
-        "title": "Widows bay",
-        "genre": "Thriller",
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "tw-s-1",
         "title": "Atlanta",
         "genre": "Drama"
@@ -3896,6 +3889,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-wcins9l",
+        "title": "Widows bay",
+        "genre": "Thriller",
+        "rating": "⭐️⭐️⭐️⭐️",
+        "notes": "",
+        "year": 2026
+      },
       {
         "id": "u-2adsbas",
         "title": "House of the dragon s3",
