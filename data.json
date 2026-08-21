@@ -221,13 +221,6 @@
         "notes": ""
       },
       {
-        "id": "u-jiv62yl",
-        "title": "The stepmom",
-        "genre": "Drama",
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-6fd1bb1",
         "title": "Secret agent",
         "genre": "Drama",
@@ -1668,6 +1661,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-jiv62yl",
+        "title": "The stepmom",
+        "genre": "Drama",
+        "rating": "❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹",
+        "notes": "",
+        "year": 2026
+      },
       {
         "id": "u-d6ho55s",
         "title": "The Odyssey",
