@@ -3460,14 +3460,6 @@
         "notes": ""
       },
       {
-        "id": "u-k6iyhvl",
-        "title": "DTF st louis",
-        "genre": "Comedy",
-        "year": null,
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-kzvmk0y",
         "title": "All her fault",
         "genre": "Crime",
@@ -3886,6 +3878,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-k6iyhvl",
+        "title": "DTF st louis",
+        "genre": "Comedy",
+        "year": 2026,
+        "rating": "⭐️⭐️⭐️⭐️",
+        "notes": ""
+      },
       {
         "id": "u-wcins9l",
         "title": "Widows bay",
