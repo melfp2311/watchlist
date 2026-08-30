@@ -82,14 +82,6 @@
         "notes": ""
       },
       {
-        "id": "u-1ryk7zr",
-        "title": "The Whisper Man",
-        "genre": "Thriller",
-        "year": null,
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-syw2n6q",
         "title": "Meet joe black",
         "genre": "Drama",
@@ -1654,6 +1646,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-1ryk7zr",
+        "title": "The Whisper Man",
+        "genre": "Thriller",
+        "year": 2026,
+        "rating": "⭐️⭐️",
+        "notes": ""
+      },
       {
         "id": "u-jiv62yl",
         "title": "The stepmom",
