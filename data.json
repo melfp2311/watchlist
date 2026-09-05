@@ -234,13 +234,6 @@
         "notes": ""
       },
       {
-        "id": "u-7jz4y6p",
-        "title": "No country for old men",
-        "genre": "Crime",
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-mzfzkhl",
         "title": "Coherence",
         "genre": "Sci-Fi",
@@ -1646,6 +1639,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-7jz4y6p",
+        "title": "No country for old men",
+        "genre": "Crime",
+        "rating": "⭐️⭐️⭐️⭐️",
+        "notes": "",
+        "year": 2026
+      },
       {
         "id": "u-1ryk7zr",
         "title": "The Whisper Man",
