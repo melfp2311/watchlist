@@ -276,13 +276,6 @@
         "notes": "Nolan"
       },
       {
-        "id": "u-55v5c02",
-        "title": "Project hail mary",
-        "genre": "Sci-Fi",
-        "rating": "",
-        "notes": ""
-      },
-      {
         "id": "u-r4wijx5",
         "title": "The end of oak street",
         "genre": "Thriller",
@@ -1639,6 +1632,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "u-55v5c02",
+        "title": "Project hail mary",
+        "genre": "Sci-Fi",
+        "rating": "⭐️⭐️⭐️",
+        "notes": "",
+        "year": 2026
+      },
       {
         "id": "u-7jz4y6p",
         "title": "No country for old men",
