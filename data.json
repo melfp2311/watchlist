@@ -1051,11 +1051,6 @@
         "genre": "Thriller"
       },
       {
-        "id": "tw-m-149",
-        "title": "Coraline",
-        "genre": "Thriller"
-      },
-      {
         "id": "tw-m-150",
         "title": "Eden",
         "genre": "Thriller"
@@ -1632,6 +1627,14 @@
       }
     ],
     "watched": [
+      {
+        "id": "tw-m-149",
+        "title": "Coraline",
+        "genre": "Thriller",
+        "rating": "⭐️⭐️⭐️",
+        "notes": "",
+        "year": 2026
+      },
       {
         "id": "u-55v5c02",
         "title": "Project hail mary",
