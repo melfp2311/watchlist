@@ -2,6 +2,14 @@
   "movies": {
     "toWatch": [
       {
+        "id": "u-0t33qo1",
+        "title": "The usual suspects",
+        "genre": "Crime",
+        "year": null,
+        "rating": "",
+        "notes": ""
+      },
+      {
         "id": "u-tsy0pc5",
         "title": "Sense and sensibility",
         "genre": "Drama",
